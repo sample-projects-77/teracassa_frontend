@@ -1,0 +1,507 @@
+.home-container {
+  min-height: 100vh;
+  position: relative;
+  padding-top: 0; /* No padding - navbar is fixed and background starts immediately below */
+}
+
+/* Hero Section with Background Image */
+.home-hero {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  margin-top: 0px; /* Start right below navbar */
+  background-image: url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2075&q=80');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Dark overlay for better text readability */
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 100px 20px 60px 20px; /* Extra top padding to prevent text cutoff */
+}
+
+.hero-content {
+  max-width: 1000px;
+  width: 100%;
+  color: white;
+  z-index: 1;
+  position: relative;
+  text-align: center;
+  padding-top: 20px; /* Additional padding to ensure content is visible */
+}
+
+.hero-title {
+  font-size: 64px;
+  font-weight: 700;
+  margin: 0 0 20px 0;
+  text-align: center;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  line-height: 1.2;
+}
+
+.hero-subtitle {
+  font-size: 20px;
+  line-height: 1.4;
+  margin: 0 0 40px 0;
+  text-align: center;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-features {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.features-title {
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0 0 20px 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  text-align: center;
+}
+
+.features-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 30px;
+  text-align: center;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.feature-intro {
+  font-size: 18px;
+  line-height: 1.4;
+  margin: 0;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  text-align: center;
+}
+
+.feature-text {
+  font-size: 16px;
+  line-height: 1.4;
+  margin: 0;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  text-align: center;
+}
+
+.feature-intro strong,
+.feature-text strong {
+  font-weight: 700;
+  color: #fff;
+}
+
+.hero-cta {
+  font-size: 48px;
+  font-weight: 700;
+  text-align: center;
+  margin: 40px 0 50px 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Cards Section - Positioned over hero background */
+.home-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  padding: 0;
+  margin-top: 40px;
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+}
+
+.card {
+  background: rgba(0, 80, 90, 0.75);
+  border-radius: 16px;
+  padding: 32px 24px;
+  text-align: center;
+  color: white;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 260px;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+  background: rgba(0, 80, 90, 0.85);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.card-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 56px;
+  filter: brightness(1.1);
+}
+
+.card-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0 0 12px 0;
+  line-height: 1.2;
+  color: #ffffff;
+}
+
+.card-description {
+  font-size: 14px;
+  line-height: 1.4;
+  margin: 0;
+  opacity: 0.95;
+  color: #ffffff;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .home-cards {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 42px;
+    margin-bottom: 16px;
+  }
+
+  .hero-subtitle {
+    font-size: 18px;
+    line-height: 1.3;
+    margin-bottom: 30px;
+  }
+
+  .features-title {
+    font-size: 28px;
+    margin-bottom: 16px;
+  }
+
+  .hero-cta {
+    font-size: 36px;
+    margin: 30px 0 30px 0;
+  }
+
+  .features-list {
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+
+  .feature-intro {
+    font-size: 16px;
+    line-height: 1.3;
+  }
+
+  .feature-text {
+    font-size: 15px;
+    line-height: 1.3;
+  }
+
+  .home-cards {
+    grid-template-columns: 1fr;
+    padding: 0;
+    gap: 20px;
+    max-width: 100%;
+    margin-top: 30px;
+  }
+
+  .home-hero {
+    margin-top: 60px;
+  }
+
+  .card {
+    min-height: auto;
+    padding: 28px 20px;
+  }
+
+  .card-icon {
+    font-size: 40px;
+    margin-bottom: 14px;
+  }
+
+  .card-title {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+
+  .card-description {
+    font-size: 13px;
+    line-height: 1.3;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 32px;
+    margin-bottom: 12px;
+  }
+
+  .hero-subtitle {
+    font-size: 16px;
+    line-height: 1.3;
+    margin-bottom: 24px;
+  }
+
+  .hero-cta {
+    font-size: 28px;
+    margin: 24px 0 24px 0;
+  }
+
+  .features-title {
+    font-size: 24px;
+    margin-bottom: 12px;
+  }
+
+  .features-list {
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .feature-intro {
+    font-size: 15px;
+    line-height: 1.3;
+  }
+
+  .feature-text {
+    font-size: 14px;
+    line-height: 1.3;
+  }
+
+  .card {
+    padding: 24px 18px;
+  }
+
+  .card-icon {
+    font-size: 36px;
+    margin-bottom: 12px;
+  }
+
+  .card-title {
+    font-size: 17px;
+    margin-bottom: 8px;
+  }
+
+  .card-description {
+    font-size: 12px;
+    line-height: 1.3;
+  }
+}
+
+/* Tips & Guides Section */
+.tips-section {
+  background: #ffffff;
+  padding: 80px 20px;
+  width: 100%;
+}
+
+.tips-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.tips-heading {
+  font-size: 42px;
+  font-weight: 700;
+  color: #333333;
+  text-align: center;
+  margin: 0 0 24px 0;
+  line-height: 1.2;
+}
+
+.tips-subtitle {
+  font-size: 18px;
+  color: #666666;
+  text-align: center;
+  margin: 0 0 60px 0;
+  line-height: 1.6;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.tips-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+  margin-top: 40px;
+}
+
+.tip-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 40px 24px;
+  text-align: center;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.tip-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+}
+
+.tip-icon-wrapper {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: #e3f2fd;
+  border: 2px solid #1976d2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.tip-icon {
+  font-size: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tip-card-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #333333;
+  margin: 0 0 16px 0;
+  line-height: 1.3;
+}
+
+.tip-card-description {
+  font-size: 15px;
+  color: #666666;
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* Responsive Design for Tips Section */
+@media (max-width: 1200px) {
+  .tips-cards {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .tips-section {
+    padding: 60px 20px;
+  }
+
+  .tips-heading {
+    font-size: 32px;
+    margin-bottom: 20px;
+  }
+
+  .tips-subtitle {
+    font-size: 16px;
+    margin-bottom: 40px;
+    line-height: 1.5;
+  }
+
+  .tips-cards {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    margin-top: 30px;
+  }
+
+  .tip-card {
+    padding: 32px 20px;
+  }
+
+  .tip-icon-wrapper {
+    width: 70px;
+    height: 70px;
+    margin-bottom: 20px;
+  }
+
+  .tip-icon {
+    font-size: 32px;
+  }
+
+  .tip-card-title {
+    font-size: 18px;
+    margin-bottom: 12px;
+  }
+
+  .tip-card-description {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+}
+
+@media (max-width: 480px) {
+  .tips-section {
+    padding: 40px 16px;
+  }
+
+  .tips-heading {
+    font-size: 28px;
+    margin-bottom: 16px;
+  }
+
+  .tips-subtitle {
+    font-size: 15px;
+    margin-bottom: 32px;
+  }
+
+  .tip-card {
+    padding: 28px 18px;
+  }
+
+  .tip-icon-wrapper {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 18px;
+  }
+
+  .tip-icon {
+    font-size: 28px;
+  }
+
+  .tip-card-title {
+    font-size: 17px;
+    margin-bottom: 10px;
+  }
+
+  .tip-card-description {
+    font-size: 13px;
+  }
+}

@@ -1,0 +1,1025 @@
+.countries-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+}
+
+/* Hero Section */
+.countries-hero {
+  background: linear-gradient(135deg, hsl(203 89% 25%) 0%, hsl(203 89% 45%) 100%);
+  color: #ffffff;
+  padding: 60px 20px 50px 20px;
+  min-height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;/* Account for fixed navbar */
+}
+
+.countries-hero-content {
+  max-width: 900px;
+  width: 100%;
+  text-align: center;
+}
+
+.countries-main-heading {
+  font-size: 56px;
+  font-weight: 700;
+  margin: 0 0 40px 0;
+  line-height: 1.2;
+  color: #ffffff;
+}
+
+.countries-description {
+  font-size: 18px;
+  line-height: 1.8;
+  margin: 0;
+  color: #ffffff;
+  max-width: 850px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Country Selection Section */
+.country-selection-section {
+  background: #ffffff;
+  padding: 30px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.country-selection-container {
+  max-width: 600px;
+  width: 100%;
+  text-align: center;
+}
+
+.country-selection-heading {
+  font-size: 22px;
+  font-weight: 700;
+  color: #333333;
+  margin: 0 0 12px 0;
+  line-height: 1.2;
+}
+
+.country-dropdown-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.country-dropdown-input {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 15px;
+  color: #333333;
+  background: #f5f5f5;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+.country-dropdown-input:hover {
+  border-color: #074d78;
+  background: #ffffff;
+}
+
+.country-dropdown-placeholder {
+  color: #999999;
+}
+
+.country-dropdown-text {
+  color: #333333;
+}
+
+.country-dropdown-arrow {
+  color: #666666;
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+  margin-left: 8px;
+}
+
+.country-dropdown-arrow.open {
+  transform: rotate(180deg);
+}
+
+.country-dropdown-list {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  max-height: 250px;
+  overflow-y: auto;
+}
+
+.country-dropdown-item {
+  padding: 10px 16px;
+  font-size: 15px;
+  color: #666666;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.country-dropdown-item:last-child {
+  border-bottom: none;
+}
+
+.country-dropdown-item:hover {
+  background: #074d78;
+  color: #ffffff;
+}
+
+.country-dropdown-item.selected {
+  background: #074d78;
+  color: #ffffff;
+  font-weight: 500;
+}
+
+/* Why Invest Section */
+.why-invest-section {
+  background: #e8f4f8;
+  padding: 60px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.why-invest-container {
+  max-width: 1200px;
+  width: 100%;
+}
+
+.why-invest-heading {
+  font-size: 36px;
+  font-weight: 700;
+  color: #333333;
+  margin: 0 0 50px 0;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.why-invest-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  align-items: stretch;
+}
+
+.why-invest-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 30px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.why-invest-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.why-invest-icon-wrapper {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f0f8fb;
+  border-radius: 50%;
+}
+
+.why-invest-icon {
+  width: 32px;
+  height: 32px;
+  color: #074d78;
+  stroke-width: 2;
+}
+
+.why-invest-card-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #333333;
+  margin: 0 0 12px 0;
+  line-height: 1.3;
+}
+
+.why-invest-card-description {
+  font-size: 16px;
+  color: #666666;
+  margin: 0;
+  line-height: 1.6;
+  flex: 1;
+}
+
+/* Info Cards Section */
+.info-cards-section {
+  background: #ffffff;
+  padding: 60px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.info-cards-container {
+  max-width: 1200px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  align-items: stretch;
+}
+
+.info-card {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.info-card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  transform: translateY(-4px);
+}
+
+.info-card-icon-wrapper {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #e8f4f8;
+  border-radius: 8px;
+  transition: background 0.3s ease;
+}
+
+.info-card:hover .info-card-icon-wrapper {
+  background: #074d78;
+}
+
+.info-card:hover .info-card-icon {
+  color: #ffffff;
+}
+
+.info-card-icon {
+  width: 32px;
+  height: 32px;
+  color: #074d78;
+  stroke-width: 2;
+  transition: color 0.3s ease;
+}
+
+.info-card-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #333333;
+  margin: 0 0 20px 0;
+  line-height: 1.3;
+}
+
+.info-card-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px 0;
+  flex: 1;
+}
+
+.info-card-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 12px;
+  font-size: 15px;
+  color: #666666;
+  line-height: 1.6;
+}
+
+.info-card-item:last-child {
+  margin-bottom: 0;
+}
+
+.checkmark-icon {
+  width: 20px;
+  height: 20px;
+  color: #074d78;
+  flex-shrink: 0;
+  margin-top: 2px;
+  stroke-width: 2.5;
+}
+
+.info-card-link {
+  color: #074d78;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 500;
+  transition: color 0.3s ease;
+  margin-top: auto;
+}
+
+.info-card-link:hover {
+  color: #063d62;
+  text-decoration: underline;
+}
+
+/* Advantages Section */
+.advantages-section {
+  background: #ffffff;
+  padding: 60px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.advantages-container {
+  max-width: 1200px;
+  width: 100%;
+}
+
+.advantages-heading {
+  font-size: 36px;
+  font-weight: 700;
+  color: #333333;
+  margin: 0 0 50px 0;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.advantages-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+  align-items: stretch;
+}
+
+.advantage-card {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 30px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.advantage-card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  transform: translateY(-4px);
+}
+
+.advantage-icon-wrapper {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f5f5f5;
+  border-radius: 50%;
+  transition: background 0.3s ease;
+}
+
+.advantage-card:hover .advantage-icon-wrapper {
+  background: #e8f4f8;
+}
+
+.advantage-icon {
+  width: 40px;
+  height: 40px;
+  color: #074d78;
+  stroke-width: 2;
+}
+
+.advantage-card-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #333333;
+  margin: 0 0 12px 0;
+  line-height: 1.3;
+}
+
+.advantage-card-description {
+  font-size: 15px;
+  color: #666666;
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* Top Destinations Section */
+.top-destinations-section {
+  background: #ffffff;
+  padding: 60px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.top-destinations-container {
+  max-width: 1200px;
+  width: 100%;
+}
+
+.top-destinations-heading {
+  font-size: 36px;
+  font-weight: 700;
+  color: #333333;
+  margin: 0 0 16px 0;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.top-destinations-subtitle {
+  font-size: 18px;
+  color: #666666;
+  margin: 0 0 50px 0;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.top-destinations-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  align-items: stretch;
+}
+
+.destination-card {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.destination-card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  transform: translateY(-4px);
+}
+
+.destination-header {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.destination-code {
+  font-size: 24px;
+  font-weight: 400;
+  color: #333333;
+}
+
+.destination-name {
+  font-size: 22px;
+  font-weight: 700;
+  color: #333333;
+}
+
+.destination-description {
+  font-size: 15px;
+  color: #666666;
+  margin: 0 0 20px 0;
+  line-height: 1.6;
+}
+
+.destination-divider {
+  height: 1px;
+  background: #e0e0e0;
+  margin: 20px 0;
+}
+
+.destination-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.destination-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.stat-icon {
+  width: 24px;
+  height: 24px;
+  color: #333333;
+  margin-bottom: 8px;
+  stroke-width: 2;
+}
+
+.stat-value {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333333;
+  margin-bottom: 4px;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: #666666;
+}
+
+.destination-regions {
+  margin-bottom: 20px;
+}
+
+.regions-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333333;
+  margin-bottom: 12px;
+}
+
+.regions-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.region-tag {
+  background: #f5f5f5;
+  color: #333333;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.destination-button {
+  width: 100%;
+  padding: 12px 20px;
+  background: #ffffff;
+  color: #333333;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  margin-top: auto;
+}
+
+.destination-button:hover {
+  background: #f5f5f5;
+  border-color: #074d78;
+  color: #074d78;
+}
+
+.destination-button-primary {
+  background: #074d78;
+  color: #ffffff;
+  border-color: #074d78;
+}
+
+.destination-button-primary:hover {
+  background: #063d62;
+  border-color: #063d62;
+  color: #ffffff;
+}
+
+/* Call to Action Section */
+.cta-section {
+  background: linear-gradient(135deg, hsl(203 89% 25%) 0%, hsl(203 89% 45%) 100%);
+  padding: 60px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cta-container {
+  max-width: 800px;
+  width: 100%;
+  text-align: center;
+}
+
+.cta-heading {
+  font-size: 42px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 16px 0;
+  line-height: 1.2;
+}
+
+.cta-subtitle {
+  font-size: 18px;
+  color: #ffffff;
+  margin: 0 0 32px 0;
+  line-height: 1.6;
+}
+
+.cta-button {
+  background: #ffffff;
+  color: #333333;
+  border: none;
+  border-radius: 8px;
+  padding: 14px 28px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.cta-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.cta-arrow {
+  width: 20px;
+  height: 20px;
+  stroke-width: 2.5;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .countries-hero {
+    padding: 50px 20px 40px 20px;
+    min-height: auto;
+  }
+
+  .countries-main-heading {
+    font-size: 42px;
+    margin-bottom: 30px;
+  }
+
+  .countries-description {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  .country-selection-section {
+    padding: 30px 20px;
+  }
+
+  .country-selection-heading {
+    font-size: 20px;
+    margin-bottom: 12px;
+  }
+
+  .country-dropdown-input {
+    font-size: 15px;
+    padding: 14px 18px;
+  }
+
+  .country-dropdown-item {
+    font-size: 15px;
+    padding: 12px 18px;
+  }
+
+  .why-invest-section {
+    padding: 50px 20px;
+  }
+
+  .why-invest-heading {
+    font-size: 28px;
+    margin-bottom: 40px;
+  }
+
+  .why-invest-cards {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .why-invest-card {
+    padding: 25px;
+  }
+
+  .info-cards-section {
+    padding: 50px 20px;
+  }
+
+  .info-cards-container {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .info-card {
+    padding: 25px;
+  }
+
+  .advantages-section {
+    padding: 50px 20px;
+  }
+
+  .advantages-heading {
+    font-size: 28px;
+    margin-bottom: 40px;
+  }
+
+  .advantages-cards {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+  }
+
+  .advantage-card {
+    padding: 25px;
+  }
+
+  .top-destinations-section {
+    padding: 50px 20px;
+  }
+
+  .top-destinations-heading {
+    font-size: 28px;
+    margin-bottom: 12px;
+  }
+
+  .top-destinations-subtitle {
+    font-size: 16px;
+    margin-bottom: 40px;
+  }
+
+  .top-destinations-cards {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .destination-card {
+    padding: 25px;
+  }
+
+  .destination-stats {
+    gap: 15px;
+  }
+
+  .cta-section {
+    padding: 50px 20px;
+  }
+
+  .cta-heading {
+    font-size: 36px;
+    margin-bottom: 14px;
+  }
+
+  .cta-subtitle {
+    font-size: 17px;
+    margin-bottom: 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  .countries-hero {
+    padding: 40px 16px 35px 16px;
+  }
+
+  .countries-main-heading {
+    font-size: 32px;
+    margin-bottom: 24px;
+  }
+
+  .countries-description {
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .country-selection-section {
+    padding: 25px 16px;
+  }
+
+  .country-selection-heading {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+
+  .country-dropdown-input {
+    font-size: 14px;
+    padding: 12px 16px;
+  }
+
+  .country-dropdown-item {
+    font-size: 14px;
+    padding: 10px 16px;
+  }
+
+  .why-invest-section {
+    padding: 40px 16px;
+  }
+
+  .why-invest-heading {
+    font-size: 24px;
+    margin-bottom: 30px;
+  }
+
+  .why-invest-cards {
+    gap: 25px;
+  }
+
+  .why-invest-card {
+    padding: 20px;
+  }
+
+  .why-invest-icon-wrapper {
+    width: 56px;
+    height: 56px;
+    margin-bottom: 16px;
+  }
+
+  .why-invest-icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .why-invest-card-title {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+
+  .why-invest-card-description {
+    font-size: 15px;
+  }
+
+  .info-cards-section {
+    padding: 40px 16px;
+  }
+
+  .info-cards-container {
+    gap: 25px;
+  }
+
+  .info-card {
+    padding: 20px;
+  }
+
+  .info-card-icon-wrapper {
+    width: 44px;
+    height: 44px;
+    margin-bottom: 16px;
+  }
+
+  .info-card-icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .info-card-title {
+    font-size: 20px;
+    margin-bottom: 16px;
+  }
+
+  .info-card-item {
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+
+  .checkmark-icon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .info-card-link {
+    font-size: 14px;
+  }
+
+  .advantages-section {
+    padding: 40px 16px;
+  }
+
+  .advantages-heading {
+    font-size: 24px;
+    margin-bottom: 30px;
+  }
+
+  .advantages-cards {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .advantage-card {
+    padding: 20px;
+  }
+
+  .advantage-icon-wrapper {
+    width: 70px;
+    height: 70px;
+    margin-bottom: 16px;
+  }
+
+  .advantage-icon {
+    width: 35px;
+    height: 35px;
+  }
+
+  .advantage-card-title {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+
+  .advantage-card-description {
+    font-size: 14px;
+  }
+
+  .top-destinations-section {
+    padding: 40px 16px;
+  }
+
+  .top-destinations-heading {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  .top-destinations-subtitle {
+    font-size: 15px;
+    margin-bottom: 30px;
+  }
+
+  .top-destinations-cards {
+    gap: 20px;
+  }
+
+  .destination-card {
+    padding: 20px;
+  }
+
+  .destination-code {
+    font-size: 20px;
+  }
+
+  .destination-name {
+    font-size: 20px;
+  }
+
+  .destination-description {
+    font-size: 14px;
+  }
+
+  .destination-stats {
+    gap: 12px;
+  }
+
+  .stat-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .stat-value {
+    font-size: 14px;
+  }
+
+  .stat-label {
+    font-size: 11px;
+  }
+
+  .regions-label {
+    font-size: 13px;
+  }
+
+  .region-tag {
+    font-size: 12px;
+    padding: 5px 10px;
+  }
+
+  .destination-button {
+    font-size: 14px;
+    padding: 10px 16px;
+  }
+
+  .cta-section {
+    padding: 50px 20px;
+  }
+
+  .cta-heading {
+    font-size: 32px;
+    margin-bottom: 12px;
+  }
+
+  .cta-subtitle {
+    font-size: 16px;
+    margin-bottom: 28px;
+  }
+
+  .cta-button {
+    font-size: 15px;
+    padding: 12px 24px;
+  }
+}
