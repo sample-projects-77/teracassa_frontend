@@ -4,6 +4,8 @@ import ProtectedRoute from './components/ProtectedRoute'
 import Home from './pages/Home'
 import Auth from './pages/Auth'
 import Countries from './pages/Countries'
+import Properties from './pages/Properties'
+import Network from './pages/Network'
 import Dashboard from './pages/Dashboard'
 import Profile from './pages/Profile'
 import About from './pages/About'
@@ -21,6 +23,9 @@ function App() {
         <Route path="/register" element={isAuthenticated ? <Navigate to="/dashboard" replace /> : <Auth />} />
         <Route path="/countries" element={<Countries />} />
         <Route path="/countries/:countryCode" element={<Countries />} />
+        <Route path="/properties" element={<Properties />} />
+        <Route path="/properties/:propertyId" element={<Properties />} />
+        <Route path="/network" element={<Network />} />
         <Route path="/about" element={<About />} />
         
         {/* Protected Routes */}
