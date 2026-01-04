@@ -1,7 +1,7 @@
 import api from '../config/api';
 
-// Search properties with filters
-export const searchProperties = async (filters = {}) => {
+// Search properties with filters and pagination
+export const searchProperties = async (filters = {}, page = 1, itemsPerPage = 6) => {
   try {
     const params = new URLSearchParams();
     
@@ -16,13 +16,19 @@ export const searchProperties = async (filters = {}) => {
     if (filters.minAreaSqm) params.append('minAreaSqm', filters.minAreaSqm);
     if (filters.maxAreaSqm) params.append('maxAreaSqm', filters.maxAreaSqm);
     if (filters.sort) params.append('sort', filters.sort);
+    
+    // Add pagination parameters
+    params.append('page', page.toString());
+    params.append('itemsPerPage', itemsPerPage.toString());
 
     const queryString = params.toString();
-    const url = queryString ? `/properties?${queryString}` : '/properties';
+    const url = `/properties?${queryString}`;
     
     console.log('API Request URL:', url);
     const response = await api.get(url);
     console.log('API Response:', response);
+    
+    // Return the full response object with data and pagination
     return response;
   } catch (error) {
     console.error('Error in searchProperties:', error);

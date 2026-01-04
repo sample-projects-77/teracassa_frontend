@@ -28,7 +28,12 @@ api.interceptors.request.use(
 api.interceptors.response.use(
   (response) => {
     // Handle response based on your backend structure
-    // Your backend returns: { statusCode, data, error }
+    // Your backend returns: { statusCode, data, error, pagination }
+    // If pagination exists, return the full response object to preserve pagination metadata
+    if (response.data && response.data.pagination) {
+      return response.data; // Return full object with data and pagination
+    }
+    // Otherwise, extract just the data for backward compatibility
     if (response.data && response.data.data) {
       return response.data.data;
     }

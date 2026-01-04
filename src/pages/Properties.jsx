@@ -10,9 +10,13 @@ const Properties = () => {
   const navigate = useNavigate();
   const [properties, setProperties] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [loadingMore, setLoadingMore] = useState(false);
   const [countries, setCountries] = useState([]);
   const [activeTab, setActiveTab] = useState('basic');
   const [hasSearched, setHasSearched] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [hasNextPage, setHasNextPage] = useState(false);
+  const [currentFilters, setCurrentFilters] = useState({});
   const [filters, setFilters] = useState({
     country: '',
     city: '',
@@ -26,7 +30,7 @@ const Properties = () => {
 
   useEffect(() => {
     loadCountries();
-    // Load default last 3 properties on page load/refresh
+    // Load default 6 properties on page load/refresh
     loadDefaultProperties();
     // Reset filters on page load/refresh
     setFilters({
@@ -51,43 +55,83 @@ const Properties = () => {
     }
   };
 
-  // Load default last 3 properties
+  // Load default 6 properties (page 1)
   const loadDefaultProperties = async () => {
     try {
       setLoading(true);
-      console.log('Loading default properties (last 3)');
-      const data = await searchProperties({ sort: 'newest' });
-      console.log('All properties received:', data);
+      console.log('Loading default properties (first 6)');
+      const response = await searchProperties({ sort: 'newest' }, 1, 6);
+      console.log('API Response:', response);
       
-      // Limit to last 3 properties
-      const limitedData = (data || []).slice(0, 3);
-      console.log('Limited to last 3 properties:', limitedData);
+      // Extract data and pagination from response
+      // Response is already processed by interceptor, so it should be the full object
+      const propertiesData = response?.data || response || [];
+      const pagination = response?.pagination || {};
       
-      setProperties(limitedData);
+      console.log('Properties received:', propertiesData);
+      console.log('Pagination info:', pagination);
+      
+      setProperties(propertiesData);
+      setCurrentPage(1);
+      setHasNextPage(pagination.hasNextPage || false);
+      setCurrentFilters({ sort: 'newest' });
       setHasSearched(true); // Show the section
     } catch (error) {
       console.error('Error loading default properties:', error);
       console.error('Error details:', error.message, error.response);
       setProperties([]);
+      setHasNextPage(false);
     } finally {
       setLoading(false);
     }
   };
 
-  const loadProperties = async (searchFilters = {}) => {
+  const loadProperties = async (searchFilters = {}, page = 1, append = false) => {
     try {
-      setLoading(true);
-      console.log('Loading properties with filters:', searchFilters);
-      const data = await searchProperties(searchFilters);
-      console.log('Properties received:', data);
-      setProperties(data || []);
+      if (append) {
+        setLoadingMore(true);
+      } else {
+        setLoading(true);
+      }
+      console.log('Loading properties with filters:', searchFilters, 'page:', page);
+      const response = await searchProperties(searchFilters, page, 6);
+      console.log('API Response:', response);
+      
+      // Extract data and pagination from response
+      // Response is already processed by interceptor, so it should be the full object
+      const propertiesData = response?.data || response || [];
+      const pagination = response?.pagination || {};
+      
+      console.log('Properties received:', propertiesData);
+      console.log('Pagination info:', pagination);
+      
+      if (append) {
+        // Append new properties to existing ones
+        setProperties(prev => [...prev, ...propertiesData]);
+      } else {
+        // Replace properties with new search results
+        setProperties(propertiesData);
+      }
+      
+      setCurrentPage(page);
+      setHasNextPage(pagination.hasNextPage || false);
+      setCurrentFilters(searchFilters);
     } catch (error) {
       console.error('Error loading properties:', error);
       console.error('Error details:', error.message, error.response);
-      setProperties([]);
+      if (!append) {
+        setProperties([]);
+      }
+      setHasNextPage(false);
     } finally {
       setLoading(false);
+      setLoadingMore(false);
     }
+  };
+
+  const handleLoadMore = async () => {
+    const nextPage = currentPage + 1;
+    await loadProperties(currentFilters, nextPage, true);
   };
 
   const handleFilterChange = (e) => {
@@ -134,7 +178,8 @@ const Properties = () => {
     
     console.log('Searching with filters:', activeFilters);
     setHasSearched(true);
-    loadProperties(activeFilters);
+    setCurrentPage(1); // Reset to page 1 for new search
+    loadProperties(activeFilters, 1, false);
   };
 
   const formatPrice = (priceCents, currency = 'EUR') => {
@@ -468,6 +513,20 @@ const Properties = () => {
                 </div>
               ))}
             </div>
+            
+            {/* Load More Button */}
+            {hasNextPage && !loading && (
+              <div className="properties-load-more-container">
+                <button 
+                  type="button" 
+                  className="properties-load-more-button"
+                  onClick={handleLoadMore}
+                  disabled={loadingMore}
+                >
+                  {loadingMore ? 'Loading...' : 'Load More'}
+                </button>
+              </div>
+            )}
           </div>
         </section>
       )}
