@@ -9,6 +9,7 @@ import Network from './pages/Network'
 import Dashboard from './pages/Dashboard'
 import Profile from './pages/Profile'
 import About from './pages/About'
+import PostAd from './pages/PostAd'
 import './App.css'
 
 function App() {
@@ -50,6 +51,14 @@ function App() {
           element={
             <ProtectedRoute>
               <Profile />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/post-ad"
+          element={
+            <ProtectedRoute>
+              <PostAd />
             </ProtectedRoute>
           }
         />

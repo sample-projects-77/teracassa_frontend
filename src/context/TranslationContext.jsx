@@ -31,25 +31,29 @@ export const TranslationProvider = ({ children }) => {
     try {
       // Dynamically import translation file
       let translationData;
+      let importedModule;
       switch (language) {
         case 'de':
-          translationData = (await import('../translations/de.json')).default;
+          importedModule = await import('../translations/de.json');
           break;
         case 'es':
-          translationData = (await import('../translations/es.json')).default;
+          importedModule = await import('../translations/es.json');
           break;
         case 'fr':
-          translationData = (await import('../translations/fr.json')).default;
+          importedModule = await import('../translations/fr.json');
           break;
         case 'ru':
-          translationData = (await import('../translations/ru.json')).default;
+          importedModule = await import('../translations/ru.json');
           break;
         case 'tr':
-          translationData = (await import('../translations/tr.json')).default;
+          importedModule = await import('../translations/tr.json');
           break;
         default:
-          translationData = (await import('../translations/en.json')).default;
+          importedModule = await import('../translations/en.json');
       }
+      
+      // Handle both .default and direct import (Vite handles JSON imports differently)
+      translationData = importedModule.default || importedModule;
       
       // Cache the translations
       translationCache[language] = translationData;
