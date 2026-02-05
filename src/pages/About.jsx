@@ -1,8 +1,11 @@
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import { useTranslation } from '../context/TranslationContext';
 import './About.css';
 
 const About = () => {
+  const { t } = useTranslation();
+  
   return (
     <div className="about-page">
       <Navbar />
@@ -10,9 +13,9 @@ const About = () => {
       {/* Hero Banner Section */}
       <section className="about-hero">
         <div className="about-hero-content">
-          <h1 className="about-hero-title">About TerraCasa</h1>
+          <h1 className="about-hero-title">{t('about.heroTitle')}</h1>
           <p className="about-hero-subtitle">
-            More than a platform – The secure foundation for international life dreams.
+            {t('about.heroSubtitle')}
           </p>
         </div>
       </section>
@@ -22,65 +25,55 @@ const About = () => {
         <div className="about-container">
           {/* Mission Section */}
           <div className="about-section">
-            <h2 className="about-section-title">Our Mission</h2>
+            <h2 className="about-section-title">{t('about.ourMission')}</h2>
             <p className="about-section-text">
-              Buying an international property should be a journey of trust. 
-              At TerraCasa, we understand that you're not just buying a house, but 
-              realizing a dream. That's why we offer you not just a platform, 
-              but a comprehensive knowledge base that helps you learn about countries and cultures 
-              – with knowledge and maximum security.
+              {t('about.missionText')}
             </p>
           </div>
 
           {/* Vision Section */}
           <div className="about-section">
-            <h2 className="about-section-title">Our Vision</h2>
+            <h2 className="about-section-title">{t('about.ourVision')}</h2>
             <p className="about-section-intro">
-              We are revolutionizing international real estate purchases by removing the biggest 
-              hurdles:
+              {t('about.visionIntro')}
             </p>
 
             <div className="vision-subsections">
               {/* Security through Verification */}
               <div className="vision-subsection">
-                <h3 className="vision-subsection-title">Security through Verification:</h3>
+                <h3 className="vision-subsection-title">{t('about.securityThroughVerification')}</h3>
                 <p className="vision-subsection-text">
-                  We verify proof of ownership and the identity of every seller, 
-                  so you have transparency and security. This way, you can invest with 
-                  confidence.
+                  {t('about.securityText')}
                 </p>
               </div>
 
               {/* Full Support */}
               <div className="vision-subsection">
-                <h3 className="vision-subsection-title">Full Support:</h3>
+                <h3 className="vision-subsection-title">{t('about.fullSupport')}</h3>
                 <p className="vision-subsection-text">
-                  We ensure that you are not alone. We connect you with a vetted network of 
-                  local lawyers, notaries, and experts who guide you through every step in your language 
-                  and according to local law.
+                  {t('about.fullSupportText')}
                 </p>
               </div>
 
               {/* Knowledge before Investment */}
               <div className="vision-subsection">
-                <h3 className="vision-subsection-title">Knowledge before Investment:</h3>
+                <h3 className="vision-subsection-title">{t('about.knowledgeBeforeInvestment')}</h3>
                 <p className="vision-subsection-text">
-                  We provide you with the best and most intelligent search criteria to precisely find 
-                  what you are looking for, and we deliver all relevant market and lifestyle information.
+                  {t('about.knowledgeText')}
                 </p>
               </div>
             </div>
 
             {/* Concluding Statement */}
             <p className="vision-conclusion">
-              TerraCasa is the secure bridge between your dream and your international home.
+              {t('about.visionConclusion')}
             </p>
           </div>
 
           {/* Values Section */}
           <div className="about-section">
-            <h2 className="about-section-title">Our Values</h2>
-            <p className="values-subtitle">What drives us and how we work</p>
+            <h2 className="about-section-title">{t('about.ourValues')}</h2>
+            <p className="values-subtitle">{t('about.valuesSubtitle')}</p>
             
             <div className="values-cards">
               {/* Global Thinking */}
@@ -93,9 +86,9 @@ const About = () => {
                     <path d="M12 22C8.69 22 5.69 20.5 3.5 18C3.5 15.5 5.5 13.5 8 13.5C10.5 13.5 12.5 15.5 12.5 18C12.5 20.5 10.5 22 12 22Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
                 </div>
-                <h3 className="value-card-title">Think globally</h3>
+                <h3 className="value-card-title">{t('about.thinkGlobally')}</h3>
                 <p className="value-card-text">
-                  We connect people with countries, cultures, and opportunities worldwide.
+                  {t('about.thinkGloballyText')}
                 </p>
               </div>
 
@@ -106,9 +99,9 @@ const About = () => {
                     <path d="M20.84 4.61C20.3292 4.099 19.7228 3.69364 19.0554 3.41708C18.3879 3.14052 17.6725 2.99817 16.95 2.99817C16.2275 2.99817 15.5121 3.14052 14.8446 3.41708C14.1772 3.69364 13.5708 4.099 13.06 4.61L12 5.67L10.94 4.61C9.9083 3.57831 8.50903 2.99871 7.05 2.99871C5.59096 2.99871 4.19169 3.57831 3.16 4.61C2.1283 5.64169 1.54871 7.04097 1.54871 8.5C1.54871 9.95903 2.1283 11.3583 3.16 12.39L4.22 13.45L12 21.23L19.78 13.45L20.84 12.39C21.351 11.8792 21.7564 11.2728 22.0329 10.6054C22.3095 9.93789 22.4518 9.22248 22.4518 8.5C22.4518 7.77752 22.3095 7.0621 22.0329 6.39464C21.7564 5.72718 21.351 5.12075 20.84 4.61Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
                 </div>
-                <h3 className="value-card-title">With passion</h3>
+                <h3 className="value-card-title">{t('about.withPassion')}</h3>
                 <p className="value-card-text">
-                  Real estate is more than just objects - they are life dreams that we take seriously.
+                  {t('about.withPassionText')}
                 </p>
               </div>
 
@@ -119,9 +112,9 @@ const About = () => {
                     <path d="M12 2L4 5V11C4 16.55 7.16 21.74 12 23C16.84 21.74 20 16.55 20 11V5L12 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
                 </div>
-                <h3 className="value-card-title">Build trust</h3>
+                <h3 className="value-card-title">{t('about.buildTrust')}</h3>
                 <p className="value-card-text">
-                  Transparency and verified partners are the foundation of our platform.
+                  {t('about.buildTrustText')}
                 </p>
               </div>
 
@@ -135,9 +128,9 @@ const About = () => {
                     <path d="M16 3.13C16.8604 3.35031 17.623 3.85071 18.1676 4.55232C18.7122 5.25392 19.0078 6.11683 19.0078 7.005C19.0078 7.89318 18.7122 8.75608 18.1676 9.45769C17.623 10.1593 16.8604 10.6597 16 10.88" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
                 </div>
-                <h3 className="value-card-title">Strong together</h3>
+                <h3 className="value-card-title">{t('about.strongTogether')}</h3>
                 <p className="value-card-text">
-                  Our network grows with everyone who participates - buyers, sellers, partners.
+                  {t('about.strongTogetherText')}
                 </p>
               </div>
             </div>
@@ -150,19 +143,19 @@ const About = () => {
         <div className="stats-container">
           <div className="stat-item">
             <div className="stat-number">12+</div>
-            <div className="stat-label">Countries</div>
+            <div className="stat-label">{t('about.countries')}</div>
           </div>
           <div className="stat-item">
             <div className="stat-number">5.000+</div>
-            <div className="stat-label">Properties</div>
+            <div className="stat-label">{t('about.properties')}</div>
           </div>
           <div className="stat-item">
             <div className="stat-number">1.200+</div>
-            <div className="stat-label">Partners</div>
+            <div className="stat-label">{t('about.partners')}</div>
           </div>
           <div className="stat-item">
             <div className="stat-number">98%</div>
-            <div className="stat-label">Satisfaction</div>
+            <div className="stat-label">{t('about.satisfaction')}</div>
           </div>
         </div>
       </section>
@@ -170,9 +163,9 @@ const About = () => {
       {/* Contact Us Section */}
       <section className="contact-section">
         <div className="contact-container">
-          <h2 className="contact-title">Contact us</h2>
+          <h2 className="contact-title">{t('about.contactUs')}</h2>
           <p className="contact-subtitle">
-            Do you have questions or suggestions? We look forward to hearing from you!
+            {t('about.contactSubtitle')}
           </p>
 
           <div className="contact-content">
@@ -186,7 +179,7 @@ const About = () => {
                   </svg>
                 </div>
                 <div className="contact-info-content">
-                  <div className="contact-info-label">E-Mail</div>
+                  <div className="contact-info-label">{t('about.email')}</div>
                   <div className="contact-info-value">info@terracasa.com</div>
                 </div>
               </div>
@@ -198,7 +191,7 @@ const About = () => {
                   </svg>
                 </div>
                 <div className="contact-info-content">
-                  <div className="contact-info-label">Phone</div>
+                  <div className="contact-info-label">{t('about.phone')}</div>
                   <div className="contact-info-value">+49 (0) 123 456 789</div>
                 </div>
               </div>
@@ -211,7 +204,7 @@ const About = () => {
                   </svg>
                 </div>
                 <div className="contact-info-content">
-                  <div className="contact-info-label">Address</div>
+                  <div className="contact-info-label">{t('about.address')}</div>
                   <div className="contact-info-value">
                     Musterstraße 123<br />
                     10115 Berlin, Germany
@@ -224,50 +217,50 @@ const About = () => {
             <div className="contact-form-wrapper">
               <form className="contact-form">
                 <div className="form-group">
-                  <label htmlFor="contact-name">Name *</label>
+                  <label htmlFor="contact-name">{t('about.name')}</label>
                   <input
                     type="text"
                     id="contact-name"
                     name="name"
                     required
-                    placeholder="Your Name"
+                    placeholder={t('about.yourName')}
                   />
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="contact-email">E-Mail *</label>
+                  <label htmlFor="contact-email">{t('about.email')} *</label>
                   <input
                     type="email"
                     id="contact-email"
                     name="email"
                     required
-                    placeholder="your@email.com"
+                    placeholder={t('about.emailPlaceholder')}
                   />
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="contact-subject">Subject</label>
+                  <label htmlFor="contact-subject">{t('about.subject')}</label>
                   <input
                     type="text"
                     id="contact-subject"
                     name="subject"
-                    placeholder="What is it about?"
+                    placeholder={t('about.whatIsItAbout')}
                   />
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="contact-message">Message *</label>
+                  <label htmlFor="contact-message">{t('about.message')}</label>
                   <textarea
                     id="contact-message"
                     name="message"
                     rows="6"
                     required
-                    placeholder="Your Message..."
+                    placeholder={t('about.yourMessage')}
                   ></textarea>
                 </div>
 
                 <button type="submit" className="contact-submit-btn">
-                  Send message
+                  {t('about.sendMessage')}
                 </button>
               </form>
             </div>

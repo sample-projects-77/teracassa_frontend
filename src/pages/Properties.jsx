@@ -2,11 +2,13 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import { useTranslation } from '../context/TranslationContext';
 import { searchProperties } from '../services/propertyService';
 import { getCountries } from '../services/countryService';
 import './Properties.css';
 
 const Properties = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [properties, setProperties] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -215,14 +217,13 @@ const Properties = () => {
       <section className="properties-hero">
         <div className="properties-hero-content">
           <h1 className="properties-main-heading">
-            Search precisely. Invest securely.
+            {t('properties.heroTitle')}
           </h1>
           <p className="properties-description">
-            Use our intelligent criteria (e.g., sea view, proximity to marina) and discover your international home. 
-            We accompany you from click to key handover.
+            {t('properties.heroDescription')}
           </p>
           <p className="properties-info">
-            Currently over 5,000 verified properties from verified providers worldwide.
+            {t('properties.heroInfo')}
           </p>
         </div>
       </section>
@@ -237,14 +238,14 @@ const Properties = () => {
               className={`search-tab ${activeTab === 'basic' ? 'active' : ''}`}
               onClick={() => setActiveTab('basic')}
             >
-              Basic Search
+              {t('properties.basicSearch')}
             </button>
             <button
               type="button"
               className={`search-tab ${activeTab === 'advanced' ? 'active' : ''}`}
               onClick={() => setActiveTab('advanced')}
             >
-              Advanced Search
+              {t('properties.advancedSearch')}
             </button>
           </div>
 
@@ -258,7 +259,7 @@ const Properties = () => {
                   value={filters.country}
                   onChange={handleFilterChange}
                 >
-                  <option value="">Please select a country</option>
+                  <option value="">{t('properties.selectCountry')}</option>
                   {countries.map((country) => (
                     <option key={country.code} value={country.code}>
                       {country.code} - {country.name}
@@ -272,7 +273,7 @@ const Properties = () => {
                   type="text"
                   id="city"
                   name="city"
-                  placeholder="Region / City"
+                  placeholder={t('properties.regionCity')}
                   value={filters.city}
                   onChange={handleFilterChange}
                 />
@@ -285,13 +286,13 @@ const Properties = () => {
                   value={filters.propertyType}
                   onChange={handleFilterChange}
                 >
-                  <option value="">Property Type</option>
-                  <option value="apartment">Apartment</option>
-                  <option value="house">House</option>
-                  <option value="villa">Villa</option>
-                  <option value="land">Land</option>
-                  <option value="commercial">Commercial</option>
-                  <option value="other">Other</option>
+                  <option value="">{t('properties.propertyType')}</option>
+                  <option value="apartment">{t('properties.apartment')}</option>
+                  <option value="house">{t('properties.house')}</option>
+                  <option value="villa">{t('properties.villa')}</option>
+                  <option value="land">{t('properties.land')}</option>
+                  <option value="commercial">{t('properties.commercial')}</option>
+                  <option value="other">{t('properties.other')}</option>
                 </select>
               </div>
               
@@ -300,7 +301,7 @@ const Properties = () => {
                   type="number"
                   id="minPriceCents"
                   name="minPriceCents"
-                  placeholder="Price from (€)"
+                  placeholder={t('properties.priceFrom')}
                   value={filters.minPriceCents}
                   onChange={handleFilterChange}
                   min="0"
@@ -313,7 +314,7 @@ const Properties = () => {
                   type="number"
                   id="maxPriceCents"
                   name="maxPriceCents"
-                  placeholder="Price to (€)"
+                  placeholder={t('properties.priceTo')}
                   value={filters.maxPriceCents}
                   onChange={handleFilterChange}
                   min="0"
@@ -331,7 +332,7 @@ const Properties = () => {
                   value={filters.bedrooms}
                   onChange={handleFilterChange}
                 >
-                  <option value="">Bedrooms</option>
+                  <option value="">{t('properties.bedrooms')}</option>
                   <option value="1">1</option>
                   <option value="2">2</option>
                   <option value="3">3</option>
@@ -345,7 +346,7 @@ const Properties = () => {
                   type="number"
                   id="minAreaSqm"
                   name="minAreaSqm"
-                  placeholder="Min. Living Area (m²)"
+                  placeholder={t('properties.minLivingArea')}
                   value={filters.minAreaSqm}
                   onChange={handleFilterChange}
                   min="0"
@@ -364,10 +365,10 @@ const Properties = () => {
                     value={filters.sort}
                     onChange={handleFilterChange}
                   >
-                    <option value="newest">Newest first</option>
-                    <option value="price_asc">Price ascending</option>
-                    <option value="price_desc">Price descending</option>
-                    <option value="top">Top offers</option>
+                    <option value="newest">{t('properties.newestFirst')}</option>
+                    <option value="price_asc">{t('properties.priceAscending')}</option>
+                    <option value="price_desc">{t('properties.priceDescending')}</option>
+                    <option value="top">{t('properties.topOffers')}</option>
                   </select>
                 </div>
               </div>
@@ -380,7 +381,7 @@ const Properties = () => {
                   <circle cx="11" cy="11" r="8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                   <path d="M21 21L16.65 16.65" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
-                Search Properties
+                {t('properties.searchProperties')}
               </button>
             </div>
           </form>
@@ -393,9 +394,9 @@ const Properties = () => {
           <div className="properties-list-container">
             {/* Section Header */}
             <div className="properties-section-header">
-              <h2 className="properties-section-title">More Top Properties from TerraCasa</h2>
+              <h2 className="properties-section-title">{t('properties.moreTopProperties')}</h2>
               <div className="properties-sort-wrapper">
-                <label htmlFor="properties-sort" className="properties-sort-label">Sort by</label>
+                <label htmlFor="properties-sort" className="properties-sort-label">{t('properties.sortBy')}</label>
                 <select
                   id="properties-sort"
                   className="properties-sort-select"
@@ -470,10 +471,10 @@ const Properties = () => {
                     </div>
                     {/* Badge - Show "New" for first property, "Top" for others */}
                     {index === 0 && (
-                      <div className="property-badge property-badge-new">New</div>
+                      <div className="property-badge property-badge-new">{t('properties.new')}</div>
                     )}
                     {index === 2 && (
-                      <div className="property-badge property-badge-top">Top</div>
+                      <div className="property-badge property-badge-top">{t('properties.top')}</div>
                     )}
                   </div>
                   <div className="property-content">
@@ -523,7 +524,7 @@ const Properties = () => {
                   onClick={handleLoadMore}
                   disabled={loadingMore}
                 >
-                  {loadingMore ? 'Loading...' : 'Load More'}
+                  {loadingMore ? t('properties.loading') : t('properties.loadMore')}
                 </button>
               </div>
             )}
@@ -535,7 +536,7 @@ const Properties = () => {
       {loading && (
         <section className="properties-list-section">
           <div className="properties-list-container">
-            <div className="loading-message">Loading properties...</div>
+            <div className="loading-message">{t('properties.loadingProperties')}</div>
           </div>
         </section>
       )}
@@ -544,8 +545,8 @@ const Properties = () => {
         <section className="properties-list-section">
           <div className="properties-list-container">
             <div className="no-properties-message">
-              <p>No properties found.</p>
-              <p>Try adjusting your search criteria.</p>
+              <p>{t('properties.noPropertiesFound')}</p>
+              <p>{t('properties.tryAdjustingCriteria')}</p>
             </div>
           </div>
         </section>

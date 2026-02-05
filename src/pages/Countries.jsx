@@ -3,10 +3,12 @@ import { useNavigate, useParams } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { getCountries, getCountryOverview, getCountrySections } from '../services/countryService';
+import { useTranslation } from '../context/TranslationContext';
 import './Countries.css';
 
 const Countries = () => {
   const { countryCode } = useParams();
+  const { t } = useTranslation();
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [countries, setCountries] = useState([]);
   const [countryOverview, setCountryOverview] = useState(null);
@@ -152,7 +154,7 @@ const Countries = () => {
     if (selectedCountry) {
       return `${selectedCountry.code} ${selectedCountry.name}`;
     }
-    return 'Select country...';
+    return t('common.selectCountry');
   };
 
   // Helper function to get section by key
@@ -174,14 +176,10 @@ const Countries = () => {
       <section className="countries-hero">
         <div className="countries-hero-content">
           <h1 className="countries-main-heading">
-            Your Country. Your Home. Your Knowledge.
+            {t('countries.heroTitle')}
           </h1>
           <p className="countries-description">
-            Understand land and people – Get one step closer to your international home: 
-            Dive deep into your desired lifestyle. We provide you with all the information 
-            you need to plan thoroughly – from the best regions for your investment to the 
-            cultural nuances of your future everyday life. This way, you also gain relevant 
-            insights into the local real estate market – long before you invest.
+            {t('countries.heroDescription')}
           </p>
         </div>
       </section>
@@ -189,7 +187,7 @@ const Countries = () => {
       {/* Country Selection Section */}
       <section className="country-selection-section">
         <div className="country-selection-container">
-          <h2 className="country-selection-heading">Select Desired Country</h2>
+          <h2 className="country-selection-heading">{t('countries.selectDesiredCountry')}</h2>
           <div className="country-dropdown-wrapper" ref={dropdownRef}>
             <div 
               className="country-dropdown-input"
@@ -212,7 +210,7 @@ const Countries = () => {
             {isOpen && (
               <div className="country-dropdown-list">
                 {loading ? (
-                  <div className="country-dropdown-item">Loading...</div>
+                  <div className="country-dropdown-item">{t('common.loading')}</div>
                 ) : countries.length > 0 ? (
                   countries.map((country) => (
                     <div
@@ -239,10 +237,10 @@ const Countries = () => {
         <section className="why-invest-section">
           <div className="why-invest-container">
             <h2 className="why-invest-heading">
-              Why invest in {countryOverview.name}?
+              {t('countries.whyInvest', { country: countryOverview.name })}
             </h2>
             {dataLoading ? (
-              <div style={{ textAlign: 'center', padding: '40px' }}>Loading...</div>
+              <div style={{ textAlign: 'center', padding: '40px' }}>{t('common.loading')}</div>
             ) : (
               <div className="why-invest-cards">
                 {countryOverview.investmentHighlights.map((highlight, index) => (
@@ -284,14 +282,14 @@ const Countries = () => {
                       </li>
                     ))
                   ) : (
-                    <li className="info-card-item">No information available</li>
+                    <li className="info-card-item">{t('common.noDataAvailable')}</li>
                   )}
                 </ul>
                 <a 
                   href={lifestyleSection.slug ? `#${lifestyleSection.slug}` : '#'} 
                   className="info-card-link"
                 >
-                  {lifestyleSection.ctaLabel || 'Learn more →'}
+                  {lifestyleSection.ctaLabel || t('common.learnMore')}
                 </a>
               </div>
             )}
@@ -314,14 +312,14 @@ const Countries = () => {
                       </li>
                     ))
                   ) : (
-                    <li className="info-card-item">No information available</li>
+                    <li className="info-card-item">{t('common.noDataAvailable')}</li>
                   )}
                 </ul>
                 <a 
                   href={propertyMarketSection.slug ? `#${propertyMarketSection.slug}` : '#'} 
                   className="info-card-link"
                 >
-                  {propertyMarketSection.ctaLabel || 'Learn more →'}
+                  {propertyMarketSection.ctaLabel || t('common.learnMore')}
                 </a>
               </div>
             )}
@@ -344,14 +342,14 @@ const Countries = () => {
                       </li>
                     ))
                   ) : (
-                    <li className="info-card-item">No information available</li>
+                    <li className="info-card-item">{t('common.noDataAvailable')}</li>
                   )}
                 </ul>
                 <a 
                   href={lawTaxSection.slug ? `#${lawTaxSection.slug}` : '#'} 
                   className="info-card-link"
                 >
-                  {lawTaxSection.ctaLabel || 'Learn more →'}
+                  {lawTaxSection.ctaLabel || t('common.learnMore')}
                 </a>
               </div>
             )}
@@ -362,7 +360,7 @@ const Countries = () => {
       {/* Advantages Section */}
       <section className="advantages-section">
         <div className="advantages-container">
-          <h2 className="advantages-heading">Your advantages with TerraCasa</h2>
+          <h2 className="advantages-heading">{t('countries.advantagesTitle')}</h2>
           <div className="advantages-cards">
             <div className="advantage-card">
               <div className="advantage-icon-wrapper">
@@ -370,9 +368,9 @@ const Countries = () => {
                   <path d="M12 2L4 5V11C4 16.55 7.16 21.74 12 23C16.84 21.74 20 16.55 20 11V5L12 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </div>
-              <h3 className="advantage-card-title">Verified Offers</h3>
+              <h3 className="advantage-card-title">{t('countries.verifiedOffers')}</h3>
               <p className="advantage-card-description">
-                All properties are verified by us
+                {t('countries.verifiedOffersDesc')}
               </p>
             </div>
 
@@ -385,9 +383,9 @@ const Countries = () => {
                   <path d="M16 3.13C16.8604 3.35031 17.623 3.85071 18.1676 4.55232C18.7122 5.25392 19.0078 6.11683 19.0078 7.005C19.0078 7.89318 18.7122 8.75608 18.1676 9.45769C17.623 10.1593 16.8604 10.6597 16 10.88" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </div>
-              <h3 className="advantage-card-title">Expert Network</h3>
+              <h3 className="advantage-card-title">{t('countries.expertNetwork')}</h3>
               <p className="advantage-card-description">
-                Access to 1,200+ local partners
+                {t('countries.expertNetworkDesc')}
               </p>
             </div>
 
@@ -404,9 +402,9 @@ const Countries = () => {
                   <path d="M18 10L20 22" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </div>
-              <h3 className="advantage-card-title">Legal Certainty</h3>
+              <h3 className="advantage-card-title">{t('countries.legalCertainty')}</h3>
               <p className="advantage-card-description">
-                Lawyers and notaries by your side
+                {t('countries.legalCertaintyDesc')}
               </p>
             </div>
 
@@ -418,9 +416,9 @@ const Countries = () => {
                   <path d="M12 22.08V12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </div>
-              <h3 className="advantage-card-title">All-round Service</h3>
+              <h3 className="advantage-card-title">{t('countries.allRoundService')}</h3>
               <p className="advantage-card-description">
-                From search to move-in
+                {t('countries.allRoundServiceDesc')}
               </p>
             </div>
           </div>
@@ -430,9 +428,9 @@ const Countries = () => {
       {/* Top Destinations Section */}
       <section className="top-destinations-section">
         <div className="top-destinations-container">
-          <h2 className="top-destinations-heading">Our Top Destinations</h2>
+          <h2 className="top-destinations-heading">{t('countries.topDestinations')}</h2>
           <p className="top-destinations-subtitle">
-            12+ countries with detailed information on the real estate market, cost of living, and culture
+            {t('countries.topDestinationsSubtitle')}
           </p>
           <div className="top-destinations-cards">
             {/* Turkey Card */}
@@ -476,7 +474,7 @@ const Countries = () => {
               </div>
               <div className="destination-divider"></div>
               <div className="destination-regions">
-                <div className="regions-label">Top Regions:</div>
+                <div className="regions-label">{t('countries.topRegions')}</div>
                 <div className="regions-tags">
                   <span className="region-tag">Istanbul</span>
                   <span className="region-tag">Bodrum</span>
@@ -484,7 +482,7 @@ const Countries = () => {
                   <span className="region-tag">Alanya</span>
                 </div>
               </div>
-              <button className="destination-button">Learn more →</button>
+              <button className="destination-button">{t('common.learnMore')}</button>
             </div>
 
             {/* Spain Card */}
@@ -528,7 +526,7 @@ const Countries = () => {
               </div>
               <div className="destination-divider"></div>
               <div className="destination-regions">
-                <div className="regions-label">Top Regions:</div>
+                <div className="regions-label">{t('countries.topRegions')}</div>
                 <div className="regions-tags">
                   <span className="region-tag">Barcelona</span>
                   <span className="region-tag">Marbella</span>
@@ -536,7 +534,7 @@ const Countries = () => {
                   <span className="region-tag">Mallorca</span>
                 </div>
               </div>
-              <button className="destination-button">Learn more →</button>
+              <button className="destination-button">{t('common.learnMore')}</button>
             </div>
 
             {/* Italy Card */}
@@ -580,7 +578,7 @@ const Countries = () => {
               </div>
               <div className="destination-divider"></div>
               <div className="destination-regions">
-                <div className="regions-label">Top Regions:</div>
+                <div className="regions-label">{t('countries.topRegions')}</div>
                 <div className="regions-tags">
                   <span className="region-tag">Tuscany</span>
                   <span className="region-tag">Apulia</span>
@@ -588,7 +586,7 @@ const Countries = () => {
                   <span className="region-tag">Calabria</span>
                 </div>
               </div>
-              <button className="destination-button">Learn more →</button>
+              <button className="destination-button">{t('common.learnMore')}</button>
             </div>
 
             {/* Greece Card */}
@@ -632,7 +630,7 @@ const Countries = () => {
               </div>
               <div className="destination-divider"></div>
               <div className="destination-regions">
-                <div className="regions-label">Top Regions:</div>
+                <div className="regions-label">{t('countries.topRegions')}</div>
                 <div className="regions-tags">
                   <span className="region-tag">Crete</span>
                   <span className="region-tag">Rhodes</span>
@@ -640,7 +638,7 @@ const Countries = () => {
                   <span className="region-tag">Athens</span>
                 </div>
               </div>
-              <button className="destination-button">Learn more →</button>
+              <button className="destination-button">{t('common.learnMore')}</button>
             </div>
 
             {/* Portugal Card */}
@@ -684,7 +682,7 @@ const Countries = () => {
               </div>
               <div className="destination-divider"></div>
               <div className="destination-regions">
-                <div className="regions-label">Top Regions:</div>
+                <div className="regions-label">{t('countries.topRegions')}</div>
                 <div className="regions-tags">
                   <span className="region-tag">Lisbon</span>
                   <span className="region-tag">Algarve</span>
@@ -692,7 +690,7 @@ const Countries = () => {
                   <span className="region-tag">Madeira</span>
                 </div>
               </div>
-              <button className="destination-button">Learn more →</button>
+              <button className="destination-button">{t('common.learnMore')}</button>
             </div>
 
             {/* Croatia Card */}
@@ -736,7 +734,7 @@ const Countries = () => {
               </div>
               <div className="destination-divider"></div>
               <div className="destination-regions">
-                <div className="regions-label">Top Regions:</div>
+                <div className="regions-label">{t('countries.topRegions')}</div>
                 <div className="regions-tags">
                   <span className="region-tag">Dubrovnik</span>
                   <span className="region-tag">Split</span>
@@ -744,7 +742,7 @@ const Countries = () => {
                   <span className="region-tag">Zadar</span>
                 </div>
               </div>
-              <button className="destination-button">Learn more →</button>
+              <button className="destination-button">{t('common.learnMore')}</button>
             </div>
           </div>
         </div>
@@ -753,10 +751,10 @@ const Countries = () => {
       {/* Call to Action Section */}
       <section className="cta-section">
         <div className="cta-container">
-          <h2 className="cta-heading">Ready for your adventure?</h2>
-          <p className="cta-subtitle">Find properties now in your dream country</p>
+          <h2 className="cta-heading">{t('countries.readyForAdventure')}</h2>
+          <p className="cta-subtitle">{t('countries.findPropertiesNow')}</p>
           <button className="cta-button">
-            Discover properties
+            {t('countries.discoverProperties')}
             <svg className="cta-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M5 12H19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
               <path d="M12 5L19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>

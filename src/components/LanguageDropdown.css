@@ -1,0 +1,165 @@
+.language-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.language-selector {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 12px;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  color: #333;
+  background: white;
+  transition: border-color 0.3s ease, color 0.3s ease, background 0.3s ease;
+  font-family: inherit;
+  white-space: nowrap;
+}
+
+.language-selector:hover:not(:disabled) {
+  border-color: #074d78;
+}
+
+.language-selector:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.language-flag {
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.language-text {
+  font-size: 13px;
+}
+
+.dropdown-arrow {
+  font-size: 10px;
+  color: #666;
+  margin-left: 2px;
+}
+
+.language-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 5px);
+  right: 0;
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  min-width: 200px;
+  z-index: 1000;
+  overflow: hidden;
+  animation: slideDown 0.2s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.language-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 12px 16px;
+  border: none;
+  background: white;
+  cursor: pointer;
+  font-size: 14px;
+  color: #333;
+  text-align: left;
+  transition: background-color 0.2s ease;
+  font-family: inherit;
+}
+
+.language-option:hover:not(:disabled) {
+  background-color: #f5f5f5;
+}
+
+.language-option:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.language-option.selected {
+  background-color: #074d78;
+  color: white;
+}
+
+.language-option.selected:hover {
+  background-color: #063d62;
+}
+
+.checkmark {
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+  width: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.language-option-flag {
+  font-weight: 600;
+  font-size: 12px;
+  min-width: 24px;
+}
+
+.language-option-text {
+  flex: 1;
+  font-size: 14px;
+}
+
+/* Transparent navbar - white selector (only on home page when scrolled) */
+body.home-page .navbar.scrolled .language-selector {
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+}
+
+body.home-page .navbar.scrolled .language-selector:hover:not(:disabled) {
+  border-color: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+body.home-page .navbar.scrolled .language-selector .dropdown-arrow {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+body.home-page .navbar.scrolled .language-selector .language-flag,
+body.home-page .navbar.scrolled .language-selector .language-text {
+  color: white;
+}
+
+/* On non-home pages, keep selector with normal styling */
+body:not(.home-page) .navbar .language-selector {
+  border: 1px solid #e0e0e0;
+  color: #333;
+  background: white;
+}
+
+body:not(.home-page) .navbar .language-selector:hover:not(:disabled) {
+  border-color: #074d78;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .language-dropdown {
+    display: none;
+  }
+}
+

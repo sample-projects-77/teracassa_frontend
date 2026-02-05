@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import { useTranslation } from '../context/TranslationContext';
 import { searchPartners } from '../services/partnerService';
 import { getCountries } from '../services/countryService';
 import './Network.css';
 
 const Network = () => {
+  const { t } = useTranslation();
   const [partners, setPartners] = useState([]);
   const [loading, setLoading] = useState(false);
   const [countries, setCountries] = useState([]);
@@ -156,7 +158,7 @@ const Network = () => {
     loadDefaultPartners();
   };
 
-  // Service categories (common partner roles)
+  // Service categories (common partner roles) - keep original English values for backend
   const serviceCategories = [
     'Real Estate Agent',
     'Architect',
@@ -167,6 +169,20 @@ const Network = () => {
     'Appraiser',
     'Construction Company'
   ];
+  
+  const getServiceCategoryLabel = (service) => {
+    const serviceMap = {
+      'Real Estate Agent': t('network.realEstateAgent'),
+      'Architect': t('network.architect'),
+      'Lawyer': t('network.lawyer'),
+      'Notary': t('network.notary'),
+      'Tax Advisor': t('network.taxAdvisor'),
+      'Financial Advisor': t('network.financialAdvisor'),
+      'Appraiser': t('network.appraiser'),
+      'Construction Company': t('network.constructionCompany')
+    };
+    return serviceMap[service] || service;
+  };
 
   // Languages
   const languages = [
@@ -191,11 +207,10 @@ const Network = () => {
       <section className="network-hero">
         <div className="network-hero-content">
           <h1 className="network-main-heading">
-            Your Network. Your Success.
+            {t('network.heroTitle')}
           </h1>
           <p className="network-description">
-            Secure your purchase abroad. Connect with our verified network of lawyers, 
-            notaries, and architects who will legally and professionally accompany you through every step of the process.
+            {t('network.heroDescription')}
           </p>
         </div>
       </section>
@@ -203,9 +218,9 @@ const Network = () => {
       {/* Search and Filter Section */}
       <section className="network-search-section">
         <div className="network-search-container">
-          <h2 className="network-search-title">Local Expertise, Global Trust.</h2>
+          <h2 className="network-search-title">{t('network.searchTitle')}</h2>
           <p className="network-search-instructions">
-            Find Your Network Partner: Filter by Country, Service, and Language.
+            {t('network.searchInstructions')}
           </p>
 
           <form onSubmit={handleSearch} className="network-search-form">
@@ -218,7 +233,7 @@ const Network = () => {
                   value={filters.country}
                   onChange={handleFilterChange}
                 >
-                  <option value="">Select country</option>
+                  <option value="">{t('network.selectCountry')}</option>
                   {countries.map((country) => (
                     <option key={country.code} value={country.code}>
                       {country.code} - {country.name}
@@ -232,7 +247,7 @@ const Network = () => {
                   type="text"
                   id="city"
                   name="city"
-                  placeholder="Region / City"
+                  placeholder={t('network.regionCity')}
                   value={filters.city}
                   onChange={handleFilterChange}
                 />
@@ -245,10 +260,10 @@ const Network = () => {
                   value={filters.serviceCategory}
                   onChange={handleFilterChange}
                 >
-                  <option value="">Service</option>
+                  <option value="">{t('network.service')}</option>
                   {serviceCategories.map((service) => (
                     <option key={service} value={service}>
-                      {service}
+                      {getServiceCategoryLabel(service)}
                     </option>
                   ))}
                 </select>
@@ -261,7 +276,7 @@ const Network = () => {
                   value={filters.language}
                   onChange={handleFilterChange}
                 >
-                  <option value="">Language</option>
+                  <option value="">{t('network.language')}</option>
                   {languages.map((lang) => (
                     <option key={lang.code} value={lang.code}>
                       {lang.name}
@@ -273,35 +288,35 @@ const Network = () => {
 
             {/* Additional Filters */}
             <div className="network-additional-filters">
-              <span className="additional-filters-label">Additional Filters:</span>
+              <span className="additional-filters-label">{t('network.additionalFilters')}</span>
               <div className="filter-tags">
                 <button
                   type="button"
                   className={`filter-tag ${additionalFilters.verifiedOnly ? 'active' : ''}`}
                   onClick={() => handleAdditionalFilterToggle('verifiedOnly')}
                 >
-                  Only verified partners
+                  {t('network.onlyVerifiedPartners')}
                 </button>
                 <button
                   type="button"
                   className={`filter-tag ${additionalFilters.ratingMin ? 'active' : ''}`}
                   onClick={() => handleAdditionalFilterToggle('ratingMin')}
                 >
-                  Rating 4.5+
+                  {t('network.rating45Plus')}
                 </button>
                 <button
                   type="button"
                   className={`filter-tag ${additionalFilters.immediatelyAvailable ? 'active' : ''}`}
                   onClick={() => handleAdditionalFilterToggle('immediatelyAvailable')}
                 >
-                  Immediately available
+                  {t('network.immediatelyAvailable')}
                 </button>
                 <button
                   type="button"
                   className={`filter-tag ${additionalFilters.available247 ? 'active' : ''}`}
                   onClick={() => handleAdditionalFilterToggle('available247')}
                 >
-                  24/7 reachable
+                  {t('network.reachable247')}
                 </button>
               </div>
             </div>
@@ -313,7 +328,7 @@ const Network = () => {
                   <circle cx="11" cy="11" r="8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                   <path d="M21 21L16.65 16.65" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
-                Search Partners
+                {t('network.searchPartners')}
               </button>
               <button 
                 type="button" 
@@ -326,14 +341,19 @@ const Network = () => {
                   <path d="M10 11V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                   <path d="M14 11V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
-                Reset
+                {t('network.reset')}
               </button>
             </div>
 
             {/* Partner Count */}
             {hasSearched && (
               <div className="network-partner-count">
-                {partners.length} verified partner{partners.length !== 1 ? 's' : ''} available in {new Set(partners.map(p => p.baseCountry).filter(Boolean)).size} countr{new Set(partners.map(p => p.baseCountry).filter(Boolean)).size !== 1 ? 'ies' : 'y'}
+                {t('network.verifiedPartnersAvailable', {
+                  count: partners.length,
+                  plural: partners.length !== 1 ? 's' : '',
+                  countries: new Set(partners.map(p => p.baseCountry).filter(Boolean)).size,
+                  countryPlural: new Set(partners.map(p => p.baseCountry).filter(Boolean)).size !== 1 ? 'ies' : 'y'
+                })}
               </div>
             )}
           </form>
@@ -346,14 +366,14 @@ const Network = () => {
           <div className="network-partners-container">
             {/* Section Header */}
             <div className="partners-section-header">
-              <h2 className="partners-section-title">Selected Partners</h2>
+              <h2 className="partners-section-title">{t('network.selectedPartners')}</h2>
               <p className="partners-section-subtitle">
-                All partners are carefully vetted and rated by our community
+                {t('network.partnersVetted')}
               </p>
             </div>
 
             {loading ? (
-              <div className="loading-message">Loading partners...</div>
+              <div className="loading-message">{t('network.loadingPartners')}</div>
             ) : partners.length > 0 ? (
               <div className="partners-grid">
                 {partners.map((partner) => {
@@ -442,7 +462,7 @@ const Network = () => {
                             {partner.ratingAverage > 0 ? partner.ratingAverage.toFixed(1) : '0.0'}
                           </span>
                           <span className="rating-count">
-                            ({partner.ratingCount} {partner.ratingCount === 1 ? 'review' : 'reviews'})
+                            ({partner.ratingCount} {partner.ratingCount === 1 ? t('network.review') : t('network.reviews')})
                           </span>
                         </div>
                         {specialties.length > 0 && (
@@ -458,10 +478,10 @@ const Network = () => {
                               <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                               <path d="L22 6L12 13L2 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                             </svg>
-                            Contact
+                            {t('network.contact')}
                           </button>
                           <button className="partner-view-profile-button">
-                            View Profile
+                            {t('network.viewProfile')}
                           </button>
                         </div>
                       </div>
@@ -471,8 +491,8 @@ const Network = () => {
               </div>
             ) : (
               <div className="no-partners-message">
-                <p>No partners found.</p>
-                <p>Try adjusting your search criteria.</p>
+                <p>{t('network.noPartnersFound')}</p>
+                <p>{t('network.tryAdjustingCriteria')}</p>
               </div>
             )}
           </div>

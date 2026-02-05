@@ -12,3 +12,9 @@ export const getPublicProfile = async (partnerId) => {
   return response;
 };
 
+// Update user language preference
+export const updateUserLanguage = async (locale) => {
+  const response = await api.patch('/user/language', { locale });
+  return response;
+};
+
