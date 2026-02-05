@@ -339,7 +339,15 @@
       "goToHome": "Ir a Inicio"
     },
     "errors": {
-      "createFailed": "Error al crear el anuncio. Por favor intente nuevamente."
+      "createFailed": "Error al crear el anuncio. Por favor intente nuevamente.",
+      "timeout": "La solicitud tardó demasiado. Por favor intente nuevamente."
+    },
+    "authRequired": {
+      "title": "Autenticación Requerida",
+      "message": "Para crear un anuncio, necesita iniciar sesión o crear una cuenta. Por favor, inicie sesión con su cuenta existente o cree una nueva cuenta si no tiene una.",
+      "login": "Iniciar Sesión",
+      "register": "Crear Cuenta",
+      "goBack": "Volver al Inicio"
     }
   }
 }

@@ -14,28 +14,27 @@ const languages = [
 ];
 
 const LanguageDropdown = () => {
-  const { user, updateUser } = useAuth();
-  const { changeLanguage } = useTranslation();
+  const { user, updateUser, isAuthenticated } = useAuth();
+  const { changeLanguage, currentLanguage: translationLanguage } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState(null);
   const [isUpdating, setIsUpdating] = useState(false);
   const dropdownRef = useRef(null);
 
-  // Initialize selected language from user data
+  // Initialize selected language from user data or localStorage
   useEffect(() => {
-    if (user?.language) {
-      const lang = languages.find(l => l.code === user.language.toLowerCase());
-      if (lang) {
-        setSelectedLanguage(lang);
-      } else {
-        // Default to English if user language not found
-        setSelectedLanguage(languages.find(l => l.code === 'en'));
-      }
+    // Check localStorage first (works for guest users)
+    const storedLanguage = localStorage.getItem('language');
+    const languageCode = user?.language || storedLanguage || 'en';
+    const lang = languages.find(l => l.code === languageCode.toLowerCase());
+    
+    if (lang) {
+      setSelectedLanguage(lang);
     } else {
-      // Default to English if no user language
+      // Default to English if language not found
       setSelectedLanguage(languages.find(l => l.code === 'en'));
     }
-  }, [user]);
+  }, [user, translationLanguage]);
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -59,31 +58,32 @@ const LanguageDropdown = () => {
 
     setIsUpdating(true);
     try {
-      // Call API to update language
-      await updateUserLanguage(language.code);
+      // Update translation context first (works for both authenticated and guest users)
+      await changeLanguage(language.code);
       
       // Update local state
       setSelectedLanguage(language);
       
-      // Update user in context if response includes language
-      if (user) {
-        updateUser({
-          ...user,
-          language: language.code
-        });
+      // If user is authenticated, update language on server
+      if (isAuthenticated && user) {
+        try {
+          await updateUserLanguage(language.code);
+          // Update user in context if response includes language
+          updateUser({
+            ...user,
+            language: language.code
+          });
+        } catch (error) {
+          console.error('Error updating language on server:', error);
+          // Continue anyway - language is already updated in localStorage and context
+        }
       }
       
-      // Update translation context
-      await changeLanguage(language.code);
-      
       setIsOpen(false);
-      
-      // Refresh the page after language change
-      window.location.reload();
     } catch (error) {
-      console.error('Error updating language:', error);
+      console.error('Error changing language:', error);
+    } finally {
       setIsUpdating(false);
-      // Optionally show error message to user
     }
   };
 

@@ -339,7 +339,15 @@
       "goToHome": "Aller à l'Accueil"
     },
     "errors": {
-      "createFailed": "Échec de la création de l'annonce. Veuillez réessayer."
+      "createFailed": "Échec de la création de l'annonce. Veuillez réessayer.",
+      "timeout": "La requête a pris trop de temps. Veuillez réessayer."
+    },
+    "authRequired": {
+      "title": "Authentification Requise",
+      "message": "Pour créer une annonce, vous devez vous connecter ou créer un compte. Veuillez vous connecter avec votre compte existant ou créer un nouveau compte si vous n'en avez pas.",
+      "login": "Se Connecter",
+      "register": "Créer un Compte",
+      "goBack": "Retour à l'Accueil"
     }
   }
 }

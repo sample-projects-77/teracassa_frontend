@@ -11,7 +11,7 @@ const DEFAULT_LANGUAGE = 'en';
 const translationCache = {};
 
 export const TranslationProvider = ({ children }) => {
-  const { user } = useAuth();
+  const { user, loading: authLoading } = useAuth();
   const [currentLanguage, setCurrentLanguage] = useState(DEFAULT_LANGUAGE);
   const [translations, setTranslations] = useState({});
   const [loading, setLoading] = useState(true);
@@ -71,16 +71,23 @@ export const TranslationProvider = ({ children }) => {
     }
   };
 
-  // Initialize language from user preference
+  // Initialize language from user preference or localStorage
   useEffect(() => {
-    const userLanguage = user?.language || localStorage.getItem('language') || DEFAULT_LANGUAGE;
+    // Don't initialize until auth loading is complete
+    if (authLoading) {
+      return;
+    }
+    
+    // Check localStorage first (works for both authenticated and guest users)
+    const storedLanguage = localStorage.getItem('language');
+    const userLanguage = user?.language || storedLanguage || DEFAULT_LANGUAGE;
     const language = SUPPORTED_LANGUAGES.includes(userLanguage.toLowerCase()) 
       ? userLanguage.toLowerCase() 
       : DEFAULT_LANGUAGE;
     
     setCurrentLanguage(language);
     loadTranslations(language);
-  }, [user]);
+  }, [user, authLoading]);
 
   // Update language when user language changes
   const changeLanguage = async (lang) => {

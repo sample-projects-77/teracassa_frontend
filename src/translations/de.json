@@ -340,6 +340,13 @@
     "errors": {
       "createFailed": "Fehler beim Erstellen der Anzeige. Bitte versuchen Sie es erneut.",
       "timeout": "Die Anfrage dauerte zu lange. Bitte versuchen Sie es erneut."
+    },
+    "authRequired": {
+      "title": "Anmeldung erforderlich",
+      "message": "Um eine Anzeige zu erstellen, müssen Sie sich anmelden oder ein Konto erstellen. Bitte melden Sie sich mit Ihrem bestehenden Konto an oder erstellen Sie ein neues Konto.",
+      "login": "Anmelden",
+      "register": "Konto erstellen",
+      "goBack": "Zurück zur Startseite"
     }
   }
 }

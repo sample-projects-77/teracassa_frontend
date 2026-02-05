@@ -56,11 +56,7 @@ function App() {
         />
         <Route
           path="/post-ad"
-          element={
-            <ProtectedRoute>
-              <PostAd />
-            </ProtectedRoute>
-          }
+          element={<PostAd />}
         />
         
         {/* Catch all */}

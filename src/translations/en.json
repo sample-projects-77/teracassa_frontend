@@ -341,6 +341,13 @@
     "errors": {
       "createFailed": "Failed to create ad. Please try again.",
       "timeout": "The request took too long. Please try again."
+    },
+    "authRequired": {
+      "title": "Authentication Required",
+      "message": "To create an ad, you need to sign in or create an account. Please log in with your existing account or create a new account if you don't have one.",
+      "login": "Login",
+      "register": "Create Account",
+      "goBack": "Go Back to Home"
     }
   }
 }

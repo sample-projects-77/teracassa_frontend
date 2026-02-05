@@ -339,7 +339,15 @@
       "goToHome": "Ana Sayfaya Git"
     },
     "errors": {
-      "createFailed": "İlan oluşturulamadı. Lütfen tekrar deneyin."
+      "createFailed": "İlan oluşturulamadı. Lütfen tekrar deneyin.",
+      "timeout": "İstek çok uzun sürdü. Lütfen tekrar deneyin."
+    },
+    "authRequired": {
+      "title": "Kimlik Doğrulama Gerekli",
+      "message": "Bir ilan oluşturmak için giriş yapmanız veya hesap oluşturmanız gerekir. Lütfen mevcut hesabınızla giriş yapın veya hesabınız yoksa yeni bir hesap oluşturun.",
+      "login": "Giriş Yap",
+      "register": "Hesap Oluştur",
+      "goBack": "Ana Sayfaya Dön"
     }
   }
 }

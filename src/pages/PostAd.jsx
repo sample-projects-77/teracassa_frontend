@@ -10,8 +10,9 @@ import './PostAd.css';
 
 const PostAd = () => {
   const { t, loading: translationsLoading, currentLanguage } = useTranslation();
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, loading: authLoading } = useAuth();
   const navigate = useNavigate();
+  const [showAuthModal, setShowAuthModal] = useState(false);
   const [countries, setCountries] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -110,23 +111,25 @@ const PostAd = () => {
   });
 
   useEffect(() => {
-    // Redirect if not authenticated
-    if (!isAuthenticated) {
-      navigate('/login');
-      return;
+    // Close modal if user becomes authenticated
+    if (isAuthenticated) {
+      setShowAuthModal(false);
+      
+      // Load countries only if authenticated
+      const loadCountries = async () => {
+        try {
+          const response = await getCountries();
+          setCountries(response.data || response);
+        } catch (err) {
+          console.error('Error loading countries:', err);
+        }
+      };
+      loadCountries();
+    } else if (!authLoading && !isAuthenticated) {
+      // Show auth modal if not authenticated (after auth check is complete)
+      setShowAuthModal(true);
     }
-
-    // Load countries
-    const loadCountries = async () => {
-      try {
-        const response = await getCountries();
-        setCountries(response.data || response);
-      } catch (err) {
-        console.error('Error loading countries:', err);
-      }
-    };
-    loadCountries();
-  }, [isAuthenticated, navigate]);
+  }, [isAuthenticated, authLoading]);
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -416,11 +419,11 @@ const PostAd = () => {
     }
   }, [translationsLoading, currentLanguage, t]);
 
-  if (translationsLoading) {
+  if (translationsLoading || authLoading) {
     return (
       <div className="post-ad-container">
         <Navbar />
-        <div style={{ padding: '40px', textAlign: 'center' }}>Loading translations...</div>
+        <div style={{ padding: '40px', textAlign: 'center' }}>Loading...</div>
       </div>
     );
   }
@@ -429,15 +432,52 @@ const PostAd = () => {
     <div className="post-ad-container">
       <Navbar />
       
-      {/* Hero Banner */}
-      <div className="post-ad-hero">
-        <div className="hero-content">
-          <h1 className="hero-title">{t('postAd.heroTitle')}</h1>
-          <p className="hero-description">{t('postAd.heroDescription')}</p>
+      {/* Authentication Required Modal */}
+      {showAuthModal && (
+        <div className="auth-required-modal-overlay">
+          <div className="auth-required-modal" onClick={(e) => e.stopPropagation()}>
+            <div className="auth-modal-icon">🔒</div>
+            <h2>{t('postAd.authRequired.title')}</h2>
+            <p>{t('postAd.authRequired.message')}</p>
+            <div className="auth-modal-buttons">
+              <button 
+                className="auth-modal-btn auth-modal-btn-primary"
+                onClick={() => navigate('/login')}
+              >
+                {t('postAd.authRequired.login')}
+              </button>
+              <button 
+                className="auth-modal-btn auth-modal-btn-secondary"
+                onClick={() => navigate('/register')}
+              >
+                {t('postAd.authRequired.register')}
+              </button>
+            </div>
+            <button 
+              className="auth-modal-close"
+              onClick={() => navigate('/')}
+            >
+              {t('postAd.authRequired.goBack')}
+            </button>
+          </div>
         </div>
-      </div>
+      )}
+      
+      {/* Only show form if authenticated */}
+      {!isAuthenticated ? null : (
+        <>
+      
+      {/* Hero Banner - Only show if authenticated */}
+      {isAuthenticated && (
+        <>
+          <div className="post-ad-hero">
+            <div className="hero-content">
+              <h1 className="hero-title">{t('postAd.heroTitle')}</h1>
+              <p className="hero-description">{t('postAd.heroDescription')}</p>
+            </div>
+          </div>
 
-      <div className="post-ad-content">
+          <div className="post-ad-content">
         <form onSubmit={handleSubmit} className="post-ad-form">
           {/* Basic Information Section */}
           <div className="form-section">
@@ -1491,33 +1531,38 @@ const PostAd = () => {
 
           {error && <div className="error-message">{error}</div>}
         </form>
-      </div>
-
-      {/* Loading Overlay */}
-      {loading && (
-        <div className="loading-overlay">
-          <div className="loading-spinner">
-            <div className="spinner"></div>
-            <p>{t('postAd.loading.creating')}</p>
-          </div>
         </div>
+
+        {/* Loading Overlay */}
+        {loading && (
+          <div className="loading-overlay">
+            <div className="loading-spinner">
+              <div className="spinner"></div>
+              <p>{t('postAd.loading.creating')}</p>
+            </div>
+          </div>
+        )}
+
+        {/* Success Popup Modal */}
+        {success && (
+          <div className="success-popup-overlay">
+            <div className="success-popup" onClick={(e) => e.stopPropagation()}>
+              <div className="success-popup-icon">✓</div>
+              <h2>{t('postAd.success.title')}</h2>
+              <p>{t('postAd.success.message')}</p>
+              <button 
+                className="success-popup-button"
+                onClick={() => navigate('/')}
+              >
+                {t('postAd.success.goToHome')}
+              </button>
+            </div>
+          </div>
+        )}
+        </>
       )}
 
-      {/* Success Popup Modal */}
-      {success && (
-        <div className="success-popup-overlay">
-          <div className="success-popup" onClick={(e) => e.stopPropagation()}>
-            <div className="success-popup-icon">✓</div>
-            <h2>{t('postAd.success.title')}</h2>
-            <p>{t('postAd.success.message')}</p>
-            <button 
-              className="success-popup-button"
-              onClick={() => navigate('/')}
-            >
-              {t('postAd.success.goToHome')}
-            </button>
-          </div>
-        </div>
+        </>
       )}
 
       <Footer />
