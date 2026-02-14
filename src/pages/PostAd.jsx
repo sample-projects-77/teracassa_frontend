@@ -18,7 +18,6 @@ const PostAd = () => {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
   const [fieldErrors, setFieldErrors] = useState({});
-  const [imageFiles, setImageFiles] = useState([]);
 
   // Form state - Basic Information
   const [formData, setFormData] = useState({
@@ -100,14 +99,7 @@ const PostAd = () => {
     currentlyRented: '',
     expectedYield: '',
     propertyManagementAvailable: '',
-    airbnbReady: false,
-    
-    // Verification
-    ownershipProofDocs: [],
-    energyCertificateDocs: [],
-    addressVerified: false,
-    consentAccepted: false,
-    premiumReviewPurchased: false
+    airbnbReady: false
   });
 
   useEffect(() => {
@@ -153,18 +145,6 @@ const PostAd = () => {
     }
   };
 
-  const handleImageUpload = (e) => {
-    const files = Array.from(e.target.files);
-    if (files.length + imageFiles.length > 20) {
-      setError('Maximal 20 Bilder erlaubt');
-      return;
-    }
-    setImageFiles(prev => [...prev, ...files]);
-  };
-
-  const removeImage = (index) => {
-    setImageFiles(prev => prev.filter((_, i) => i !== index));
-  };
 
   // Helper function to extract first number from text (e.g., "200m oder 5 Gehminuten" -> 200)
   const extractNumber = (text) => {
@@ -237,7 +217,7 @@ const PostAd = () => {
         areaSqm: formData.areaSqm ? parseInt(formData.areaSqm) : undefined,
         plotAreaSqm: formData.plotAreaSqm ? parseInt(formData.plotAreaSqm) : undefined,
         yearBuilt: formData.yearBuilt ? parseInt(formData.yearBuilt) : undefined,
-        imageUrls: imageFiles.map(file => URL.createObjectURL(file)), // In production, upload to server first
+        imageUrls: [],
         
         // Details object
         details: {
@@ -318,15 +298,6 @@ const PostAd = () => {
           expectedYieldPercent: formData.expectedYield ? parseFloat(formData.expectedYield) : undefined,
           propertyManagementAvailable: formData.propertyManagementAvailable || undefined,
           airbnbReady: formData.airbnbReady || undefined
-        },
-        
-        // Verification
-        verification: {
-          ownershipProofDocs: formData.ownershipProofDocs,
-          energyCertificateDocs: formData.energyCertificateDocs,
-          addressVerified: formData.addressVerified,
-          consentAccepted: formData.consentAccepted,
-          premiumReviewPurchased: formData.premiumReviewPurchased
         }
       };
 
@@ -634,46 +605,6 @@ const PostAd = () => {
             </div>
           </div>
 
-          {/* Photo Upload Section */}
-          <div className="form-section">
-            <div className="section-header">
-              <div className="section-icon">📷</div>
-              <h2 className="section-title">{t('postAd.uploadPhotos')}</h2>
-            </div>
-            
-            <div className="photo-upload-area">
-              <input
-                type="file"
-                id="imageUpload"
-                accept="image/png,image/jpeg,image/jpg"
-                multiple
-                onChange={handleImageUpload}
-                style={{ display: 'none' }}
-              />
-              <label htmlFor="imageUpload" className="upload-label">
-                <div className="upload-icon">↑</div>
-                <p>{t('postAd.clickOrDragPhotos')}</p>
-                <p className="upload-hint">{t('postAd.photoRequirements')}</p>
-              </label>
-              
-              {imageFiles.length > 0 && (
-                <div className="image-preview-grid">
-                  {imageFiles.map((file, index) => (
-                    <div key={index} className="image-preview">
-                      <img src={URL.createObjectURL(file)} alt={`Preview ${index + 1}`} />
-                      <button
-                        type="button"
-                        onClick={() => removeImage(index)}
-                        className="remove-image-btn"
-                      >
-                        ×
-                      </button>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-          </div>
 
           {/* Additional Property Information */}
           <div className="form-section">
@@ -1475,46 +1406,6 @@ const PostAd = () => {
             </div>
           </div>
 
-          {/* Verification Section */}
-          <div className="form-section verification-section">
-            <div className="section-header">
-              <div className="section-icon">🛡️</div>
-              <h2 className="section-title">{t('postAd.verificationTrust')}</h2>
-            </div>
-            <p className="section-description">{t('postAd.verificationDescription')}</p>
-            
-            <div className="verification-cards">
-              <div className="verification-card">
-                <div className="card-icon">📄</div>
-                <h3>{t('postAd.ownershipProof')}</h3>
-                <p>{t('postAd.ownershipProofDesc')}</p>
-                <button type="button" className="add-btn">
-                  {t('postAd.add')}
-                </button>
-                <span className="recommended-badge">{t('postAd.recommended')}</span>
-              </div>
-
-              <div className="verification-card">
-                <div className="card-icon">🛡️</div>
-                <h3>{t('postAd.identityVerification')}</h3>
-                <p>{t('postAd.identityVerificationDesc')}</p>
-                <button type="button" className="add-btn">
-                  {t('postAd.add')}
-                </button>
-                <span className="recommended-badge">{t('postAd.recommended')}</span>
-              </div>
-
-              <div className="verification-card">
-                <div className="card-icon">📍</div>
-                <h3>{t('postAd.addressVerification')}</h3>
-                <p>{t('postAd.addressVerificationDesc')}</p>
-                <button type="button" className="add-btn">
-                  {t('postAd.add')}
-                </button>
-                <span className="recommended-badge">{t('postAd.recommended')}</span>
-              </div>
-            </div>
-          </div>
 
           {/* Form Actions */}
           <div className="form-actions">
