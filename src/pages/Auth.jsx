@@ -30,9 +30,10 @@ const Auth = () => {
     roleTitle: '',
     baseCountry: '',
     baseCity: '',
-    avatarUrl: '',
     phone: '',
   });
+  const [avatarFile, setAvatarFile] = useState(null);
+  const [avatarPreview, setAvatarPreview] = useState(null);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const { login: authLogin, isAuthenticated } = useAuth();
@@ -60,6 +61,40 @@ const Auth = () => {
     setError('');
   };
 
+  const handleAvatarChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      // Validate file type
+      if (!file.type.startsWith('image/')) {
+        setError('Please select a valid image file');
+        return;
+      }
+      // Validate file size (e.g., max 5MB)
+      if (file.size > 5 * 1024 * 1024) {
+        setError('Image size should be less than 5MB');
+        return;
+      }
+      setAvatarFile(file);
+      // Create preview
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setAvatarPreview(reader.result);
+      };
+      reader.readAsDataURL(file);
+      setError('');
+    }
+  };
+
+  const removeAvatar = () => {
+    setAvatarFile(null);
+    setAvatarPreview(null);
+    // Reset file input
+    const fileInput = document.getElementById('register-avatar');
+    if (fileInput) {
+      fileInput.value = '';
+    }
+  };
+
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
     setError('');
@@ -85,7 +120,32 @@ const Auth = () => {
     setLoading(true);
 
     try {
-      const response = await register(registerData);
+      // Create FormData for file upload
+      const formData = new FormData();
+      formData.append('email', registerData.email);
+      formData.append('password', registerData.password);
+      formData.append('firstName', registerData.firstName);
+      formData.append('lastName', registerData.lastName);
+      if (registerData.companyName) {
+        formData.append('companyName', registerData.companyName);
+      }
+      if (registerData.roleTitle) {
+        formData.append('roleTitle', registerData.roleTitle);
+      }
+      if (registerData.baseCountry) {
+        formData.append('baseCountry', registerData.baseCountry);
+      }
+      if (registerData.baseCity) {
+        formData.append('baseCity', registerData.baseCity);
+      }
+      if (registerData.phone) {
+        formData.append('phone', registerData.phone);
+      }
+      if (avatarFile) {
+        formData.append('avatar', avatarFile);
+      }
+
+      const response = await register(formData);
       
       if (response.user && response.token) {
         authLogin(response.user, response.token);
@@ -351,15 +411,74 @@ const Auth = () => {
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="register-avatarUrl">Avatar URL</label>
+                  <label htmlFor="register-avatar">Avatar Image</label>
                   <input
-                    type="url"
-                    id="register-avatarUrl"
-                    name="avatarUrl"
-                    value={registerData.avatarUrl}
-                    onChange={handleRegisterChange}
-                    placeholder="Profile image URL (optional)"
+                    type="file"
+                    id="register-avatar"
+                    name="avatar"
+                    accept="image/png,image/jpeg,image/jpg,image/gif,image/webp"
+                    onChange={handleAvatarChange}
+                    style={{ display: 'none' }}
                   />
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                    <label
+                      htmlFor="register-avatar"
+                      style={{
+                        padding: '10px 15px',
+                        border: '1px solid #ddd',
+                        borderRadius: '4px',
+                        cursor: 'pointer',
+                        textAlign: 'center',
+                        backgroundColor: '#f9f9f9',
+                        transition: 'background-color 0.2s'
+                      }}
+                      onMouseEnter={(e) => e.target.style.backgroundColor = '#f0f0f0'}
+                      onMouseLeave={(e) => e.target.style.backgroundColor = '#f9f9f9'}
+                    >
+                      {avatarFile ? 'Change Avatar Image' : 'Choose Avatar Image (optional)'}
+                    </label>
+                    {avatarPreview && (
+                      <div style={{ position: 'relative', display: 'inline-block', maxWidth: '150px' }}>
+                        <img
+                          src={avatarPreview}
+                          alt="Avatar preview"
+                          style={{
+                            width: '100%',
+                            height: 'auto',
+                            borderRadius: '4px',
+                            maxHeight: '150px',
+                            objectFit: 'cover'
+                          }}
+                        />
+                        <button
+                          type="button"
+                          onClick={removeAvatar}
+                          style={{
+                            position: 'absolute',
+                            top: '5px',
+                            right: '5px',
+                            background: 'rgba(255, 0, 0, 0.7)',
+                            color: 'white',
+                            border: 'none',
+                            borderRadius: '50%',
+                            width: '24px',
+                            height: '24px',
+                            cursor: 'pointer',
+                            fontSize: '16px',
+                            lineHeight: '1',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center'
+                          }}
+                        >
+                          ×
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                  <p style={{ fontSize: '12px', color: '#666', marginTop: '5px' }}>
+                    Supported formats: PNG, JPEG, JPG, GIF, WEBP (max 5MB)
+                  </p>
                 </div>
 
                 <button type="submit" className="auth-button primary" disabled={loading}>

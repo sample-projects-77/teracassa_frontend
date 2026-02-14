@@ -2,6 +2,7 @@ import api from '../config/api';
 
 // Register user
 export const register = async (userData) => {
+  // FormData will be handled automatically by the API interceptor
   const response = await api.post('/auth/register', userData);
   return response;
 };
