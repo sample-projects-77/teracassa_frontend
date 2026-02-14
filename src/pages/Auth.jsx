@@ -41,7 +41,7 @@ const Auth = () => {
 
   // Redirect if already authenticated
   if (isAuthenticated) {
-    navigate('/dashboard');
+    navigate('/');
     return null;
   }
 
@@ -105,7 +105,7 @@ const Auth = () => {
       
       if (response.user && response.token) {
         authLogin(response.user, response.token);
-        navigate('/dashboard');
+        navigate('/');
       }
     } catch (err) {
       setError(err.message || 'Login failed. Please check your credentials.');
@@ -149,7 +149,7 @@ const Auth = () => {
       
       if (response.user && response.token) {
         authLogin(response.user, response.token);
-        navigate('/dashboard');
+        navigate('/');
       }
     } catch (err) {
       setError(err.message || 'Registration failed. Please try again.');

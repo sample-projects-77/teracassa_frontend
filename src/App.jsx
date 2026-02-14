@@ -20,8 +20,8 @@ function App() {
       <Routes>
         {/* Public Routes */}
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={isAuthenticated ? <Navigate to="/dashboard" replace /> : <Auth />} />
-        <Route path="/register" element={isAuthenticated ? <Navigate to="/dashboard" replace /> : <Auth />} />
+        <Route path="/login" element={isAuthenticated ? <Navigate to="/" replace /> : <Auth />} />
+        <Route path="/register" element={isAuthenticated ? <Navigate to="/" replace /> : <Auth />} />
         <Route path="/countries" element={<Countries />} />
         <Route path="/countries/:countryCode" element={<Countries />} />
         <Route path="/properties" element={<Properties />} />
