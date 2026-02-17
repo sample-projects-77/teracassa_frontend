@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { login, register } from '../services/authService';
+import { getCountries } from '../services/countryService';
 import './Auth.css';
 
 const Auth = () => {
@@ -36,8 +37,51 @@ const Auth = () => {
   const [avatarPreview, setAvatarPreview] = useState(null);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [countries, setCountries] = useState([]);
   const { login: authLogin, isAuthenticated } = useAuth();
   const navigate = useNavigate();
+
+  // Role title options
+  const roleTitleOptions = [
+    'Real Estate Agent',
+    'Lawyer',
+    'Appraiser',
+    'Contractor',
+    'Translator',
+    'Architect',
+    'Moving Company'
+  ];
+
+  // Cities by country code
+  const citiesByCountry = {
+    'TR': ['Istanbul', 'Ankara', 'Izmir', 'Antalya', 'Bodrum', 'Alanya', 'Fethiye', 'Marmaris'],
+    'ES': ['Madrid', 'Barcelona', 'Valencia', 'Seville', 'Marbella', 'Mallorca', 'Malaga', 'Alicante'],
+    'IT': ['Rome', 'Milan', 'Naples', 'Turin', 'Palermo', 'Genoa', 'Florence', 'Bologna'],
+    'GR': ['Athens', 'Thessaloniki', 'Crete', 'Rhodes', 'Santorini', 'Mykonos', 'Corfu', 'Patras'],
+    'PT': ['Lisbon', 'Porto', 'Braga', 'Coimbra', 'Faro', 'Algarve', 'Madeira', 'Aveiro'],
+    'HR': ['Zagreb', 'Split', 'Dubrovnik', 'Rijeka', 'Zadar', 'Pula', 'Osijek', 'Istria'],
+    'FR': ['Paris', 'Marseille', 'Lyon', 'Toulouse', 'Nice', 'Nantes', 'Strasbourg', 'Bordeaux'],
+    'DE': ['Berlin', 'Munich', 'Hamburg', 'Frankfurt', 'Cologne', 'Stuttgart', 'Düsseldorf', 'Dortmund']
+  };
+
+  useEffect(() => {
+    loadCountries();
+  }, []);
+
+  const loadCountries = async () => {
+    try {
+      const data = await getCountries();
+      setCountries(data || []);
+    } catch (error) {
+      console.error('Error loading countries:', error);
+      setCountries([]);
+    }
+  };
+
+  const getCitiesForCountry = (countryCode) => {
+    if (!countryCode) return [];
+    return citiesByCountry[countryCode.toUpperCase()] || [];
+  };
 
   // Redirect if already authenticated
   if (isAuthenticated) {
@@ -361,40 +405,63 @@ const Auth = () => {
 
                 <div className="form-group">
                   <label htmlFor="register-roleTitle">Role Title</label>
-                  <input
-                    type="text"
+                  <select
                     id="register-roleTitle"
                     name="roleTitle"
                     value={registerData.roleTitle}
                     onChange={handleRegisterChange}
-                    placeholder="e.g., Real Estate Agent (optional)"
-                  />
+                  >
+                    <option value="">Select role (optional)</option>
+                    {roleTitleOptions.map((role) => (
+                      <option key={role} value={role}>
+                        {role}
+                      </option>
+                    ))}
+                  </select>
                 </div>
 
                 <div className="form-row">
                   <div className="form-group">
                     <label htmlFor="register-baseCountry">Base Country</label>
-                    <input
-                      type="text"
+                    <select
                       id="register-baseCountry"
                       name="baseCountry"
                       value={registerData.baseCountry}
-                      onChange={handleRegisterChange}
-                      placeholder="e.g., TR, ES (optional)"
-                      maxLength="2"
-                    />
+                      onChange={(e) => {
+                        handleRegisterChange(e);
+                        // Reset city when country changes
+                        setRegisterData({
+                          ...registerData,
+                          baseCountry: e.target.value,
+                          baseCity: ''
+                        });
+                      }}
+                    >
+                      <option value="">Select country (optional)</option>
+                      {countries.map((country) => (
+                        <option key={country.code} value={country.code}>
+                          {country.code} - {country.name}
+                        </option>
+                      ))}
+                    </select>
                   </div>
 
                   <div className="form-group">
                     <label htmlFor="register-baseCity">Base City</label>
-                    <input
-                      type="text"
+                    <select
                       id="register-baseCity"
                       name="baseCity"
                       value={registerData.baseCity}
                       onChange={handleRegisterChange}
-                      placeholder="City name (optional)"
-                    />
+                      disabled={!registerData.baseCountry}
+                    >
+                      <option value="">Select city (optional)</option>
+                      {getCitiesForCountry(registerData.baseCountry).map((city) => (
+                        <option key={city} value={city}>
+                          {city}
+                        </option>
+                      ))}
+                    </select>
                   </div>
                 </div>
 

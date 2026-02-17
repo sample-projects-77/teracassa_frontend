@@ -333,6 +333,13 @@
   font-weight: 500;
   transition: color 0.3s ease;
   margin-top: auto;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: inherit;
+  text-align: left;
+  display: inline-block;
 }
 
 .info-card-link:hover {

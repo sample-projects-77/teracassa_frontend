@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { updateProfile } from '../services/profileService';
+import { getCountries } from '../services/countryService';
 import Navbar from '../components/Navbar';
 import './Profile.css';
 
@@ -17,6 +18,49 @@ const Profile = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const [countries, setCountries] = useState([]);
+
+  // Role title options
+  const roleTitleOptions = [
+    'Real Estate Agent',
+    'Lawyer',
+    'Appraiser',
+    'Contractor',
+    'Translator',
+    'Architect',
+    'Moving Company'
+  ];
+
+  // Cities by country code
+  const citiesByCountry = {
+    'TR': ['Istanbul', 'Ankara', 'Izmir', 'Antalya', 'Bodrum', 'Alanya', 'Fethiye', 'Marmaris'],
+    'ES': ['Madrid', 'Barcelona', 'Valencia', 'Seville', 'Marbella', 'Mallorca', 'Malaga', 'Alicante'],
+    'IT': ['Rome', 'Milan', 'Naples', 'Turin', 'Palermo', 'Genoa', 'Florence', 'Bologna'],
+    'GR': ['Athens', 'Thessaloniki', 'Crete', 'Rhodes', 'Santorini', 'Mykonos', 'Corfu', 'Patras'],
+    'PT': ['Lisbon', 'Porto', 'Braga', 'Coimbra', 'Faro', 'Algarve', 'Madeira', 'Aveiro'],
+    'HR': ['Zagreb', 'Split', 'Dubrovnik', 'Rijeka', 'Zadar', 'Pula', 'Osijek', 'Istria'],
+    'FR': ['Paris', 'Marseille', 'Lyon', 'Toulouse', 'Nice', 'Nantes', 'Strasbourg', 'Bordeaux'],
+    'DE': ['Berlin', 'Munich', 'Hamburg', 'Frankfurt', 'Cologne', 'Stuttgart', 'Düsseldorf', 'Dortmund']
+  };
+
+  useEffect(() => {
+    loadCountries();
+  }, []);
+
+  const loadCountries = async () => {
+    try {
+      const data = await getCountries();
+      setCountries(data || []);
+    } catch (error) {
+      console.error('Error loading countries:', error);
+      setCountries([]);
+    }
+  };
+
+  const getCitiesForCountry = (countryCode) => {
+    if (!countryCode) return [];
+    return citiesByCountry[countryCode.toUpperCase()] || [];
+  };
 
   useEffect(() => {
     if (user) {
@@ -95,40 +139,63 @@ const Profile = () => {
 
         <div className="form-group">
           <label htmlFor="roleTitle">Role Title</label>
-          <input
-            type="text"
+          <select
             id="roleTitle"
             name="roleTitle"
             value={formData.roleTitle}
             onChange={handleChange}
-            placeholder="e.g., Immobilienmaklerin"
-          />
+          >
+            <option value="">Select role (optional)</option>
+            {roleTitleOptions.map((role) => (
+              <option key={role} value={role}>
+                {role}
+              </option>
+            ))}
+          </select>
         </div>
 
         <div className="form-row">
           <div className="form-group">
             <label htmlFor="baseCountry">Base Country</label>
-            <input
-              type="text"
+            <select
               id="baseCountry"
               name="baseCountry"
               value={formData.baseCountry}
-              onChange={handleChange}
-              placeholder="e.g., TR"
-              maxLength="2"
-            />
+              onChange={(e) => {
+                handleChange(e);
+                // Reset city when country changes
+                setFormData({
+                  ...formData,
+                  baseCountry: e.target.value,
+                  baseCity: ''
+                });
+              }}
+            >
+              <option value="">Select country (optional)</option>
+              {countries.map((country) => (
+                <option key={country.code} value={country.code}>
+                  {country.code} - {country.name}
+                </option>
+              ))}
+            </select>
           </div>
 
           <div className="form-group">
             <label htmlFor="baseCity">Base City</label>
-            <input
-              type="text"
+            <select
               id="baseCity"
               name="baseCity"
               value={formData.baseCity}
               onChange={handleChange}
-              placeholder="City name"
-            />
+              disabled={!formData.baseCountry}
+            >
+              <option value="">Select city (optional)</option>
+              {getCitiesForCountry(formData.baseCountry).map((city) => (
+                <option key={city} value={city}>
+                  {city}
+                </option>
+              ))}
+            </select>
           </div>
         </div>
 

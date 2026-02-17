@@ -22,6 +22,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={isAuthenticated ? <Navigate to="/" replace /> : <Auth />} />
         <Route path="/register" element={isAuthenticated ? <Navigate to="/" replace /> : <Auth />} />
+        <Route path="/signup" element={<Navigate to="/register" replace />} />
         <Route path="/countries" element={<Countries />} />
         <Route path="/countries/:countryCode" element={<Countries />} />
         <Route path="/properties" element={<Properties />} />
