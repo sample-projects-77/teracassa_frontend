@@ -399,7 +399,8 @@
     },
     "success": {
       "title": "Ad Created Successfully!",
-      "message": "Your ad has been successfully created and is now under review.",
+      "message": "Your ad has been successfully created.",
+      "redirecting": "Redirecting to homepage...",
       "goToHome": "Go to Home"
     },
     "errors": {

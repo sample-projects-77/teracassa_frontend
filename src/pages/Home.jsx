@@ -9,6 +9,9 @@ const Home = () => {
   const { t } = useTranslation();
   
   useEffect(() => {
+    // Scroll to top when component mounts
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    
     // Add class to body to identify home page
     document.body.classList.add('home-page');
     return () => {

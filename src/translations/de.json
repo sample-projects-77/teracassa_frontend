@@ -396,7 +396,8 @@
     },
     "success": {
       "title": "Anzeige erfolgreich erstellt!",
-      "message": "Ihre Anzeige wurde erfolgreich erstellt und wird nun überprüft.",
+      "message": "Ihre Anzeige wurde erfolgreich erstellt.",
+      "redirecting": "Weiterleitung zur Startseite...",
       "goToHome": "Zur Startseite"
     },
     "errors": {

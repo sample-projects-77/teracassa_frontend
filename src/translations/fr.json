@@ -397,7 +397,8 @@
     },
     "success": {
       "title": "Annonce Créée avec Succès!",
-      "message": "Votre annonce a été créée avec succès et est en cours d'examen.",
+      "message": "Votre annonce a été créée avec succès.",
+      "redirecting": "Redirection vers la page d'accueil...",
       "goToHome": "Aller à l'Accueil"
     },
     "errors": {

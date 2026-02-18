@@ -397,7 +397,8 @@
     },
     "success": {
       "title": "¡Anuncio Creado Exitosamente!",
-      "message": "Su anuncio ha sido creado exitosamente y está siendo revisado.",
+      "message": "Su anuncio ha sido creado exitosamente.",
+      "redirecting": "Redirigiendo a la página de inicio...",
       "goToHome": "Ir a Inicio"
     },
     "errors": {

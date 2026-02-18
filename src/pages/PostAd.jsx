@@ -6,6 +6,8 @@ import { useTranslation } from '../context/TranslationContext';
 import { useAuth } from '../context/AuthContext';
 import { createProperty } from '../services/propertyService';
 import { getCountries } from '../services/countryService';
+import CountryDropdown from '../components/CountryDropdown';
+import CityDropdown from '../components/CityDropdown';
 import './PostAd.css';
 
 const PostAd = () => {
@@ -110,10 +112,11 @@ const PostAd = () => {
       // Load countries only if authenticated
       const loadCountries = async () => {
         try {
-          const response = await getCountries();
-          setCountries(response.data || response);
+          const data = await getCountries();
+          setCountries(data || []);
         } catch (err) {
           console.error('Error loading countries:', err);
+          setCountries([]);
         }
       };
       loadCountries();
@@ -127,7 +130,9 @@ const PostAd = () => {
     const { name, value, type, checked } = e.target;
     setFormData(prev => ({
       ...prev,
-      [name]: type === 'checkbox' ? checked : value
+      [name]: type === 'checkbox' ? checked : value,
+      // Clear city when country changes
+      ...(name === 'country' ? { city: '' } : {})
     }));
     
     // Clear field error when user starts typing
@@ -135,6 +140,15 @@ const PostAd = () => {
       setFieldErrors(prev => {
         const newErrors = { ...prev };
         delete newErrors[name];
+        return newErrors;
+      });
+    }
+    
+    // Clear city field error when country changes
+    if (name === 'country' && fieldErrors.city) {
+      setFieldErrors(prev => {
+        const newErrors = { ...prev };
+        delete newErrors.city;
         return newErrors;
       });
     }
@@ -156,7 +170,6 @@ const PostAd = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
-    setSuccess(false);
     setFieldErrors({});
     
     // Basic validation
@@ -192,7 +205,7 @@ const PostAd = () => {
     const safetyTimeout = setTimeout(() => {
       console.warn('Loading timeout - forcing loading state to clear');
       setLoading(false);
-      if (!success && !error) {
+      if (!error) {
         setError(t('postAd.errors.timeout'));
       }
     }, 10000);
@@ -218,6 +231,7 @@ const PostAd = () => {
         plotAreaSqm: formData.plotAreaSqm ? parseInt(formData.plotAreaSqm) : undefined,
         yearBuilt: formData.yearBuilt ? parseInt(formData.yearBuilt) : undefined,
         imageUrls: [],
+        status: 'published', // Set status to published instead of draft
         
         // Details object
         details: {
@@ -310,7 +324,7 @@ const PostAd = () => {
       const elapsedTime = Date.now() - startTime;
       const remainingTime = Math.max(0, minLoadingTime - elapsedTime);
       
-      // Wait for minimum loading time, then show success
+      // Wait for minimum loading time, then redirect
       await new Promise(resolve => setTimeout(resolve, remainingTime));
       
       // Clear safety timeout
@@ -324,14 +338,30 @@ const PostAd = () => {
       
       if (responseData && (responseData.id || responseData.status || response)) {
         setLoading(false);
-        setSuccess(true);
         setError(null);
+        setSuccess(true);
+        
+        // Show success message for 2 seconds, then redirect
+        setTimeout(() => {
+          // Scroll to top before navigation for smooth transition
+          window.scrollTo(0, 0);
+          // Redirect to home after showing success message
+          navigate('/');
+        }, 2000);
       } else {
         // If response doesn't have expected structure, still show success
         console.warn('Unexpected response structure:', response);
         setLoading(false);
-        setSuccess(true);
         setError(null);
+        setSuccess(true);
+        
+        // Show success message for 2 seconds, then redirect
+        setTimeout(() => {
+          // Scroll to top before navigation for smooth transition
+          window.scrollTo(0, 0);
+          // Redirect to home after showing success message
+          navigate('/');
+        }, 2000);
       }
     } catch (err) {
       // Clear safety timeout
@@ -490,33 +520,26 @@ const PostAd = () => {
 
               <div className="form-group">
                 <label htmlFor="country">{t('postAd.country')} *</label>
-                <select
+                <CountryDropdown
                   id="country"
                   name="country"
                   value={formData.country}
                   onChange={handleInputChange}
+                  countries={countries}
                   className={fieldErrors.country ? 'error-field' : ''}
                   required
-                >
-                  <option value="">{t('postAd.selectCountry')}</option>
-                  {countries.map(country => (
-                    <option key={country.code} value={country.code}>
-                      {country.name}
-                    </option>
-                  ))}
-                </select>
+                />
                 {fieldErrors.country && <span className="field-error">{fieldErrors.country}</span>}
               </div>
 
               <div className="form-group">
                 <label htmlFor="city">{t('postAd.cityRegion')} *</label>
-                <input
-                  type="text"
+                <CityDropdown
                   id="city"
                   name="city"
                   value={formData.city}
                   onChange={handleInputChange}
-                  placeholder={t('postAd.cityPlaceholder')}
+                  countryCode={formData.country}
                   className={fieldErrors.city ? 'error-field' : ''}
                   required
                 />
@@ -1425,7 +1448,7 @@ const PostAd = () => {
         </div>
 
         {/* Loading Overlay */}
-        {loading && (
+        {loading && !success && (
           <div className="loading-overlay">
             <div className="loading-spinner">
               <div className="spinner"></div>
@@ -1434,22 +1457,17 @@ const PostAd = () => {
           </div>
         )}
 
-        {/* Success Popup Modal */}
+        {/* Success Overlay */}
         {success && (
-          <div className="success-popup-overlay">
-            <div className="success-popup" onClick={(e) => e.stopPropagation()}>
-              <div className="success-popup-icon">✓</div>
-              <h2>{t('postAd.success.title')}</h2>
-              <p>{t('postAd.success.message')}</p>
-              <button 
-                className="success-popup-button"
-                onClick={() => navigate('/')}
-              >
-                {t('postAd.success.goToHome')}
-              </button>
+          <div className="loading-overlay">
+            <div className="loading-spinner">
+              <div className="success-checkmark">✓</div>
+              <p className="success-title">{t('postAd.success.title')}</p>
+              <p className="success-message-text">{t('postAd.success.redirecting')}</p>
             </div>
           </div>
         )}
+
         </>
       )}
 

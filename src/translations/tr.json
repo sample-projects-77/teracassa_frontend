@@ -397,7 +397,8 @@
     },
     "success": {
       "title": "İlan Başarıyla Oluşturuldu!",
-      "message": "İlanınız başarıyla oluşturuldu ve şu anda inceleniyor.",
+      "message": "İlanınız başarıyla oluşturuldu.",
+      "redirecting": "Ana sayfaya yönlendiriliyor...",
       "goToHome": "Ana Sayfaya Git"
     },
     "errors": {
