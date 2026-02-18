@@ -55,6 +55,22 @@ export const updateProperty = async (propertyId, propertyData) => {
   return response;
 };
 
+// Upload property images (auth required)
+export const uploadPropertyImages = async (imageFiles) => {
+  const formData = new FormData();
+  // Append all image files to FormData
+  imageFiles.forEach((file) => {
+    formData.append('images', file);
+  });
+  
+  const response = await api.post('/properties/images', formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
+  return response;
+};
+
 // Delete/archive property listing (auth required)
 export const deleteProperty = async (propertyId) => {
   const response = await api.delete(`/properties/${propertyId}`);

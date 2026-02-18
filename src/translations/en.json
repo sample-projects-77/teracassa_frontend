@@ -397,6 +397,16 @@
     "loading": {
       "creating": "Creating ad..."
     },
+    "uploadPhotos": "Upload Photos",
+    "images": {
+      "clickOrDrag": "Click here or drag photos in",
+      "fileRequirements": "PNG, JPG up to 10MB (max. 20 images)",
+      "invalidType": "Only image files are allowed (PNG, JPG, GIF, WEBP)",
+      "fileTooLarge": "File size too large. Maximum 10MB per file.",
+      "maxFiles": "Maximum 20 images allowed.",
+      "uploading": "Uploading images...",
+      "remove": "Remove image"
+    },
     "success": {
       "title": "Ad Created Successfully!",
       "message": "Your ad has been successfully created.",

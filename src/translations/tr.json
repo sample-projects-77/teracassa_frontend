@@ -395,6 +395,16 @@
     "loading": {
       "creating": "İlan oluşturuluyor..."
     },
+    "uploadPhotos": "Fotoğraf Yükle",
+    "images": {
+      "clickOrDrag": "Buraya tıklayın veya fotoğrafları sürükleyin",
+      "fileRequirements": "PNG, JPG 10MB'a kadar (maks. 20 resim)",
+      "invalidType": "Sadece resim dosyalarına izin verilir (PNG, JPG, GIF, WEBP)",
+      "fileTooLarge": "Dosya boyutu çok büyük. Dosya başına maksimum 10MB.",
+      "maxFiles": "Maksimum 20 resim izin verilir.",
+      "uploading": "Resimler yükleniyor...",
+      "remove": "Resmi kaldır"
+    },
     "success": {
       "title": "İlan Başarıyla Oluşturuldu!",
       "message": "İlanınız başarıyla oluşturuldu.",

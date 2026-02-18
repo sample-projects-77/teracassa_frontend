@@ -394,6 +394,16 @@
     "loading": {
       "creating": "Anzeige wird erstellt..."
     },
+    "uploadPhotos": "Fotos hochladen",
+    "images": {
+      "clickOrDrag": "Klicke hier oder ziehe Fotos hinein",
+      "fileRequirements": "PNG, JPG bis zu 10MB (max. 20 Bilder)",
+      "invalidType": "Nur Bilddateien sind erlaubt (PNG, JPG, GIF, WEBP)",
+      "fileTooLarge": "Dateigröße zu groß. Maximal 10MB pro Datei.",
+      "maxFiles": "Maximal 20 Bilder erlaubt.",
+      "uploading": "Bilder werden hochgeladen...",
+      "remove": "Bild entfernen"
+    },
     "success": {
       "title": "Anzeige erfolgreich erstellt!",
       "message": "Ihre Anzeige wurde erfolgreich erstellt.",

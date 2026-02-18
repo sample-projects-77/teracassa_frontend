@@ -395,6 +395,16 @@
     "loading": {
       "creating": "Creando anuncio..."
     },
+    "uploadPhotos": "Subir Fotos",
+    "images": {
+      "clickOrDrag": "Haz clic aquí o arrastra fotos",
+      "fileRequirements": "PNG, JPG hasta 10MB (máx. 20 imágenes)",
+      "invalidType": "Solo se permiten archivos de imagen (PNG, JPG, GIF, WEBP)",
+      "fileTooLarge": "El archivo es demasiado grande. Máximo 10MB por archivo.",
+      "maxFiles": "Máximo 20 imágenes permitidas.",
+      "uploading": "Subiendo imágenes...",
+      "remove": "Eliminar imagen"
+    },
     "success": {
       "title": "¡Anuncio Creado Exitosamente!",
       "message": "Su anuncio ha sido creado exitosamente.",

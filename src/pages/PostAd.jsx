@@ -4,7 +4,7 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { useTranslation } from '../context/TranslationContext';
 import { useAuth } from '../context/AuthContext';
-import { createProperty } from '../services/propertyService';
+import { createProperty, uploadPropertyImages } from '../services/propertyService';
 import { getCountries } from '../services/countryService';
 import CountryDropdown from '../components/CountryDropdown';
 import CityDropdown from '../components/CityDropdown';
@@ -20,6 +20,9 @@ const PostAd = () => {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
   const [fieldErrors, setFieldErrors] = useState({});
+  const [imageFiles, setImageFiles] = useState([]);
+  const [imagePreviews, setImagePreviews] = useState([]);
+  const [uploadingImages, setUploadingImages] = useState(false);
 
   // Form state - Basic Information
   const [formData, setFormData] = useState({
@@ -167,6 +170,82 @@ const PostAd = () => {
     return match ? parseFloat(match[0]) : undefined;
   };
 
+  // Handle image file selection
+  const handleImageChange = (e) => {
+    const files = Array.from(e.target.files);
+    addImages(files);
+  };
+
+  // Handle drag and drop
+  const handleDragOver = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const files = Array.from(e.dataTransfer.files);
+    addImages(files);
+  };
+
+  // Add images with validation
+  const addImages = (files) => {
+    const validFiles = [];
+    const maxFiles = 20;
+    const maxSize = 10 * 1024 * 1024; // 10MB
+
+    files.forEach((file) => {
+      // Check file type
+      if (!file.type.startsWith('image/')) {
+        setError(t('postAd.images.invalidType'));
+        return;
+      }
+
+      // Check file size
+      if (file.size > maxSize) {
+        setError(t('postAd.images.fileTooLarge'));
+        return;
+      }
+
+      // Check total file count
+      if (imageFiles.length + validFiles.length >= maxFiles) {
+        setError(t('postAd.images.maxFiles'));
+        return;
+      }
+
+      validFiles.push(file);
+    });
+
+    if (validFiles.length > 0) {
+      const newFiles = [...imageFiles, ...validFiles];
+      setImageFiles(newFiles);
+
+      // Create previews
+      const previewPromises = validFiles.map((file) => {
+        return new Promise((resolve) => {
+          const reader = new FileReader();
+          reader.onloadend = () => {
+            resolve(reader.result);
+          };
+          reader.readAsDataURL(file);
+        });
+      });
+
+      Promise.all(previewPromises).then((newPreviews) => {
+        setImagePreviews((prev) => [...prev, ...newPreviews]);
+      });
+    }
+  };
+
+  // Remove image
+  const removeImage = (index) => {
+    const newFiles = imageFiles.filter((_, i) => i !== index);
+    const newPreviews = imagePreviews.filter((_, i) => i !== index);
+    setImageFiles(newFiles);
+    setImagePreviews(newPreviews);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
@@ -211,6 +290,22 @@ const PostAd = () => {
     }, 10000);
 
     try {
+      // Upload images first if any are selected
+      let uploadedImageUrls = [];
+      if (imageFiles.length > 0) {
+        setUploadingImages(true);
+        try {
+          const uploadResponse = await uploadPropertyImages(imageFiles);
+          uploadedImageUrls = uploadResponse.imageUrls || [];
+          setUploadingImages(false);
+        } catch (uploadError) {
+          console.error('Error uploading images:', uploadError);
+          setUploadingImages(false);
+          // Continue with property creation even if image upload fails
+          // User can add images later
+        }
+      }
+
       // Build property data object matching API structure
       const propertyData = {
         title: formData.title,
@@ -230,7 +325,8 @@ const PostAd = () => {
         areaSqm: formData.areaSqm ? parseInt(formData.areaSqm) : undefined,
         plotAreaSqm: formData.plotAreaSqm ? parseInt(formData.plotAreaSqm) : undefined,
         yearBuilt: formData.yearBuilt ? parseInt(formData.yearBuilt) : undefined,
-        imageUrls: [],
+        imageUrls: uploadedImageUrls,
+        primaryImageUrl: uploadedImageUrls.length > 0 ? uploadedImageUrls[0] : undefined,
         status: 'published', // Set status to published instead of draft
         
         // Details object
@@ -590,6 +686,60 @@ const PostAd = () => {
                 </div>
                 {fieldErrors.priceFrom && <span className="field-error">{fieldErrors.priceFrom}</span>}
               </div>
+            </div>
+          </div>
+
+          {/* Image Upload Section */}
+          <div className="form-section">
+            <div className="section-header">
+              <div className="section-icon">📷</div>
+              <h2 className="section-title">{t('postAd.uploadPhotos')}</h2>
+            </div>
+            
+            <div className="form-group full-width">
+              <div 
+                className="upload-label"
+                onDragOver={handleDragOver}
+                onDrop={handleDrop}
+                onClick={() => document.getElementById('property-images').click()}
+              >
+                <div className="upload-icon">⬆</div>
+                <p>{t('postAd.images.clickOrDrag')}</p>
+                <p className="upload-hint">{t('postAd.images.fileRequirements')}</p>
+              </div>
+              <input
+                type="file"
+                id="property-images"
+                name="images"
+                accept="image/png,image/jpeg,image/jpg,image/gif,image/webp"
+                multiple
+                onChange={handleImageChange}
+                style={{ display: 'none' }}
+              />
+              
+              {imagePreviews.length > 0 && (
+                <div className="image-preview-grid">
+                  {imagePreviews.map((preview, index) => (
+                    <div key={index} className="image-preview">
+                      <img src={preview} alt={`Preview ${index + 1}`} />
+                      <button
+                        type="button"
+                        className="remove-image-btn"
+                        onClick={() => removeImage(index)}
+                        aria-label={t('postAd.images.remove')}
+                      >
+                        ×
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              )}
+              
+              {uploadingImages && (
+                <p style={{ marginTop: '12px', color: '#3b82f6' }}>
+                  {t('postAd.images.uploading')}
+                </p>
+              )}
             </div>
           </div>
 
