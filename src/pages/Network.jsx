@@ -1,6 +1,11 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import EmptyState from '../components/EmptyState';
+import ContactModal from '../components/ContactModal';
+import CountryDropdown from '../components/CountryDropdown';
+import CityDropdown from '../components/CityDropdown';
 import { useTranslation } from '../context/TranslationContext';
 import { searchPartners } from '../services/partnerService';
 import { getCountries } from '../services/countryService';
@@ -8,6 +13,7 @@ import './Network.css';
 
 const Network = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const [partners, setPartners] = useState([]);
   const [loading, setLoading] = useState(false);
   const [countries, setCountries] = useState([]);
@@ -24,6 +30,8 @@ const Network = () => {
     immediatelyAvailable: false,
     available247: false
   });
+  const [selectedPartner, setSelectedPartner] = useState(null);
+  const [showContactModal, setShowContactModal] = useState(false);
 
   useEffect(() => {
     loadCountries();
@@ -91,8 +99,17 @@ const Network = () => {
         filteredData = filteredData.filter(p => p.ratingAverage >= 4.5);
       }
       
-      // Note: verifiedOnly, immediatelyAvailable, and available247 would need backend support
-      // For now, we'll filter by rating only on frontend
+      if (additionalFilters.verifiedOnly) {
+        filteredData = filteredData.filter(p => p.isVerified);
+      }
+      
+      if (additionalFilters.immediatelyAvailable) {
+        filteredData = filteredData.filter(p => p.isImmediatelyAvailable);
+      }
+      
+      if (additionalFilters.available247) {
+        filteredData = filteredData.filter(p => p.isAvailable247);
+      }
       
       setPartners(filteredData);
     } catch (error) {
@@ -227,29 +244,25 @@ const Network = () => {
             {/* Main Filters */}
             <div className="network-filters-row">
               <div className="network-filter-field">
-                <select
+                <CountryDropdown
                   id="country"
                   name="country"
                   value={filters.country}
                   onChange={handleFilterChange}
-                >
-                  <option value="">{t('network.selectCountry')}</option>
-                  {countries.map((country) => (
-                    <option key={country.code} value={country.code}>
-                      {country.code} - {country.name}
-                    </option>
-                  ))}
-                </select>
+                  countries={countries}
+                  placeholder={t('network.selectCountry')}
+                />
               </div>
               
               <div className="network-filter-field">
-                <input
-                  type="text"
+                <CityDropdown
                   id="city"
                   name="city"
-                  placeholder={t('network.regionCity')}
                   value={filters.city}
                   onChange={handleFilterChange}
+                  countryCode={filters.country}
+                  placeholder={t('network.regionCity')}
+                  allowFreeText={true}
                 />
               </div>
               
@@ -407,7 +420,7 @@ const Network = () => {
                   };
 
                   const specialties = getSpecialties(partner.roleTitle);
-                  const isVerified = partner.ratingCount > 0; // Consider verified if they have ratings
+                  const isVerified = partner.isVerified || partner.ratingCount > 0;
 
                   return (
                     <div key={partner.id} className="partner-card">
@@ -472,15 +485,49 @@ const Network = () => {
                             ))}
                           </div>
                         )}
+                        {(partner.isAvailable247 || partner.isImmediatelyAvailable) && (
+                          <div className="partner-availability-indicators">
+                            {partner.isAvailable247 && (
+                              <span className="availability-indicator indicator-247" title={t('network.reachable247')}>
+                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                  <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"/>
+                                  <path d="M12 6V12L16 14" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                                </svg>
+                                24/7
+                              </span>
+                            )}
+                            {partner.isImmediatelyAvailable && (
+                              <span className="availability-indicator indicator-immediate" title={t('network.immediatelyAvailable')}>
+                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                  <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                </svg>
+                                {t('network.immediatelyAvailable')}
+                              </span>
+                            )}
+                          </div>
+                        )}
                         <div className="partner-actions">
-                          <button className="partner-contact-button">
+                          <button 
+                            className="partner-contact-button"
+                            onClick={() => {
+                              setSelectedPartner(partner);
+                              setShowContactModal(true);
+                            }}
+                          >
                             <svg className="contact-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                               <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                               <path d="L22 6L12 13L2 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                             </svg>
                             {t('network.contact')}
                           </button>
-                          <button className="partner-view-profile-button">
+                          <button 
+                            className="partner-view-profile-button"
+                            onClick={() => {
+                              // Scroll to top before navigation for smooth transition
+                              window.scrollTo({ top: 0, behavior: 'instant' });
+                              navigate(`/partners/${partner.id}`);
+                            }}
+                          >
                             {t('network.viewProfile')}
                           </button>
                         </div>
@@ -490,16 +537,29 @@ const Network = () => {
                 })}
               </div>
             ) : (
-              <div className="no-partners-message">
-                <p>{t('network.noPartnersFound')}</p>
-                <p>{t('network.tryAdjustingCriteria')}</p>
-              </div>
+              <EmptyState 
+                type="partners"
+                actionLabel={t('network.searchPartners')}
+                onAction={() => {
+                  // Scroll to search form
+                  document.querySelector('.network-search-section')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+              />
             )}
           </div>
         </section>
       )}
 
       <Footer />
+      
+      <ContactModal
+        show={showContactModal}
+        onClose={() => {
+          setShowContactModal(false);
+          setSelectedPartner(null);
+        }}
+        partner={selectedPartner}
+      />
     </div>
   );
 };

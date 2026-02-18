@@ -2,6 +2,9 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { updateProfile } from '../services/profileService';
 import { getCountries } from '../services/countryService';
+import CountryDropdown from '../components/CountryDropdown';
+import CityDropdown from '../components/CityDropdown';
+import RoleDropdown from '../components/RoleDropdown';
 import Navbar from '../components/Navbar';
 import './Profile.css';
 
@@ -14,6 +17,8 @@ const Profile = () => {
     baseCountry: '',
     baseCity: '',
     phone: '',
+    isAvailable247: false,
+    isImmediatelyAvailable: false,
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -22,29 +27,6 @@ const Profile = () => {
   const [avatarFile, setAvatarFile] = useState(null);
   const [avatarPreview, setAvatarPreview] = useState(null);
   const [initialLoad, setInitialLoad] = useState(true);
-
-  // Role title options
-  const roleTitleOptions = [
-    'Real Estate Agent',
-    'Lawyer',
-    'Appraiser',
-    'Contractor',
-    'Translator',
-    'Architect',
-    'Moving Company'
-  ];
-
-  // Cities by country code
-  const citiesByCountry = {
-    'TR': ['Istanbul', 'Ankara', 'Izmir', 'Antalya', 'Bodrum', 'Alanya', 'Fethiye', 'Marmaris'],
-    'ES': ['Madrid', 'Barcelona', 'Valencia', 'Seville', 'Marbella', 'Mallorca', 'Malaga', 'Alicante'],
-    'IT': ['Rome', 'Milan', 'Naples', 'Turin', 'Palermo', 'Genoa', 'Florence', 'Bologna'],
-    'GR': ['Athens', 'Thessaloniki', 'Crete', 'Rhodes', 'Santorini', 'Mykonos', 'Corfu', 'Patras'],
-    'PT': ['Lisbon', 'Porto', 'Braga', 'Coimbra', 'Faro', 'Algarve', 'Madeira', 'Aveiro'],
-    'HR': ['Zagreb', 'Split', 'Dubrovnik', 'Rijeka', 'Zadar', 'Pula', 'Osijek', 'Istria'],
-    'FR': ['Paris', 'Marseille', 'Lyon', 'Toulouse', 'Nice', 'Nantes', 'Strasbourg', 'Bordeaux'],
-    'DE': ['Berlin', 'Munich', 'Hamburg', 'Frankfurt', 'Cologne', 'Stuttgart', 'Düsseldorf', 'Dortmund']
-  };
 
   useEffect(() => {
     loadCountries();
@@ -62,11 +44,6 @@ const Profile = () => {
     }
   };
 
-  const getCitiesForCountry = (countryCode) => {
-    if (!countryCode) return [];
-    return citiesByCountry[countryCode.toUpperCase()] || [];
-  };
-
   useEffect(() => {
     // Wait for auth to finish loading
     if (authLoading) {
@@ -82,6 +59,8 @@ const Profile = () => {
         baseCountry: user.baseCountry || '',
         baseCity: user.baseCity || '',
         phone: user.phone || '',
+        isAvailable247: user.isAvailable247 || false,
+        isImmediatelyAvailable: user.isImmediatelyAvailable || false,
       };
       setFormData(formDataToSet);
       
@@ -188,6 +167,8 @@ const Profile = () => {
         formDataObj.append('baseCountry', formData.baseCountry || '');
         formDataObj.append('baseCity', formData.baseCity || '');
         formDataObj.append('phone', formData.phone || '');
+        formDataObj.append('isAvailable247', formData.isAvailable247);
+        formDataObj.append('isImmediatelyAvailable', formData.isImmediatelyAvailable);
         dataToSend = formDataObj;
       } else {
         // Send all form data including avatarUrl if it exists
@@ -328,25 +309,19 @@ const Profile = () => {
 
         <div className="form-group">
           <label htmlFor="roleTitle">Role Title</label>
-          <select
+          <RoleDropdown
             id="roleTitle"
             name="roleTitle"
             value={formData.roleTitle}
             onChange={handleChange}
-          >
-            <option value="">Select role (optional)</option>
-            {roleTitleOptions.map((role) => (
-              <option key={role} value={role}>
-                {role}
-              </option>
-            ))}
-          </select>
+            placeholder="Select role (optional)"
+          />
         </div>
 
         <div className="form-row">
           <div className="form-group">
             <label htmlFor="baseCountry">Base Country</label>
-            <select
+            <CountryDropdown
               id="baseCountry"
               name="baseCountry"
               value={formData.baseCountry}
@@ -359,32 +334,21 @@ const Profile = () => {
                   baseCity: ''
                 });
               }}
-            >
-              <option value="">Select country (optional)</option>
-              {countries.map((country) => (
-                <option key={country.code} value={country.code}>
-                  {country.code} - {country.name}
-                </option>
-              ))}
-            </select>
+              countries={countries}
+              placeholder="Select country (optional)"
+            />
           </div>
 
           <div className="form-group">
             <label htmlFor="baseCity">Base City</label>
-            <select
+            <CityDropdown
               id="baseCity"
               name="baseCity"
               value={formData.baseCity}
               onChange={handleChange}
-              disabled={!formData.baseCountry}
-            >
-              <option value="">Select city (optional)</option>
-              {getCitiesForCountry(formData.baseCountry).map((city) => (
-                <option key={city} value={city}>
-                  {city}
-                </option>
-              ))}
-            </select>
+              countryCode={formData.baseCountry}
+              placeholder="Select city (optional)"
+            />
           </div>
         </div>
 
@@ -398,6 +362,30 @@ const Profile = () => {
             onChange={handleChange}
             placeholder="Phone number"
           />
+        </div>
+
+        <div className="form-group">
+          <label className="checkbox-group-label">Availability</label>
+          <div className="checkbox-group">
+            <label className="checkbox-label">
+              <input
+                type="checkbox"
+                name="isAvailable247"
+                checked={formData.isAvailable247}
+                onChange={(e) => setFormData({ ...formData, isAvailable247: e.target.checked })}
+              />
+              <span>24/7 Available</span>
+            </label>
+            <label className="checkbox-label">
+              <input
+                type="checkbox"
+                name="isImmediatelyAvailable"
+                checked={formData.isImmediatelyAvailable}
+                onChange={(e) => setFormData({ ...formData, isImmediatelyAvailable: e.target.checked })}
+              />
+              <span>Immediately Available</span>
+            </label>
+          </div>
         </div>
 
         <button type="submit" className="submit-button" disabled={loading}>

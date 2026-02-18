@@ -2,6 +2,9 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import EmptyState from '../components/EmptyState';
+import CountryDropdown from '../components/CountryDropdown';
+import CityDropdown from '../components/CityDropdown';
 import { useTranslation } from '../context/TranslationContext';
 import { searchProperties } from '../services/propertyService';
 import { getCountries } from '../services/countryService';
@@ -27,7 +30,16 @@ const Properties = () => {
     maxPriceCents: '',
     bedrooms: '',
     minAreaSqm: '',
-    sort: 'newest'
+    sort: 'newest',
+    // Advanced filters
+    propertyAge: '',
+    hasSeaView: false,
+    hasPool: false,
+    hasGarden: false,
+    hasParking: false,
+    hasElevator: false,
+    furnished: '',
+    maxAreaSqm: ''
   });
 
   useEffect(() => {
@@ -253,29 +265,25 @@ const Properties = () => {
             {/* First Row */}
             <div className="search-row">
               <div className="search-field">
-                <select
+                <CountryDropdown
                   id="country"
                   name="country"
                   value={filters.country}
                   onChange={handleFilterChange}
-                >
-                  <option value="">{t('properties.selectCountry')}</option>
-                  {countries.map((country) => (
-                    <option key={country.code} value={country.code}>
-                      {country.code} - {country.name}
-                    </option>
-                  ))}
-                </select>
+                  countries={countries}
+                  placeholder={t('properties.selectCountry')}
+                />
               </div>
               
               <div className="search-field">
-                <input
-                  type="text"
+                <CityDropdown
                   id="city"
                   name="city"
-                  placeholder={t('properties.regionCity')}
                   value={filters.city}
                   onChange={handleFilterChange}
+                  countryCode={filters.country}
+                  placeholder={t('properties.regionCity')}
+                  allowFreeText={true}
                 />
               </div>
               
@@ -356,22 +364,131 @@ const Properties = () => {
 
             {/* Advanced Search Fields (shown when advanced tab is active) */}
             {activeTab === 'advanced' && (
-              <div className="search-row">
-                <div className="search-field">
-                  <label htmlFor="sort">Sort</label>
-                  <select
-                    id="sort"
-                    name="sort"
-                    value={filters.sort}
-                    onChange={handleFilterChange}
-                  >
-                    <option value="newest">{t('properties.newestFirst')}</option>
-                    <option value="price_asc">{t('properties.priceAscending')}</option>
-                    <option value="price_desc">{t('properties.priceDescending')}</option>
-                    <option value="top">{t('properties.topOffers')}</option>
-                  </select>
+              <>
+                <div className="search-row">
+                  <div className="search-field">
+                    <label htmlFor="sort">{t('properties.sort')}</label>
+                    <select
+                      id="sort"
+                      name="sort"
+                      value={filters.sort}
+                      onChange={handleFilterChange}
+                    >
+                      <option value="newest">{t('properties.newestFirst')}</option>
+                      <option value="price_asc">{t('properties.priceAscending')}</option>
+                      <option value="price_desc">{t('properties.priceDescending')}</option>
+                      <option value="top">{t('properties.topOffers')}</option>
+                    </select>
+                  </div>
+                  
+                  <div className="search-field">
+                    <label htmlFor="propertyAge">{t('properties.propertyAge')}</label>
+                    <select
+                      id="propertyAge"
+                      name="propertyAge"
+                      value={filters.propertyAge}
+                      onChange={handleFilterChange}
+                    >
+                      <option value="">{t('properties.anyAge')}</option>
+                      <option value="new">{t('properties.newConstruction')}</option>
+                      <option value="0-5">{t('properties.age0to5')}</option>
+                      <option value="5-10">{t('properties.age5to10')}</option>
+                      <option value="10-20">{t('properties.age10to20')}</option>
+                      <option value="20+">{t('properties.age20Plus')}</option>
+                    </select>
+                  </div>
+                  
+                  <div className="search-field">
+                    <label htmlFor="furnished">{t('properties.furnished')}</label>
+                    <select
+                      id="furnished"
+                      name="furnished"
+                      value={filters.furnished}
+                      onChange={handleFilterChange}
+                    >
+                      <option value="">{t('properties.any')}</option>
+                      <option value="furnished">{t('properties.furnished')}</option>
+                      <option value="semi-furnished">{t('properties.semiFurnished')}</option>
+                      <option value="unfurnished">{t('properties.unfurnished')}</option>
+                    </select>
+                  </div>
+                  
+                  <div className="search-field">
+                    <label htmlFor="maxAreaSqm">{t('properties.maxLivingArea')}</label>
+                    <input
+                      type="number"
+                      id="maxAreaSqm"
+                      name="maxAreaSqm"
+                      placeholder={t('properties.maxAreaPlaceholder')}
+                      value={filters.maxAreaSqm}
+                      onChange={handleFilterChange}
+                      min="0"
+                    />
+                  </div>
                 </div>
-              </div>
+                
+                <div className="search-row">
+                  <div className="search-field">
+                    <label className="checkbox-label">
+                      <input
+                        type="checkbox"
+                        name="hasSeaView"
+                        checked={filters.hasSeaView}
+                        onChange={(e) => setFilters(prev => ({ ...prev, hasSeaView: e.target.checked }))}
+                      />
+                      <span>{t('properties.seaView')}</span>
+                    </label>
+                  </div>
+                  
+                  <div className="search-field">
+                    <label className="checkbox-label">
+                      <input
+                        type="checkbox"
+                        name="hasPool"
+                        checked={filters.hasPool}
+                        onChange={(e) => setFilters(prev => ({ ...prev, hasPool: e.target.checked }))}
+                      />
+                      <span>{t('properties.pool')}</span>
+                    </label>
+                  </div>
+                  
+                  <div className="search-field">
+                    <label className="checkbox-label">
+                      <input
+                        type="checkbox"
+                        name="hasGarden"
+                        checked={filters.hasGarden}
+                        onChange={(e) => setFilters(prev => ({ ...prev, hasGarden: e.target.checked }))}
+                      />
+                      <span>{t('properties.garden')}</span>
+                    </label>
+                  </div>
+                  
+                  <div className="search-field">
+                    <label className="checkbox-label">
+                      <input
+                        type="checkbox"
+                        name="hasParking"
+                        checked={filters.hasParking}
+                        onChange={(e) => setFilters(prev => ({ ...prev, hasParking: e.target.checked }))}
+                      />
+                      <span>{t('properties.parking')}</span>
+                    </label>
+                  </div>
+                  
+                  <div className="search-field">
+                    <label className="checkbox-label">
+                      <input
+                        type="checkbox"
+                        name="hasElevator"
+                        checked={filters.hasElevator}
+                        onChange={(e) => setFilters(prev => ({ ...prev, hasElevator: e.target.checked }))}
+                      />
+                      <span>{t('properties.elevator')}</span>
+                    </label>
+                  </div>
+                </div>
+              </>
             )}
             
             {/* Search Button */}
@@ -541,13 +658,17 @@ const Properties = () => {
         </section>
       )}
 
-      {!loading && properties.length === 0 && (
+      {!loading && properties.length === 0 && hasSearched && (
         <section className="properties-list-section">
           <div className="properties-list-container">
-            <div className="no-properties-message">
-              <p>{t('properties.noPropertiesFound')}</p>
-              <p>{t('properties.tryAdjustingCriteria')}</p>
-            </div>
+            <EmptyState 
+              type="properties"
+              actionLabel={t('properties.searchProperties')}
+              onAction={() => {
+                // Scroll to search form
+                document.querySelector('.properties-search-section')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+            />
           </div>
         </section>
       )}

@@ -3,6 +3,9 @@ import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { login, register } from '../services/authService';
 import { getCountries } from '../services/countryService';
+import CountryDropdown from '../components/CountryDropdown';
+import CityDropdown from '../components/CityDropdown';
+import RoleDropdown from '../components/RoleDropdown';
 import './Auth.css';
 
 const Auth = () => {
@@ -41,29 +44,6 @@ const Auth = () => {
   const { login: authLogin, isAuthenticated } = useAuth();
   const navigate = useNavigate();
 
-  // Role title options
-  const roleTitleOptions = [
-    'Real Estate Agent',
-    'Lawyer',
-    'Appraiser',
-    'Contractor',
-    'Translator',
-    'Architect',
-    'Moving Company'
-  ];
-
-  // Cities by country code
-  const citiesByCountry = {
-    'TR': ['Istanbul', 'Ankara', 'Izmir', 'Antalya', 'Bodrum', 'Alanya', 'Fethiye', 'Marmaris'],
-    'ES': ['Madrid', 'Barcelona', 'Valencia', 'Seville', 'Marbella', 'Mallorca', 'Malaga', 'Alicante'],
-    'IT': ['Rome', 'Milan', 'Naples', 'Turin', 'Palermo', 'Genoa', 'Florence', 'Bologna'],
-    'GR': ['Athens', 'Thessaloniki', 'Crete', 'Rhodes', 'Santorini', 'Mykonos', 'Corfu', 'Patras'],
-    'PT': ['Lisbon', 'Porto', 'Braga', 'Coimbra', 'Faro', 'Algarve', 'Madeira', 'Aveiro'],
-    'HR': ['Zagreb', 'Split', 'Dubrovnik', 'Rijeka', 'Zadar', 'Pula', 'Osijek', 'Istria'],
-    'FR': ['Paris', 'Marseille', 'Lyon', 'Toulouse', 'Nice', 'Nantes', 'Strasbourg', 'Bordeaux'],
-    'DE': ['Berlin', 'Munich', 'Hamburg', 'Frankfurt', 'Cologne', 'Stuttgart', 'Düsseldorf', 'Dortmund']
-  };
-
   useEffect(() => {
     loadCountries();
   }, []);
@@ -76,11 +56,6 @@ const Auth = () => {
       console.error('Error loading countries:', error);
       setCountries([]);
     }
-  };
-
-  const getCitiesForCountry = (countryCode) => {
-    if (!countryCode) return [];
-    return citiesByCountry[countryCode.toUpperCase()] || [];
   };
 
   // Redirect if already authenticated
@@ -396,25 +371,19 @@ const Auth = () => {
 
                 <div className="form-group">
                   <label htmlFor="register-roleTitle">Role Title</label>
-                  <select
+                  <RoleDropdown
                     id="register-roleTitle"
                     name="roleTitle"
                     value={registerData.roleTitle}
                     onChange={handleRegisterChange}
-                  >
-                    <option value="">Select role (optional)</option>
-                    {roleTitleOptions.map((role) => (
-                      <option key={role} value={role}>
-                        {role}
-                      </option>
-                    ))}
-                  </select>
+                    placeholder="Select role (optional)"
+                  />
                 </div>
 
                 <div className="form-row">
                   <div className="form-group">
                     <label htmlFor="register-baseCountry">Base Country</label>
-                    <select
+                    <CountryDropdown
                       id="register-baseCountry"
                       name="baseCountry"
                       value={registerData.baseCountry}
@@ -427,32 +396,21 @@ const Auth = () => {
                           baseCity: ''
                         });
                       }}
-                    >
-                      <option value="">Select country (optional)</option>
-                      {countries.map((country) => (
-                        <option key={country.code} value={country.code}>
-                          {country.code} - {country.name}
-                        </option>
-                      ))}
-                    </select>
+                      countries={countries}
+                      placeholder="Select country (optional)"
+                    />
                   </div>
 
                   <div className="form-group">
                     <label htmlFor="register-baseCity">Base City</label>
-                    <select
+                    <CityDropdown
                       id="register-baseCity"
                       name="baseCity"
                       value={registerData.baseCity}
                       onChange={handleRegisterChange}
-                      disabled={!registerData.baseCountry}
-                    >
-                      <option value="">Select city (optional)</option>
-                      {getCitiesForCountry(registerData.baseCountry).map((city) => (
-                        <option key={city} value={city}>
-                          {city}
-                        </option>
-                      ))}
-                    </select>
+                      countryCode={registerData.baseCountry}
+                      placeholder="Select city (optional)"
+                    />
                   </div>
                 </div>
 

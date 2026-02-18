@@ -425,6 +425,40 @@
   white-space: nowrap;
 }
 
+.partner-availability-indicators {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+  justify-content: center;
+}
+
+.availability-indicator {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.availability-indicator svg {
+  width: 14px;
+  height: 14px;
+}
+
+.indicator-247 {
+  background: #e3f2fd;
+  color: #1976d2;
+}
+
+.indicator-immediate {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
 .partner-actions {
   display: flex;
   gap: 12px;

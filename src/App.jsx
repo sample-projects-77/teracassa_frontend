@@ -8,6 +8,7 @@ import Properties from './pages/Properties'
 import Network from './pages/Network'
 import Dashboard from './pages/Dashboard'
 import Profile from './pages/Profile'
+import PartnerProfile from './pages/PartnerProfile'
 import About from './pages/About'
 import PostAd from './pages/PostAd'
 import './App.css'
@@ -28,6 +29,7 @@ function App() {
         <Route path="/properties" element={<Properties />} />
         <Route path="/properties/:propertyId" element={<Properties />} />
         <Route path="/network" element={<Network />} />
+        <Route path="/partners/:partnerId" element={<PartnerProfile />} />
         <Route path="/about" element={<About />} />
         
         {/* Protected Routes */}
