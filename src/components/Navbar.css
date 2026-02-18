@@ -234,6 +234,28 @@ body:not(.home-page) .navbar .language-selector:hover {
   text-decoration: none;
 }
 
+.navbar-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #e0e0e0;
+  transition: border-color 0.3s ease;
+}
+
+.icon-button:hover .navbar-avatar {
+  border-color: #074d78;
+}
+
+/* Transparent navbar - avatar styling */
+body.home-page .navbar.scrolled .navbar-avatar {
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+body.home-page .navbar.scrolled .icon-button:hover .navbar-avatar {
+  border-color: rgba(255, 255, 255, 0.8);
+}
+
 .icon-button:hover {
   color: #074d78;
 }

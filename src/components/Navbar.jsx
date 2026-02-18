@@ -6,7 +6,7 @@ import LanguageDropdown from './LanguageDropdown';
 import './Navbar.css';
 
 const Navbar = () => {
-  const { isAuthenticated, logout } = useAuth();
+  const { isAuthenticated, logout, user } = useAuth();
   const { t } = useTranslation();
   const location = useLocation();
   const navigate = useNavigate();
@@ -67,7 +67,15 @@ const Navbar = () => {
             {isAuthenticated ? (
               <>
                 <Link to="/profile" className="icon-button" title={t('common.profile')}>
-                  <span className="icon">👤</span>
+                  {user?.avatarUrl ? (
+                    <img 
+                      src={user.avatarUrl} 
+                      alt="Profile" 
+                      className="navbar-avatar"
+                    />
+                  ) : (
+                    <span className="icon">👤</span>
+                  )}
                 </Link>
                 <button onClick={logout} className="navbar-login-btn">
                   {t('common.logout')}

@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect, useContext } from 'react';
+import { createContext, useState, useEffect, useContext, useCallback, useRef } from 'react';
 import { getCurrentUser } from '../services/authService';
 
 const AuthContext = createContext(null);
@@ -7,6 +7,7 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const fetchingRef = useRef(false);
 
   useEffect(() => {
     // Check if user is logged in on mount
@@ -18,20 +19,32 @@ export const AuthProvider = ({ children }) => {
     }
   }, []);
 
-  const fetchUser = async () => {
+  const fetchUser = useCallback(async () => {
+    // Prevent multiple simultaneous calls
+    if (fetchingRef.current) {
+      return;
+    }
     try {
+      fetchingRef.current = true;
+      setLoading(true);
       const userData = await getCurrentUser();
       setUser(userData);
       setIsAuthenticated(true);
+      // Also update localStorage with fresh data
+      if (userData) {
+        localStorage.setItem('user', JSON.stringify(userData));
+      }
     } catch (error) {
       console.error('Error fetching user:', error);
       localStorage.removeItem('token');
       localStorage.removeItem('user');
+      setUser(null);
       setIsAuthenticated(false);
     } finally {
       setLoading(false);
+      fetchingRef.current = false;
     }
-  };
+  }, []); // Empty dependency array - function is stable
 
   const login = (userData, token) => {
     localStorage.setItem('token', token);

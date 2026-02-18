@@ -316,15 +316,6 @@ const Auth = () => {
                 <button type="submit" className="auth-button primary" disabled={loading}>
                   {loading ? 'Logging in...' : 'Login'}
                 </button>
-
-                <div className="divider">
-                  <span>OR CONTINUE WITH</span>
-                </div>
-
-                <button type="button" className="auth-button google-button">
-                  <span className="google-icon">G</span>
-                  Google
-                </button>
               </form>
             </div>
           )}
@@ -550,15 +541,6 @@ const Auth = () => {
 
                 <button type="submit" className="auth-button primary" disabled={loading}>
                   {loading ? 'Creating account...' : 'Register'}
-                </button>
-
-                <div className="divider">
-                  <span>OR CONTINUE WITH</span>
-                </div>
-
-                <button type="button" className="auth-button google-button">
-                  <span className="google-icon">G</span>
-                  Google
                 </button>
               </form>
             </div>

@@ -6,7 +6,7 @@ import Navbar from '../components/Navbar';
 import './Profile.css';
 
 const Profile = () => {
-  const { user, updateUser } = useAuth();
+  const { user, updateUser, loading: authLoading, fetchUser } = useAuth();
   const [formData, setFormData] = useState({
     avatarUrl: '',
     companyName: '',
@@ -19,6 +19,9 @@ const Profile = () => {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [countries, setCountries] = useState([]);
+  const [avatarFile, setAvatarFile] = useState(null);
+  const [avatarPreview, setAvatarPreview] = useState(null);
+  const [initialLoad, setInitialLoad] = useState(true);
 
   // Role title options
   const roleTitleOptions = [
@@ -45,7 +48,9 @@ const Profile = () => {
 
   useEffect(() => {
     loadCountries();
-  }, []);
+    // Don't fetch user data here - it's already fetched by AuthContext on mount
+    // Only fetch if user is missing and auth is not loading
+  }, []); // Empty dependency array - only run once on mount
 
   const loadCountries = async () => {
     try {
@@ -63,17 +68,57 @@ const Profile = () => {
   };
 
   useEffect(() => {
+    // Wait for auth to finish loading
+    if (authLoading) {
+      return;
+    }
+
+    // If we have user data, use it
     if (user) {
-      setFormData({
+      const formDataToSet = {
         avatarUrl: user.avatarUrl || '',
         companyName: user.companyName || '',
         roleTitle: user.roleTitle || '',
         baseCountry: user.baseCountry || '',
         baseCity: user.baseCity || '',
         phone: user.phone || '',
-      });
+      };
+      setFormData(formDataToSet);
+      
+      // Set avatar preview if user has avatarUrl
+      if (user.avatarUrl) {
+        setAvatarPreview(user.avatarUrl);
+      } else {
+        setAvatarPreview(null);
+      }
+      setInitialLoad(false);
+    } else {
+      // If no user in context, try localStorage as fallback
+      const storedUser = localStorage.getItem('user');
+      if (storedUser) {
+        try {
+          const parsedUser = JSON.parse(storedUser);
+          setFormData({
+            avatarUrl: parsedUser.avatarUrl || '',
+            companyName: parsedUser.companyName || '',
+            roleTitle: parsedUser.roleTitle || '',
+            baseCountry: parsedUser.baseCountry || '',
+            baseCity: parsedUser.baseCity || '',
+            phone: parsedUser.phone || '',
+          });
+          if (parsedUser.avatarUrl) {
+            setAvatarPreview(parsedUser.avatarUrl);
+          }
+          setInitialLoad(false);
+        } catch (e) {
+          console.error('Error parsing stored user:', e);
+          setInitialLoad(false);
+        }
+      } else {
+        setInitialLoad(false);
+      }
     }
-  }, [user]);
+  }, [user, authLoading]);
 
   const handleChange = (e) => {
     setFormData({
@@ -84,6 +129,48 @@ const Profile = () => {
     setSuccess('');
   };
 
+  const handleAvatarChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      // Validate file type
+      if (!file.type.startsWith('image/')) {
+        setError('Please select a valid image file');
+        return;
+      }
+      // Validate file size (e.g., max 5MB)
+      if (file.size > 5 * 1024 * 1024) {
+        setError('Image size should be less than 5MB');
+        return;
+      }
+      setAvatarFile(file);
+      // Create preview
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setAvatarPreview(reader.result);
+        setFormData({
+          ...formData,
+          avatarUrl: reader.result, // Set preview as URL for now
+        });
+      };
+      reader.readAsDataURL(file);
+      setError('');
+    }
+  };
+
+  const removeAvatar = () => {
+    setAvatarFile(null);
+    setAvatarPreview(null);
+    setFormData({
+      ...formData,
+      avatarUrl: '',
+    });
+    // Reset file input
+    const fileInput = document.getElementById('profile-avatar');
+    if (fileInput) {
+      fileInput.value = '';
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
@@ -91,15 +178,54 @@ const Profile = () => {
     setLoading(true);
 
     try {
-      const updatedUser = await updateProfile(formData);
+      // Create FormData if avatar file is selected
+      let dataToSend;
+      if (avatarFile) {
+        const formDataObj = new FormData();
+        formDataObj.append('avatar', avatarFile);
+        formDataObj.append('companyName', formData.companyName || '');
+        formDataObj.append('roleTitle', formData.roleTitle || '');
+        formDataObj.append('baseCountry', formData.baseCountry || '');
+        formDataObj.append('baseCity', formData.baseCity || '');
+        formDataObj.append('phone', formData.phone || '');
+        dataToSend = formDataObj;
+      } else {
+        // Send all form data including avatarUrl if it exists
+        dataToSend = {
+          ...formData,
+          // Preserve avatarUrl if it exists and no new file is being uploaded
+          avatarUrl: formData.avatarUrl || user?.avatarUrl || ''
+        };
+      }
+
+      const updatedUser = await updateProfile(dataToSend);
       updateUser(updatedUser);
       setSuccess('Profile updated successfully!');
+      setAvatarFile(null); // Clear file after successful update
+      // Refresh user data to get latest from server
+      if (fetchUser) {
+        await fetchUser();
+      }
     } catch (err) {
       setError(err.message || 'Failed to update profile');
     } finally {
       setLoading(false);
     }
   };
+
+  // Show loading state while user data is being fetched
+  if (authLoading || (initialLoad && !user)) {
+    return (
+      <div className="profile-container">
+        <Navbar />
+        <div className="profile-header">
+          <h1>Edit Profile</h1>
+          <p>Update your profile information</p>
+        </div>
+        <div style={{ textAlign: 'center', padding: '40px' }}>Loading profile data...</div>
+      </div>
+    );
+  }
 
   return (
     <div className="profile-container">
@@ -114,15 +240,78 @@ const Profile = () => {
 
       <form onSubmit={handleSubmit} className="profile-form">
         <div className="form-group">
-          <label htmlFor="avatarUrl">Avatar URL</label>
+          <label htmlFor="profile-avatar">Profile Picture</label>
           <input
-            type="url"
-            id="avatarUrl"
-            name="avatarUrl"
-            value={formData.avatarUrl}
-            onChange={handleChange}
-            placeholder="https://..."
+            type="file"
+            id="profile-avatar"
+            name="avatar"
+            accept="image/png,image/jpeg,image/jpg,image/gif,image/webp"
+            onChange={handleAvatarChange}
+            style={{ display: 'none' }}
           />
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+            {avatarPreview ? (
+              <div style={{ position: 'relative', display: 'inline-block', maxWidth: '200px' }}>
+                <img
+                  src={avatarPreview}
+                  alt="Profile preview"
+                  style={{
+                    width: '100%',
+                    height: 'auto',
+                    borderRadius: '8px',
+                    maxHeight: '200px',
+                    objectFit: 'cover',
+                    border: '1px solid #e0e0e0'
+                  }}
+                />
+                <button
+                  type="button"
+                  onClick={removeAvatar}
+                  style={{
+                    position: 'absolute',
+                    top: '8px',
+                    right: '8px',
+                    background: 'rgba(255, 0, 0, 0.8)',
+                    color: 'white',
+                    border: 'none',
+                    borderRadius: '50%',
+                    width: '28px',
+                    height: '28px',
+                    cursor: 'pointer',
+                    fontSize: '18px',
+                    lineHeight: '1',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    boxShadow: '0 2px 4px rgba(0,0,0,0.2)'
+                  }}
+                >
+                  ×
+                </button>
+              </div>
+            ) : null}
+            <label
+              htmlFor="profile-avatar"
+              style={{
+                padding: '12px 20px',
+                border: '1px solid #ddd',
+                borderRadius: '6px',
+                cursor: 'pointer',
+                textAlign: 'center',
+                backgroundColor: '#f9f9f9',
+                transition: 'background-color 0.2s ease',
+                display: 'inline-block',
+                width: 'fit-content'
+              }}
+              onMouseEnter={(e) => e.target.style.backgroundColor = '#f0f0f0'}
+              onMouseLeave={(e) => e.target.style.backgroundColor = '#f9f9f9'}
+            >
+              {avatarPreview ? 'Change Picture' : 'Upload Picture'}
+            </label>
+          </div>
+          <p style={{ fontSize: '12px', color: '#666', marginTop: '5px' }}>
+            Supported formats: PNG, JPEG, JPG, GIF, WEBP (max 5MB)
+          </p>
         </div>
 
         <div className="form-group">
