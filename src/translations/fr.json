@@ -13,7 +13,10 @@
     "loading": "Chargement...",
     "learnMore": "En savoir plus →",
     "selectCountry": "Sélectionner un pays...",
-    "noDataAvailable": "Aucune information disponible"
+    "noDataAvailable": "Aucune information disponible",
+    "pros": "Avantages",
+    "cons": "Inconvénients",
+    "bestAreasForRetirees": "Meilleures Régions pour les Retraités"
   },
   "countries": {
     "heroTitle": "Votre Pays. Votre Maison. Votre Connaissance.",

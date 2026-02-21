@@ -10,13 +10,28 @@ const api = axios.create({
   },
 });
 
-// Request interceptor to add auth token
+// Request interceptor to add auth token and language
 api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('token');
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
+    // Always read language fresh from localStorage at request time
+    // This ensures we get the latest language even if state hasn't updated yet
+    const language = localStorage.getItem('language') || 'en';
+    config.headers['Accept-Language'] = language;
+    
+    // Add cache-busting for country endpoints to prevent stale language responses
+    if (config.url && config.url.includes('/countries/')) {
+      // Initialize params if it doesn't exist
+      if (!config.params) {
+        config.params = {};
+      }
+      // Add timestamp to prevent browser/axios caching
+      config.params._t = Date.now();
+    }
+    
     // If data is FormData, let the browser set Content-Type with boundary
     // Don't override it with application/json
     if (config.data instanceof FormData) {

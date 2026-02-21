@@ -13,7 +13,10 @@
     "loading": "Lädt...",
     "learnMore": "Mehr erfahren →",
     "selectCountry": "Land auswählen...",
-    "noDataAvailable": "Keine Informationen verfügbar"
+    "noDataAvailable": "Keine Informationen verfügbar",
+    "pros": "Vorteile",
+    "cons": "Nachteile",
+    "bestAreasForRetirees": "Beste Gebiete für Rentner"
   },
   "countries": {
     "heroTitle": "Dein Land. Dein Zuhause. Dein Wissen.",

@@ -15,7 +15,10 @@
     "selectCountry": "Select country",
     "selectCity": "Select city",
     "selectRole": "Select role",
-    "noDataAvailable": "No information available"
+    "noDataAvailable": "No information available",
+    "pros": "Pros",
+    "cons": "Cons",
+    "bestAreasForRetirees": "Best Areas for Retirees"
   },
   "countries": {
     "heroTitle": "Your Country. Your Home. Your Knowledge.",

@@ -92,8 +92,10 @@ export const TranslationProvider = ({ children }) => {
   // Update language when user language changes
   const changeLanguage = async (lang) => {
     if (SUPPORTED_LANGUAGES.includes(lang)) {
-      setCurrentLanguage(lang);
+      // Update localStorage FIRST to ensure API calls get the correct language
       localStorage.setItem('language', lang);
+      // Then update state (this will trigger re-renders and useEffects)
+      setCurrentLanguage(lang);
       await loadTranslations(lang);
     }
   };

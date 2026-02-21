@@ -18,3 +18,9 @@ export const getCountrySections = async (countryCode) => {
   return response;
 };
 
+// Get country details
+export const getCountryDetails = async (countryCode) => {
+  const response = await api.get(`/countries/${countryCode}/details`);
+  return response;
+};
+

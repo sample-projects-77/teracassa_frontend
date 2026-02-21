@@ -13,7 +13,10 @@
     "loading": "Yükleniyor...",
     "learnMore": "Daha fazla bilgi →",
     "selectCountry": "Ülke seç...",
-    "noDataAvailable": "Bilgi mevcut değil"
+    "noDataAvailable": "Bilgi mevcut değil",
+    "pros": "Avantajlar",
+    "cons": "Dezavantajlar",
+    "bestAreasForRetirees": "Emekliler İçin En İyi Bölgeler"
   },
   "countries": {
     "heroTitle": "Senin Ülken. Senin Evin. Senin Bilgin.",

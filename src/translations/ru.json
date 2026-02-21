@@ -13,7 +13,10 @@
     "loading": "Загрузка...",
     "learnMore": "Узнать больше →",
     "selectCountry": "Выбрать страну...",
-    "noDataAvailable": "Информация недоступна"
+    "noDataAvailable": "Информация недоступна",
+    "pros": "Преимущества",
+    "cons": "Недостатки",
+    "bestAreasForRetirees": "Лучшие Районы для Пенсионеров"
   },
   "countries": {
     "heroTitle": "Ваша Страна. Ваш Дом. Ваши Знания.",

@@ -3,13 +3,14 @@ import { useNavigate, useParams } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import LearnMoreModal from '../components/LearnMoreModal';
-import { getCountries, getCountryOverview, getCountrySections } from '../services/countryService';
+import CountryDetailsModal from '../components/CountryDetailsModal';
+import { getCountries, getCountryOverview, getCountrySections, getCountryDetails } from '../services/countryService';
 import { useTranslation } from '../context/TranslationContext';
 import './Countries.css';
 
 const Countries = () => {
   const { countryCode } = useParams();
-  const { t } = useTranslation();
+  const { t, currentLanguage } = useTranslation();
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [countries, setCountries] = useState([]);
   const [countryOverview, setCountryOverview] = useState(null);
@@ -19,8 +20,16 @@ const Countries = () => {
   const [dataLoading, setDataLoading] = useState(false);
   const [learnMoreModalOpen, setLearnMoreModalOpen] = useState(false);
   const [selectedSection, setSelectedSection] = useState(null);
+  const [countryDetailsModalOpen, setCountryDetailsModalOpen] = useState(false);
+  const [selectedCountryDetails, setSelectedCountryDetails] = useState(null);
   const dropdownRef = useRef(null);
+  const languageRef = useRef(currentLanguage);
   const navigate = useNavigate();
+
+  // Keep ref in sync with currentLanguage
+  useEffect(() => {
+    languageRef.current = currentLanguage;
+  }, [currentLanguage]);
 
   useEffect(() => {
     loadCountries();
@@ -28,9 +37,16 @@ const Countries = () => {
 
   useEffect(() => {
     if (countryCode) {
-      loadCountryData(countryCode);
+      // Use a small delay to ensure localStorage is updated and state is synchronized
+      // This prevents the "one step behind" issue where API calls use stale language
+      const timeoutId = setTimeout(() => {
+        loadCountryData(countryCode);
+      }, 50);
+      
+      return () => clearTimeout(timeoutId);
     }
-  }, [countryCode]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [countryCode, currentLanguage]);
 
   // Set selectedCountry when countries load and countryCode is in URL
   useEffect(() => {
@@ -71,6 +87,10 @@ const Countries = () => {
   const loadCountryData = async (code) => {
     try {
       setDataLoading(true);
+      // Ensure we use the latest language from localStorage
+      // This ensures the API interceptor gets the correct language
+      const currentLang = localStorage.getItem('language') || 'en';
+      
       const [overview, sections] = await Promise.all([
         getCountryOverview(code),
         getCountrySections(code)
@@ -181,6 +201,26 @@ const Countries = () => {
   const handleCloseModal = () => {
     setLearnMoreModalOpen(false);
     setSelectedSection(null);
+  };
+
+  // Handle destination card Learn More click
+  const handleDestinationLearnMore = async (countryCode) => {
+    try {
+      const countryDetails = await getCountryDetails(countryCode);
+      if (countryDetails) {
+        setSelectedCountryDetails(countryDetails);
+        setCountryDetailsModalOpen(true);
+      }
+    } catch (error) {
+      console.error('Error loading country details:', error);
+      // Optionally show an error message to the user
+    }
+  };
+
+  // Close country details modal
+  const handleCloseCountryDetailsModal = () => {
+    setCountryDetailsModalOpen(false);
+    setSelectedCountryDetails(null);
   };
 
   return (
@@ -432,7 +472,12 @@ const Countries = () => {
                   <span className="region-tag">Alanya</span>
                 </div>
               </div>
-              <button className="destination-button">{t('common.learnMore')}</button>
+              <button 
+                className="destination-button"
+                onClick={() => handleDestinationLearnMore('TR')}
+              >
+                {t('common.learnMore')}
+              </button>
             </div>
 
             {/* Spain Card */}
@@ -484,7 +529,12 @@ const Countries = () => {
                   <span className="region-tag">Mallorca</span>
                 </div>
               </div>
-              <button className="destination-button">{t('common.learnMore')}</button>
+              <button 
+                className="destination-button"
+                onClick={() => handleDestinationLearnMore('ES')}
+              >
+                {t('common.learnMore')}
+              </button>
             </div>
 
             {/* Italy Card */}
@@ -536,7 +586,12 @@ const Countries = () => {
                   <span className="region-tag">Calabria</span>
                 </div>
               </div>
-              <button className="destination-button">{t('common.learnMore')}</button>
+              <button 
+                className="destination-button"
+                onClick={() => handleDestinationLearnMore('IT')}
+              >
+                {t('common.learnMore')}
+              </button>
             </div>
 
             {/* Greece Card */}
@@ -588,7 +643,12 @@ const Countries = () => {
                   <span className="region-tag">Athens</span>
                 </div>
               </div>
-              <button className="destination-button">{t('common.learnMore')}</button>
+              <button 
+                className="destination-button"
+                onClick={() => handleDestinationLearnMore('GR')}
+              >
+                {t('common.learnMore')}
+              </button>
             </div>
 
             {/* Portugal Card */}
@@ -640,7 +700,12 @@ const Countries = () => {
                   <span className="region-tag">Madeira</span>
                 </div>
               </div>
-              <button className="destination-button">{t('common.learnMore')}</button>
+              <button 
+                className="destination-button"
+                onClick={() => handleDestinationLearnMore('PT')}
+              >
+                {t('common.learnMore')}
+              </button>
             </div>
 
             {/* Croatia Card */}
@@ -692,7 +757,12 @@ const Countries = () => {
                   <span className="region-tag">Zadar</span>
                 </div>
               </div>
-              <button className="destination-button">{t('common.learnMore')}</button>
+              <button 
+                className="destination-button"
+                onClick={() => handleDestinationLearnMore('HR')}
+              >
+                {t('common.learnMore')}
+              </button>
             </div>
           </div>
         </div>
@@ -791,6 +861,13 @@ const Countries = () => {
         isOpen={learnMoreModalOpen}
         onClose={handleCloseModal}
         section={selectedSection}
+      />
+
+      {/* Country Details Modal */}
+      <CountryDetailsModal
+        isOpen={countryDetailsModalOpen}
+        onClose={handleCloseCountryDetailsModal}
+        countryData={selectedCountryDetails}
       />
     </div>
   );
