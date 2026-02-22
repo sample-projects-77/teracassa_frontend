@@ -24,6 +24,7 @@ const Countries = () => {
   const [selectedCountryDetails, setSelectedCountryDetails] = useState(null);
   const dropdownRef = useRef(null);
   const languageRef = useRef(currentLanguage);
+  const prevLanguageRef = useRef(currentLanguage);
   const navigate = useNavigate();
 
   // Keep ref in sync with currentLanguage
@@ -37,11 +38,20 @@ const Countries = () => {
 
   useEffect(() => {
     if (countryCode) {
-      // Use a small delay to ensure localStorage is updated and state is synchronized
-      // This prevents the "one step behind" issue where API calls use stale language
+      // Check if language actually changed
+      const languageChanged = prevLanguageRef.current !== currentLanguage;
+      const previousLanguage = prevLanguageRef.current;
+      prevLanguageRef.current = currentLanguage;
+      
+      // When language changes, wait a bit longer to ensure localStorage and state are synchronized
+      // The API interceptor reads from localStorage, which is updated first in changeLanguage
+      const delay = languageChanged ? 250 : 0;
+      
       const timeoutId = setTimeout(() => {
+        // Always reload - loadCountryData reads from localStorage which is the source of truth
+        // The API interceptor also reads from localStorage, ensuring consistency
         loadCountryData(countryCode);
-      }, 50);
+      }, delay);
       
       return () => clearTimeout(timeoutId);
     }
@@ -85,31 +95,48 @@ const Countries = () => {
   };
 
   const loadCountryData = async (code) => {
+    // Capture the language and country at the start of the request
+    // This ensures we only update state if they haven't changed during the request
+    const requestLanguage = localStorage.getItem('language') || 'en';
+    const requestCountryCode = code;
+    
     try {
       setDataLoading(true);
-      // Ensure we use the latest language from localStorage
-      // This ensures the API interceptor gets the correct language
-      const currentLang = localStorage.getItem('language') || 'en';
       
       const [overview, sections] = await Promise.all([
         getCountryOverview(code),
         getCountrySections(code)
       ]);
-      setCountryOverview(overview);
-      setCountrySections(sections);
       
-      // Set selected country from overview data or countries list
-      if (overview) {
-        const country = countries.find(c => c.code === code?.toUpperCase()) || {
-          code: overview.code,
-          name: overview.name
-        };
-        setSelectedCountry(country);
+      // Verify that language and country haven't changed during the request
+      // This prevents stale responses from overwriting current data
+      const currentLang = localStorage.getItem('language') || 'en';
+      const currentCountryCode = countryCode || code;
+      
+      if (requestLanguage === currentLang && requestCountryCode === currentCountryCode) {
+        setCountryOverview(overview);
+        setCountrySections(sections);
+        
+        // Set selected country from overview data or countries list
+        if (overview) {
+          const country = countries.find(c => c.code === code?.toUpperCase()) || {
+            code: overview.code,
+            name: overview.name
+          };
+          setSelectedCountry(country);
+        }
+      } else {
+        // Language or country changed during request, ignore this response
+        console.log('Ignoring stale response - language or country changed during request');
       }
     } catch (error) {
       console.error('Error loading country data:', error);
-      setCountryOverview(null);
-      setCountrySections(null);
+      // Only clear data if language/country haven't changed
+      const currentLang = localStorage.getItem('language') || 'en';
+      if (requestLanguage === currentLang && requestCountryCode === (countryCode || code)) {
+        setCountryOverview(null);
+        setCountrySections(null);
+      }
     } finally {
       setDataLoading(false);
     }
