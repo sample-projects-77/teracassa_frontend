@@ -32,9 +32,20 @@ const Countries = () => {
     languageRef.current = currentLanguage;
   }, [currentLanguage]);
 
+  // Load countries on mount and when language changes so dropdown names are translated.
+  // On language change use a short delay so localStorage is updated before the request (same as loadCountryData).
+  const isInitialMount = useRef(true);
   useEffect(() => {
-    loadCountries();
-  }, []);
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+      loadCountries();
+      return;
+    }
+    const timeoutId = setTimeout(() => {
+      loadCountries();
+    }, 250);
+    return () => clearTimeout(timeoutId);
+  }, [currentLanguage]);
 
   useEffect(() => {
     if (countryCode) {
@@ -58,15 +69,16 @@ const Countries = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [countryCode, currentLanguage]);
 
-  // Set selectedCountry when countries load and countryCode is in URL
+  // Sync selectedCountry from the current countries list so the displayed name is always in the active language.
+  // Runs when countries load (or refetch after language change) so both initial URL selection and placeholder stay translated.
   useEffect(() => {
-    if (countryCode && countries.length > 0 && !selectedCountry) {
-      const country = countries.find(c => c.code === countryCode.toUpperCase());
-      if (country) {
-        setSelectedCountry(country);
-      }
-    }
-  }, [countries, countryCode, selectedCountry]);
+    if (countries.length === 0) return;
+    const codeToSync = countryCode?.toUpperCase() || selectedCountry?.code;
+    if (!codeToSync) return;
+    const country = countries.find(c => c.code === codeToSync);
+    if (country) setSelectedCountry(country);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [countries, countryCode]);
 
   useEffect(() => {
     const handleClickOutside = (event) => {

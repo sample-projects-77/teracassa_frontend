@@ -22,13 +22,11 @@ api.interceptors.request.use(
     const language = localStorage.getItem('language') || 'en';
     config.headers['Accept-Language'] = language;
     
-    // Add cache-busting for country endpoints to prevent stale language responses
-    if (config.url && config.url.includes('/countries/')) {
-      // Initialize params if it doesn't exist
+    // Add cache-busting for all country endpoints (list + detail) to prevent stale language responses
+    if (config.url && config.url.includes('/countries')) {
       if (!config.params) {
         config.params = {};
       }
-      // Add timestamp to prevent browser/axios caching
       config.params._t = Date.now();
     }
     
