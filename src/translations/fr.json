@@ -41,18 +41,12 @@
     "destinationDescription": {
       "TR": "Climat méditerranéen, diversité culturelle et prix immobiliers attractifs",
       "ES": "Qualité de vie, soleil et marchés immobiliers stables sur la côte",
-      "IT": "Culture, gastronomie et régions côtières pittoresques",
-      "GR": "Îles de rêve, histoire et marché immobilier en croissance",
-      "PT": "Hivers doux, gens accueillants et popularité croissante",
-      "HR": "Côte adriatique, membre de l'UE et marché immobilier émergent"
+      "NC": "Style de vie méditerranéen, immobilier abordable et soleil toute l'année"
     },
     "destinationName": {
       "TR": "Turquie",
       "ES": "Espagne",
-      "IT": "Italie",
-      "GR": "Grèce",
-      "PT": "Portugal",
-      "HR": "Croatie"
+      "NC": "Chypre du Nord"
     }
   },
   "home": {

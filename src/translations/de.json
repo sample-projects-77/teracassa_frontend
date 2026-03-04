@@ -41,18 +41,12 @@
     "destinationDescription": {
       "TR": "Mittelmeerklima, kulturelle Vielfalt und attraktive Immobilienpreise",
       "ES": "Lebensqualität, Sonne und stabile Immobilienmärkte an der Küste",
-      "IT": "Kultur, Kulinarik und malerische Küstenregionen",
-      "GR": "Traumhafte Inseln, Geschichte und wachsender Immobilienmarkt",
-      "PT": "Milde Winter, freundliche Menschen und wachsende Beliebtheit",
-      "HR": "Adriatikküste, EU-Mitglied und aufstrebender Immobilienmarkt"
+      "NC": "Mittelmeer-Lifestyle, erschwingliche Immobilien und Sonne das ganze Jahr"
     },
     "destinationName": {
       "TR": "Türkei",
       "ES": "Spanien",
-      "IT": "Italien",
-      "GR": "Griechenland",
-      "PT": "Portugal",
-      "HR": "Kroatien"
+      "NC": "Nordzypern"
     }
   },
   "home": {

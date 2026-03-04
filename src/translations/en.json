@@ -43,18 +43,12 @@
     "destinationDescription": {
       "TR": "Mediterranean climate, cultural diversity, and attractive real estate prices",
       "ES": "Quality of life, sun, and stable real estate markets on the coast",
-      "IT": "Culture, culinary, and picturesque coastal regions",
-      "GR": "Dreamy islands, history, and growing real estate market",
-      "PT": "Mild winters, friendly people, and increasing popularity",
-      "HR": "Adriatic coast, EU member, and emerging real estate market"
+      "NC": "Mediterranean lifestyle, affordable property, and year-round sunshine"
     },
     "destinationName": {
       "TR": "Turkey",
       "ES": "Spain",
-      "IT": "Italy",
-      "GR": "Greece",
-      "PT": "Portugal",
-      "HR": "Croatia"
+      "NC": "Northern Cyprus"
     }
   },
   "home": {

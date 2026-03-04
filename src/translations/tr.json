@@ -41,18 +41,12 @@
     "destinationDescription": {
       "TR": "Akdeniz iklimi, kültürel çeşitlilik ve çekici gayrimenkul fiyatları",
       "ES": "Yaşam kalitesi, güneş ve kıyıda istikrarlı gayrimenkul piyasaları",
-      "IT": "Kültür, mutfak ve pitoresk kıyı bölgeleri",
-      "GR": "Rüya gibi adalar, tarih ve büyüyen gayrimenkul piyasası",
-      "PT": "Ilıman kışlar, dost insanlar ve artan popülerlik",
-      "HR": "Adriyatik kıyısı, AB üyesi ve gelişen gayrimenkul piyasası"
+      "NC": "Akdeniz yaşam tarzı, uygun fiyatlı emlak ve yıl boyu güneş"
     },
     "destinationName": {
       "TR": "Türkiye",
       "ES": "İspanya",
-      "IT": "İtalya",
-      "GR": "Yunanistan",
-      "PT": "Portekiz",
-      "HR": "Hırvatistan"
+      "NC": "Kuzey Kıbrıs"
     }
   },
   "home": {

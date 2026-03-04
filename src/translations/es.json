@@ -41,18 +41,12 @@
     "destinationDescription": {
       "TR": "Clima mediterráneo, diversidad cultural y precios inmobiliarios atractivos",
       "ES": "Calidad de vida, sol y mercados inmobiliarios estables en la costa",
-      "IT": "Cultura, gastronomía y pintorescas regiones costeras",
-      "GR": "Islas de ensueño, historia y mercado inmobiliario en crecimiento",
-      "PT": "Inviernos suaves, gente amable y creciente popularidad",
-      "HR": "Costa adriática, miembro de la UE y mercado inmobiliario emergente"
+      "NC": "Estilo de vida mediterráneo, propiedades asequibles y sol todo el año"
     },
     "destinationName": {
       "TR": "Turquía",
       "ES": "España",
-      "IT": "Italia",
-      "GR": "Grecia",
-      "PT": "Portugal",
-      "HR": "Croacia"
+      "NC": "Chipre del Norte"
     }
   },
   "home": {

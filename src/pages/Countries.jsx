@@ -576,14 +576,14 @@ const Countries = () => {
               </button>
             </div>
 
-            {/* Italy Card */}
+            {/* Northern Cyprus Card */}
             <div className="destination-card">
               <div className="destination-header">
-                <span className="destination-code">IT</span>
-                <span className="destination-name">{t('countries.destinationName.IT')}</span>
+                <span className="destination-code">NC</span>
+                <span className="destination-name">{t('countries.destinationName.NC')}</span>
               </div>
               <p className="destination-description">
-                {t('countries.destinationDescription.IT')}
+                {t('countries.destinationDescription.NC')}
               </p>
               <div className="destination-divider"></div>
               <div className="destination-stats">
@@ -593,7 +593,7 @@ const Countries = () => {
                     <path d="M5 21V7L13 2L21 7V21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                     <path d="M9 21V12H15V21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
-                  <div className="stat-value">€ 2.100/m²</div>
+                  <div className="stat-value">€ 1.400/m²</div>
                   <div className="stat-label">Avg. Price</div>
                 </div>
                 <div className="destination-stat">
@@ -601,7 +601,7 @@ const Countries = () => {
                     <path d="M3 3V21H21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                     <path d="M7 16L12 11L16 15L21 10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
-                  <div className="stat-value">+4.8%</div>
+                  <div className="stat-value">+6.0%</div>
                   <div className="stat-label">Growth</div>
                 </div>
                 <div className="destination-stat">
@@ -611,7 +611,7 @@ const Countries = () => {
                     <path d="M23 21V19C22.9993 18.1137 22.7044 17.2528 22.1614 16.5523C21.6184 15.8519 20.8581 15.3516 20 15.13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                     <path d="M16 3.13C16.8604 3.35031 17.623 3.85071 18.1676 4.55232C18.7122 5.25392 19.0078 6.11683 19.0078 7.005C19.0078 7.89318 18.7122 8.75608 18.1676 9.45769C17.623 10.1593 16.8604 10.6597 16 10.88" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
-                  <div className="stat-value">60M</div>
+                  <div className="stat-value">~350K</div>
                   <div className="stat-label">Inhabitants</div>
                 </div>
               </div>
@@ -619,186 +619,15 @@ const Countries = () => {
               <div className="destination-regions">
                 <div className="regions-label">{t('countries.topRegions')}</div>
                 <div className="regions-tags">
-                  <span className="region-tag">Tuscany</span>
-                  <span className="region-tag">Apulia</span>
-                  <span className="region-tag">Sardinia</span>
-                  <span className="region-tag">Calabria</span>
+                  <span className="region-tag">Kyrenia</span>
+                  <span className="region-tag">Famagusta</span>
+                  <span className="region-tag">Nicosia</span>
+                  <span className="region-tag">Iskele</span>
                 </div>
               </div>
               <button 
                 className="destination-button"
-                onClick={() => handleDestinationLearnMore('IT')}
-              >
-                {t('common.learnMore')}
-              </button>
-            </div>
-
-            {/* Greece Card */}
-            <div className="destination-card">
-              <div className="destination-header">
-                <span className="destination-code">GR</span>
-                <span className="destination-name">{t('countries.destinationName.GR')}</span>
-              </div>
-              <p className="destination-description">
-                {t('countries.destinationDescription.GR')}
-              </p>
-              <div className="destination-divider"></div>
-              <div className="destination-stats">
-                <div className="destination-stat">
-                  <svg className="stat-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M3 21H21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path d="M5 21V7L13 2L21 7V21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path d="M9 21V12H15V21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                  <div className="stat-value">€ 1.500/m²</div>
-                  <div className="stat-label">Avg. Price</div>
-                </div>
-                <div className="destination-stat">
-                  <svg className="stat-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M3 3V21H21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path d="M7 16L12 11L16 15L21 10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                  <div className="stat-value">+6.3%</div>
-                  <div className="stat-label">Growth</div>
-                </div>
-                <div className="destination-stat">
-                  <svg className="stat-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M17 21V19C17 17.9391 16.5786 16.9217 15.8284 16.1716C15.0783 15.4214 14.0609 15 13 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path d="M9 11C11.2091 11 13 9.20914 13 7C13 4.79086 11.2091 3 9 3C6.79086 3 5 4.79086 5 7C5 9.20914 6.79086 11 9 11Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path d="M23 21V19C22.9993 18.1137 22.7044 17.2528 22.1614 16.5523C21.6184 15.8519 20.8581 15.3516 20 15.13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path d="M16 3.13C16.8604 3.35031 17.623 3.85071 18.1676 4.55232C18.7122 5.25392 19.0078 6.11683 19.0078 7.005C19.0078 7.89318 18.7122 8.75608 18.1676 9.45769C17.623 10.1593 16.8604 10.6597 16 10.88" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                  <div className="stat-value">10M</div>
-                  <div className="stat-label">Inhabitants</div>
-                </div>
-              </div>
-              <div className="destination-divider"></div>
-              <div className="destination-regions">
-                <div className="regions-label">{t('countries.topRegions')}</div>
-                <div className="regions-tags">
-                  <span className="region-tag">Crete</span>
-                  <span className="region-tag">Rhodes</span>
-                  <span className="region-tag">Santorini</span>
-                  <span className="region-tag">Athens</span>
-                </div>
-              </div>
-              <button 
-                className="destination-button"
-                onClick={() => handleDestinationLearnMore('GR')}
-              >
-                {t('common.learnMore')}
-              </button>
-            </div>
-
-            {/* Portugal Card */}
-            <div className="destination-card">
-              <div className="destination-header">
-                <span className="destination-code">PT</span>
-                <span className="destination-name">{t('countries.destinationName.PT')}</span>
-              </div>
-              <p className="destination-description">
-                {t('countries.destinationDescription.PT')}
-              </p>
-              <div className="destination-divider"></div>
-              <div className="destination-stats">
-                <div className="destination-stat">
-                  <svg className="stat-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M3 21H21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path d="M5 21V7L13 2L21 7V21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path d="M9 21V12H15V21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                  <div className="stat-value">€ 1.600/m²</div>
-                  <div className="stat-label">Avg. Price</div>
-                </div>
-                <div className="destination-stat">
-                  <svg className="stat-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M3 3V21H21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path d="M7 16L12 11L16 15L21 10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                  <div className="stat-value">+7.1%</div>
-                  <div className="stat-label">Growth</div>
-                </div>
-                <div className="destination-stat">
-                  <svg className="stat-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M17 21V19C17 17.9391 16.5786 16.9217 15.8284 16.1716C15.0783 15.4214 14.0609 15 13 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path d="M9 11C11.2091 11 13 9.20914 13 7C13 4.79086 11.2091 3 9 3C6.79086 3 5 4.79086 5 7C5 9.20914 6.79086 11 9 11Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path d="M23 21V19C22.9993 18.1137 22.7044 17.2528 22.1614 16.5523C21.6184 15.8519 20.8581 15.3516 20 15.13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path d="M16 3.13C16.8604 3.35031 17.623 3.85071 18.1676 4.55232C18.7122 5.25392 19.0078 6.11683 19.0078 7.005C19.0078 7.89318 18.7122 8.75608 18.1676 9.45769C17.623 10.1593 16.8604 10.6597 16 10.88" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                  <div className="stat-value">10M</div>
-                  <div className="stat-label">Inhabitants</div>
-                </div>
-              </div>
-              <div className="destination-divider"></div>
-              <div className="destination-regions">
-                <div className="regions-label">{t('countries.topRegions')}</div>
-                <div className="regions-tags">
-                  <span className="region-tag">Lisbon</span>
-                  <span className="region-tag">Algarve</span>
-                  <span className="region-tag">Porto</span>
-                  <span className="region-tag">Madeira</span>
-                </div>
-              </div>
-              <button 
-                className="destination-button"
-                onClick={() => handleDestinationLearnMore('PT')}
-              >
-                {t('common.learnMore')}
-              </button>
-            </div>
-
-            {/* Croatia Card */}
-            <div className="destination-card">
-              <div className="destination-header">
-                <span className="destination-code">HR</span>
-                <span className="destination-name">{t('countries.destinationName.HR')}</span>
-              </div>
-              <p className="destination-description">
-                {t('countries.destinationDescription.HR')}
-              </p>
-              <div className="destination-divider"></div>
-              <div className="destination-stats">
-                <div className="destination-stat">
-                  <svg className="stat-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M3 21H21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path d="M5 21V7L13 2L21 7V21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path d="M9 21V12H15V21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                  <div className="stat-value">€ 2.000/m²</div>
-                  <div className="stat-label">Avg. Price</div>
-                </div>
-                <div className="destination-stat">
-                  <svg className="stat-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M3 3V21H21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path d="M7 16L12 11L16 15L21 10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                  <div className="stat-value">+9.2%</div>
-                  <div className="stat-label">Growth</div>
-                </div>
-                <div className="destination-stat">
-                  <svg className="stat-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M17 21V19C17 17.9391 16.5786 16.9217 15.8284 16.1716C15.0783 15.4214 14.0609 15 13 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path d="M9 11C11.2091 11 13 9.20914 13 7C13 4.79086 11.2091 3 9 3C6.79086 3 5 4.79086 5 7C5 9.20914 6.79086 11 9 11Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path d="M23 21V19C22.9993 18.1137 22.7044 17.2528 22.1614 16.5523C21.6184 15.8519 20.8581 15.3516 20 15.13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path d="M16 3.13C16.8604 3.35031 17.623 3.85071 18.1676 4.55232C18.7122 5.25392 19.0078 6.11683 19.0078 7.005C19.0078 7.89318 18.7122 8.75608 18.1676 9.45769C17.623 10.1593 16.8604 10.6597 16 10.88" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                  <div className="stat-value">4M</div>
-                  <div className="stat-label">Inhabitants</div>
-                </div>
-              </div>
-              <div className="destination-divider"></div>
-              <div className="destination-regions">
-                <div className="regions-label">{t('countries.topRegions')}</div>
-                <div className="regions-tags">
-                  <span className="region-tag">Dubrovnik</span>
-                  <span className="region-tag">Split</span>
-                  <span className="region-tag">Istria</span>
-                  <span className="region-tag">Zadar</span>
-                </div>
-              </div>
-              <button 
-                className="destination-button"
-                onClick={() => handleDestinationLearnMore('HR')}
+                onClick={() => handleDestinationLearnMore('NC')}
               >
                 {t('common.learnMore')}
               </button>
