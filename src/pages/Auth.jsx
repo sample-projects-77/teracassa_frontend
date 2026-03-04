@@ -38,6 +38,8 @@ const Auth = () => {
   });
   const [avatarFile, setAvatarFile] = useState(null);
   const [avatarPreview, setAvatarPreview] = useState(null);
+  const [verificationDocFiles, setVerificationDocFiles] = useState([]);
+  const [verificationDocPreviews, setVerificationDocPreviews] = useState([]);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [countries, setCountries] = useState([]);
@@ -114,6 +116,56 @@ const Auth = () => {
     }
   };
 
+  const MAX_VERIFICATION_DOCS = 10;
+  const handleVerificationDocsChange = (e) => {
+    const files = Array.from(e.target.files || []);
+    if (files.length === 0) return;
+    const valid = [];
+    const invalid = [];
+    for (const file of files) {
+      if (!file.type.startsWith('image/')) {
+        invalid.push(file.name + ' (not an image)');
+        continue;
+      }
+      if (file.size > 5 * 1024 * 1024) {
+        invalid.push(file.name + ' (max 5MB)');
+        continue;
+      }
+      valid.push(file);
+    }
+    if (invalid.length > 0) {
+      setError('Some files were skipped: ' + invalid.join(', '));
+    }
+    setVerificationDocFiles((prev) => [...prev, ...valid].slice(0, MAX_VERIFICATION_DOCS));
+    if (valid.length > 0) setError('');
+    e.target.value = '';
+  };
+
+  useEffect(() => {
+    if (verificationDocFiles.length === 0) {
+      setVerificationDocPreviews([]);
+      return;
+    }
+    let cancelled = false;
+    const readers = verificationDocFiles.map((file) =>
+      new Promise((resolve) => {
+        const r = new FileReader();
+        r.onloadend = () => resolve(r.result);
+        r.readAsDataURL(file);
+      })
+    );
+    Promise.all(readers).then((results) => {
+      if (!cancelled) setVerificationDocPreviews(results);
+    });
+    return () => { cancelled = true; };
+  }, [verificationDocFiles]);
+
+  const removeVerificationDoc = (index) => {
+    setVerificationDocFiles((prev) => prev.filter((_, i) => i !== index));
+    const fileInput = document.getElementById('register-verification-docs');
+    if (fileInput) fileInput.value = '';
+  };
+
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
     setError('');
@@ -163,6 +215,9 @@ const Auth = () => {
       if (avatarFile) {
         formData.append('avatar', avatarFile);
       }
+      verificationDocFiles.forEach((file) => {
+        formData.append('verificationDocs', file);
+      });
 
       const response = await register(formData);
       
@@ -495,6 +550,80 @@ const Auth = () => {
                   <p style={{ fontSize: '12px', color: '#666', marginTop: '5px' }}>
                     Supported formats: PNG, JPEG, JPG, GIF, WEBP (max 5MB)
                   </p>
+                </div>
+
+                <div className="form-group">
+                  <label>Verification documents (optional)</label>
+                  <p style={{ fontSize: '12px', color: '#666', marginBottom: '8px' }}>
+                    Upload images for verification (e.g. ID, proof of address). Max {MAX_VERIFICATION_DOCS} images, 5MB each.
+                  </p>
+                  <input
+                    type="file"
+                    id="register-verification-docs"
+                    name="verificationDocs"
+                    accept="image/png,image/jpeg,image/jpg,image/gif,image/webp"
+                    multiple
+                    onChange={handleVerificationDocsChange}
+                    style={{ display: 'none' }}
+                  />
+                  <label
+                    htmlFor="register-verification-docs"
+                    style={{
+                      padding: '10px 15px',
+                      border: '1px solid #ddd',
+                      borderRadius: '4px',
+                      cursor: 'pointer',
+                      textAlign: 'center',
+                      backgroundColor: '#f9f9f9',
+                      display: 'inline-block',
+                      marginBottom: '10px',
+                    }}
+                  >
+                    {verificationDocFiles.length === 0
+                      ? 'Choose verification documents'
+                      : `Add more (${verificationDocFiles.length}/${MAX_VERIFICATION_DOCS})`}
+                  </label>
+                  {verificationDocPreviews.length > 0 && (
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', marginTop: '10px' }}>
+                      {verificationDocPreviews.map((src, i) => (
+                        <div key={i} style={{ position: 'relative', width: '80px', height: '80px' }}>
+                          <img
+                            src={src}
+                            alt={`Doc ${i + 1}`}
+                            style={{
+                              width: '100%',
+                              height: '100%',
+                              objectFit: 'cover',
+                              borderRadius: '4px',
+                              border: '1px solid #ddd',
+                            }}
+                          />
+                          <button
+                            type="button"
+                            onClick={() => removeVerificationDoc(i)}
+                            style={{
+                              position: 'absolute',
+                              top: '2px',
+                              right: '2px',
+                              background: 'rgba(255,0,0,0.8)',
+                              color: 'white',
+                              border: 'none',
+                              borderRadius: '50%',
+                              width: '20px',
+                              height: '20px',
+                              cursor: 'pointer',
+                              fontSize: '14px',
+                              lineHeight: '1',
+                              padding: 0,
+                            }}
+                            aria-label="Remove"
+                          >
+                            ×
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
 
                 <button type="submit" className="auth-button primary" disabled={loading}>
