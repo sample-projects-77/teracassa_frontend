@@ -506,7 +506,7 @@ const Auth = () => {
                       onMouseEnter={(e) => e.target.style.backgroundColor = '#f0f0f0'}
                       onMouseLeave={(e) => e.target.style.backgroundColor = '#f9f9f9'}
                     >
-                      {avatarFile ? 'Change Avatar Image' : 'Choose Avatar Image (optional)'}
+                      {avatarFile ? 'Change Avatar Image' : 'Choose Avatar Image'}
                     </label>
                     {avatarPreview && (
                       <div style={{ position: 'relative', display: 'inline-block', maxWidth: '150px' }}>
@@ -553,7 +553,7 @@ const Auth = () => {
                 </div>
 
                 <div className="form-group">
-                  <label>Verification documents (optional)</label>
+                  <label>Verification documents</label>
                   <p style={{ fontSize: '12px', color: '#666', marginBottom: '8px' }}>
                     Upload images for verification (e.g. ID, proof of address). Max {MAX_VERIFICATION_DOCS} images, 5MB each.
                   </p>
