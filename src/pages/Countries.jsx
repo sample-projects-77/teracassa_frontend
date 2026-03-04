@@ -466,10 +466,10 @@ const Countries = () => {
             <div className="destination-card">
               <div className="destination-header">
                 <span className="destination-code">TR</span>
-                <span className="destination-name">Turkey</span>
+                <span className="destination-name">{t('countries.destinationName.TR')}</span>
               </div>
               <p className="destination-description">
-                Mediterranean climate, cultural diversity, and attractive real estate prices
+                {t('countries.destinationDescription.TR')}
               </p>
               <div className="destination-divider"></div>
               <div className="destination-stats">
@@ -523,10 +523,10 @@ const Countries = () => {
             <div className="destination-card">
               <div className="destination-header">
                 <span className="destination-code">ES</span>
-                <span className="destination-name">Spain</span>
+                <span className="destination-name">{t('countries.destinationName.ES')}</span>
               </div>
               <p className="destination-description">
-                Quality of life, sun, and stable real estate markets on the coast
+                {t('countries.destinationDescription.ES')}
               </p>
               <div className="destination-divider"></div>
               <div className="destination-stats">
@@ -580,10 +580,10 @@ const Countries = () => {
             <div className="destination-card">
               <div className="destination-header">
                 <span className="destination-code">IT</span>
-                <span className="destination-name">Italy</span>
+                <span className="destination-name">{t('countries.destinationName.IT')}</span>
               </div>
               <p className="destination-description">
-                Culture, culinary, and picturesque coastal regions
+                {t('countries.destinationDescription.IT')}
               </p>
               <div className="destination-divider"></div>
               <div className="destination-stats">
@@ -637,10 +637,10 @@ const Countries = () => {
             <div className="destination-card">
               <div className="destination-header">
                 <span className="destination-code">GR</span>
-                <span className="destination-name">Greece</span>
+                <span className="destination-name">{t('countries.destinationName.GR')}</span>
               </div>
               <p className="destination-description">
-                Dreamy islands, history, and growing real estate market
+                {t('countries.destinationDescription.GR')}
               </p>
               <div className="destination-divider"></div>
               <div className="destination-stats">
@@ -694,10 +694,10 @@ const Countries = () => {
             <div className="destination-card">
               <div className="destination-header">
                 <span className="destination-code">PT</span>
-                <span className="destination-name">Portugal</span>
+                <span className="destination-name">{t('countries.destinationName.PT')}</span>
               </div>
               <p className="destination-description">
-                Mild winters, friendly people, and increasing popularity
+                {t('countries.destinationDescription.PT')}
               </p>
               <div className="destination-divider"></div>
               <div className="destination-stats">
@@ -751,10 +751,10 @@ const Countries = () => {
             <div className="destination-card">
               <div className="destination-header">
                 <span className="destination-code">HR</span>
-                <span className="destination-name">Croatia</span>
+                <span className="destination-name">{t('countries.destinationName.HR')}</span>
               </div>
               <p className="destination-description">
-                Adriatic coast, EU member, and emerging real estate market
+                {t('countries.destinationDescription.HR')}
               </p>
               <div className="destination-divider"></div>
               <div className="destination-stats">

@@ -4,7 +4,7 @@ import { useAuth } from './AuthContext';
 const TranslationContext = createContext(null);
 
 // Supported languages
-const SUPPORTED_LANGUAGES = ['en', 'de', 'es', 'fr', 'ru', 'tr'];
+const SUPPORTED_LANGUAGES = ['en', 'de', 'es', 'fr', 'ru', 'tr', 'ar'];
 const DEFAULT_LANGUAGE = 'en';
 
 // Cache for loaded translations
@@ -33,6 +33,9 @@ export const TranslationProvider = ({ children }) => {
       let translationData;
       let importedModule;
       switch (language) {
+        case 'ar':
+          importedModule = await import('../translations/ar.json');
+          break;
         case 'de':
           importedModule = await import('../translations/de.json');
           break;
@@ -85,6 +88,12 @@ export const TranslationProvider = ({ children }) => {
       ? userLanguage.toLowerCase() 
       : DEFAULT_LANGUAGE;
     
+    // Set document direction and lang for RTL (Arabic)
+    if (typeof document !== 'undefined' && document.documentElement) {
+      document.documentElement.dir = language === 'ar' ? 'rtl' : 'ltr';
+      document.documentElement.lang = language;
+    }
+    
     setCurrentLanguage(language);
     loadTranslations(language);
   }, [user, authLoading]);
@@ -94,6 +103,11 @@ export const TranslationProvider = ({ children }) => {
     if (SUPPORTED_LANGUAGES.includes(lang)) {
       // Update localStorage FIRST to ensure API calls get the correct language
       localStorage.setItem('language', lang);
+      // Set document direction and lang for RTL (Arabic)
+      if (typeof document !== 'undefined' && document.documentElement) {
+        document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+        document.documentElement.lang = lang === 'ar' ? 'ar' : lang;
+      }
       // Then update state (this will trigger re-renders and useEffects)
       setCurrentLanguage(lang);
       await loadTranslations(lang);

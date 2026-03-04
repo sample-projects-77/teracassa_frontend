@@ -37,7 +37,23 @@
     "topRegions": "Regiones Principales:",
     "readyForAdventure": "¿Listo para tu aventura?",
     "findPropertiesNow": "Encuentra propiedades ahora en tu país soñado",
-    "discoverProperties": "Descubrir propiedades"
+    "discoverProperties": "Descubrir propiedades",
+    "destinationDescription": {
+      "TR": "Clima mediterráneo, diversidad cultural y precios inmobiliarios atractivos",
+      "ES": "Calidad de vida, sol y mercados inmobiliarios estables en la costa",
+      "IT": "Cultura, gastronomía y pintorescas regiones costeras",
+      "GR": "Islas de ensueño, historia y mercado inmobiliario en crecimiento",
+      "PT": "Inviernos suaves, gente amable y creciente popularidad",
+      "HR": "Costa adriática, miembro de la UE y mercado inmobiliario emergente"
+    },
+    "destinationName": {
+      "TR": "Turquía",
+      "ES": "España",
+      "IT": "Italia",
+      "GR": "Grecia",
+      "PT": "Portugal",
+      "HR": "Croacia"
+    }
   },
   "home": {
     "heroTitle": "Descubrir. Invertir. Vivir.",
@@ -425,6 +441,21 @@
       "register": "Crear Cuenta",
       "goBack": "Volver al Inicio"
     }
+  },
+  "footer": {
+    "tagline": "Tu plataforma de inmuebles internacionales y estilos de vida en todo el mundo",
+    "discover": "Descubrir",
+    "becomeAPartner": "Ser socio",
+    "helpSupport": "Ayuda y soporte",
+    "faq": "Preguntas frecuentes",
+    "contact": "Contacto",
+    "dataProtection": "Protección de datos",
+    "termsAndConditions": "Términos y condiciones",
+    "newsletter": "Boletín",
+    "newsletterDescription": "Manténgase informado sobre nuevas propiedades y tendencias del mercado",
+    "yourEmail": "Tu correo electrónico",
+    "subscribe": "Suscribirse",
+    "copyright": "© 2025 TerraCasa. Todos los derechos reservados."
   }
 }
 

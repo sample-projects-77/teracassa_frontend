@@ -39,7 +39,23 @@
     "topRegions": "Top Regions:",
     "readyForAdventure": "Ready for your adventure?",
     "findPropertiesNow": "Find properties now in your dream country",
-    "discoverProperties": "Discover properties"
+    "discoverProperties": "Discover properties",
+    "destinationDescription": {
+      "TR": "Mediterranean climate, cultural diversity, and attractive real estate prices",
+      "ES": "Quality of life, sun, and stable real estate markets on the coast",
+      "IT": "Culture, culinary, and picturesque coastal regions",
+      "GR": "Dreamy islands, history, and growing real estate market",
+      "PT": "Mild winters, friendly people, and increasing popularity",
+      "HR": "Adriatic coast, EU member, and emerging real estate market"
+    },
+    "destinationName": {
+      "TR": "Turkey",
+      "ES": "Spain",
+      "IT": "Italy",
+      "GR": "Greece",
+      "PT": "Portugal",
+      "HR": "Croatia"
+    }
   },
   "home": {
     "heroTitle": "Discover. Invest. Live.",
@@ -427,6 +443,21 @@
       "register": "Create Account",
       "goBack": "Go Back to Home"
     }
+  },
+  "footer": {
+    "tagline": "Your platform for international real estate and worldwide lifestyles",
+    "discover": "Discover",
+    "becomeAPartner": "Become a Partner",
+    "helpSupport": "Help & Support",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "dataProtection": "Data Protection",
+    "termsAndConditions": "Terms and Conditions",
+    "newsletter": "Newsletter",
+    "newsletterDescription": "Stay informed about new properties and market trends",
+    "yourEmail": "Your E-Mail",
+    "subscribe": "Subscribe",
+    "copyright": "© 2025 TerraCasa. All rights reserved."
   }
 }
 

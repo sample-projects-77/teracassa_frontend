@@ -5,6 +5,7 @@ import { updateUserLanguage } from '../services/profileService';
 import './LanguageDropdown.css';
 
 const languages = [
+  { code: 'ar', flag: 'SA', name: 'Arabic', nativeName: 'العربية (AR)' },
   { code: 'de', flag: 'DE', name: 'Deutsch', nativeName: 'Deutsch (DE)' },
   { code: 'en', flag: 'GB', name: 'English', nativeName: 'English (EN)' },
   { code: 'es', flag: 'ES', name: 'Español', nativeName: 'Español (ES)' },

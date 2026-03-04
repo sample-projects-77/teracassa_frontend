@@ -37,7 +37,23 @@
     "topRegions": "Top-Regionen:",
     "readyForAdventure": "Bereit für dein Abenteuer?",
     "findPropertiesNow": "Finde jetzt Immobilien in deinem Traumland",
-    "discoverProperties": "Immobilien entdecken"
+    "discoverProperties": "Immobilien entdecken",
+    "destinationDescription": {
+      "TR": "Mittelmeerklima, kulturelle Vielfalt und attraktive Immobilienpreise",
+      "ES": "Lebensqualität, Sonne und stabile Immobilienmärkte an der Küste",
+      "IT": "Kultur, Kulinarik und malerische Küstenregionen",
+      "GR": "Traumhafte Inseln, Geschichte und wachsender Immobilienmarkt",
+      "PT": "Milde Winter, freundliche Menschen und wachsende Beliebtheit",
+      "HR": "Adriatikküste, EU-Mitglied und aufstrebender Immobilienmarkt"
+    },
+    "destinationName": {
+      "TR": "Türkei",
+      "ES": "Spanien",
+      "IT": "Italien",
+      "GR": "Griechenland",
+      "PT": "Portugal",
+      "HR": "Kroatien"
+    }
   },
   "home": {
     "heroTitle": "Entdecken. Investieren. Leben.",
@@ -424,6 +440,21 @@
       "register": "Konto erstellen",
       "goBack": "Zurück zur Startseite"
     }
+  },
+  "footer": {
+    "tagline": "Ihre Plattform für internationale Immobilien und Lebensstile weltweit",
+    "discover": "Entdecken",
+    "becomeAPartner": "Partner werden",
+    "helpSupport": "Hilfe & Support",
+    "faq": "FAQ",
+    "contact": "Kontakt",
+    "dataProtection": "Datenschutz",
+    "termsAndConditions": "AGB",
+    "newsletter": "Newsletter",
+    "newsletterDescription": "Bleiben Sie über neue Immobilien und Markttrends informiert",
+    "yourEmail": "Ihre E-Mail",
+    "subscribe": "Abonnieren",
+    "copyright": "© 2025 TerraCasa. Alle Rechte vorbehalten."
   }
 }
 
