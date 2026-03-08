@@ -11,6 +11,7 @@ const Navbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [isScrolled, setIsScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,6 +23,11 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  /* Close mobile menu when route changes */
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [location.pathname]);
+
   const isActive = (path) => {
     if (path === '/') {
       return location.pathname === '/';
@@ -32,13 +38,22 @@ const Navbar = () => {
   return (
     <>
       {/* Main navigation bar */}
-      <header className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
+      <header className={`navbar ${isScrolled ? 'scrolled' : ''} ${menuOpen ? 'menu-open' : ''}`}>
         <div className="navbar-container">
           <Link to="/" className="navbar-logo">
             TerraCasa
           </Link>
-          
-          <nav className="navbar-nav">
+
+          <button
+            type="button"
+            className="navbar-menu-toggle"
+            aria-label={menuOpen ? t('common.closeMenu') || 'Close menu' : t('common.openMenu') || 'Open menu'}
+            onClick={() => setMenuOpen((prev) => !prev)}
+          >
+            <span className="navbar-menu-toggle-icon" aria-hidden="true" />
+          </button>
+
+          <nav className="navbar-nav" aria-hidden={!menuOpen}>
             <Link to="/" className={`nav-link ${isActive('/') ? 'active' : ''}`}>{t('common.homepage')}</Link>
             <Link to="/properties" className={`nav-link ${isActive('/properties') ? 'active' : ''}`}>{t('common.properties')}</Link>
             <Link to="/countries" className={`nav-link ${isActive('/countries') ? 'active' : ''}`}>{t('common.countries')}</Link>

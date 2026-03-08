@@ -10,6 +10,8 @@
     "logout": "Déconnexion",
     "profile": "Profil",
     "favorites": "Favoris",
+    "openMenu": "Ouvrir le menu",
+    "closeMenu": "Fermer le menu",
     "loading": "Chargement...",
     "learnMore": "En savoir plus →",
     "selectCountry": "Sélectionner un pays...",

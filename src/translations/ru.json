@@ -10,6 +10,8 @@
     "logout": "Выйти",
     "profile": "Профиль",
     "favorites": "Избранное",
+    "openMenu": "Открыть меню",
+    "closeMenu": "Закрыть меню",
     "loading": "Загрузка...",
     "learnMore": "Узнать больше →",
     "selectCountry": "Выбрать страну...",

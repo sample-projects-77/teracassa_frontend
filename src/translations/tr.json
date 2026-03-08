@@ -10,6 +10,8 @@
     "logout": "Çıkış Yap",
     "profile": "Profil",
     "favorites": "Favoriler",
+    "openMenu": "Menüyü aç",
+    "closeMenu": "Menüyü kapat",
     "loading": "Yükleniyor...",
     "learnMore": "Daha fazla bilgi →",
     "selectCountry": "Ülke seç...",

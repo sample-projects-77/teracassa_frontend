@@ -10,6 +10,8 @@
     "logout": "Cerrar Sesión",
     "profile": "Perfil",
     "favorites": "Favoritos",
+    "openMenu": "Abrir menú",
+    "closeMenu": "Cerrar menú",
     "loading": "Cargando...",
     "learnMore": "Saber más →",
     "selectCountry": "Seleccionar país...",
