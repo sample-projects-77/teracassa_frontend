@@ -350,11 +350,31 @@
   margin: 0;
 }
 
-.verified-checkmark {
-  width: 20px;
-  height: 20px;
-  color: #1976d2;
+/* Verified badge – pill style for clarity and trust */
+.verified-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+  color: #2e7d32;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
   flex-shrink: 0;
+  border: 1px solid rgba(46, 125, 50, 0.25);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+
+.verified-pill-icon {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+.verified-pill-text {
+  line-height: 1;
 }
 
 .partner-role {

@@ -1,4 +1,4 @@
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useTranslation } from '../context/TranslationContext';
@@ -9,7 +9,6 @@ const Navbar = () => {
   const { isAuthenticated, logout, user } = useAuth();
   const { t } = useTranslation();
   const location = useLocation();
-  const navigate = useNavigate();
   const [isScrolled, setIsScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -64,21 +63,6 @@ const Navbar = () => {
 
           <div className="navbar-utils">
             <LanguageDropdown />
-            <button 
-              className="icon-button" 
-              title={t('common.favorites')}
-              onClick={() => {
-                if (isAuthenticated) {
-                  // Navigate to favourites page (assuming /favorites route exists)
-                  // If not, we can create a properties page with favourites filter
-                  navigate('/properties?favorites=true');
-                } else {
-                  navigate('/login');
-                }
-              }}
-            >
-              <span className="icon">♡</span>
-            </button>
             {isAuthenticated ? (
               <>
                 <Link to="/profile" className="icon-button" title={t('common.profile')}>
