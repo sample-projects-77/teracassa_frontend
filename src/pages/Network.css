@@ -279,6 +279,20 @@
   gap: 32px;
 }
 
+.network-load-more-sentinel {
+  height: 1px;
+  width: 100%;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.network-loading-more {
+  text-align: center;
+  padding: 24px;
+  color: #666666;
+  font-size: 16px;
+}
+
 .partner-card {
   background: white;
   border-radius: 12px;

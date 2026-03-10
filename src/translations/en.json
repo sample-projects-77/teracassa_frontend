@@ -259,7 +259,11 @@
     "whatIsItAbout": "What is it about?",
     "message": "Message *",
     "yourMessage": "Your Message...",
-    "sendMessage": "Send message"
+    "sendMessage": "Send message",
+    "sending": "Sending...",
+    "messageSentSuccess": "Your message has been sent. We will get back to you soon.",
+    "sendError": "Failed to send message. Please try again.",
+    "fillRequiredFields": "Please fill in name, email and message."
   },
   "postAd": {
     "heroTitle": "Maximum Trust. Maximum Success.",

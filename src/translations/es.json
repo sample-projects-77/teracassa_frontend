@@ -257,7 +257,11 @@
     "whatIsItAbout": "¿De qué se trata?",
     "message": "Mensaje *",
     "yourMessage": "Tu Mensaje...",
-    "sendMessage": "Enviar mensaje"
+    "sendMessage": "Enviar mensaje",
+    "sending": "Enviando...",
+    "messageSentSuccess": "Su mensaje ha sido enviado. Nos pondremos en contacto pronto.",
+    "sendError": "No se pudo enviar el mensaje. Por favor, inténtelo de nuevo.",
+    "fillRequiredFields": "Por favor, rellene nombre, correo y mensaje."
   },
   "postAd": {
     "heroTitle": "Máxima Confianza. Máximo Éxito.",

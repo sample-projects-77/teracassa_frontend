@@ -256,7 +256,11 @@
     "whatIsItAbout": "Worum geht es?",
     "message": "Nachricht *",
     "yourMessage": "Deine Nachricht...",
-    "sendMessage": "Nachricht senden"
+    "sendMessage": "Nachricht senden",
+    "sending": "Wird gesendet...",
+    "messageSentSuccess": "Ihre Nachricht wurde gesendet. Wir melden uns in Kürze bei Ihnen.",
+    "sendError": "Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es erneut.",
+    "fillRequiredFields": "Bitte füllen Sie Name, E-Mail und Nachricht aus."
   },
   "postAd": {
     "heroTitle": "Maximales Vertrauen. Maximaler Erfolg.",

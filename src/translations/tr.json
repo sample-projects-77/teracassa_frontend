@@ -257,7 +257,11 @@
     "whatIsItAbout": "Ne hakkında?",
     "message": "Mesaj *",
     "yourMessage": "Mesajınız...",
-    "sendMessage": "Mesaj gönder"
+    "sendMessage": "Mesaj gönder",
+    "sending": "Gönderiliyor...",
+    "messageSentSuccess": "Mesajınız gönderildi. En kısa sürede size dönüş yapacağız.",
+    "sendError": "Mesaj gönderilemedi. Lütfen tekrar deneyin.",
+    "fillRequiredFields": "Lütfen ad, e-posta ve mesaj alanlarını doldurun."
   },
   "postAd": {
     "heroTitle": "Maksimum Güven. Maksimum Başarı.",

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -32,10 +32,28 @@ const Network = () => {
   });
   const [selectedPartner, setSelectedPartner] = useState(null);
   const [showContactModal, setShowContactModal] = useState(false);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(false);
+  const [loadingMore, setLoadingMore] = useState(false);
+  const [totalCount, setTotalCount] = useState(0);
+  const [lastSearchFilters, setLastSearchFilters] = useState({});
+  const loadMoreSentinelRef = useRef(null);
+
+  const PARTNERS_PAGE_SIZE = 12;
+
+  const applyAdditionalFilters = useCallback((list) => {
+    let out = list || [];
+    if (additionalFilters.ratingMin) out = out.filter(p => p.ratingAverage >= 4.5);
+    if (additionalFilters.verifiedOnly) out = out.filter(p => p.isVerified);
+    if (additionalFilters.immediatelyAvailable) out = out.filter(p => p.isImmediatelyAvailable);
+    if (additionalFilters.available247) out = out.filter(p => p.isAvailable247);
+    return out;
+  }, [additionalFilters.ratingMin, additionalFilters.verifiedOnly, additionalFilters.immediatelyAvailable, additionalFilters.available247]);
+
+  const displayedPartners = applyAdditionalFilters(partners);
 
   useEffect(() => {
     loadCountries();
-    // Load default partners with rating >= 4.5 on initial load
     loadDefaultPartners();
     // Reset filters on page load/refresh
     setFilters({
@@ -62,64 +80,75 @@ const Network = () => {
     }
   };
 
-  // Load default partners with rating >= 4.5
   const loadDefaultPartners = async () => {
     try {
       setLoading(true);
-      console.log('Loading default partners (rating >= 4.5)');
-      const data = await searchPartners({});
-      console.log('All partners received:', data);
-      
-      // Filter for rating >= 4.5
-      const filteredData = (data || []).filter(p => p.ratingAverage >= 4.5);
-      console.log('Filtered partners (rating >= 4.5):', filteredData);
-      
-      setPartners(filteredData);
-      setHasSearched(true); // Show the section
+      const result = await searchPartners({ page: 1, limit: PARTNERS_PAGE_SIZE });
+      const list = result?.data ?? result ?? [];
+      const pagination = result?.pagination;
+      setPartners(Array.isArray(list) ? list : []);
+      setPage(1);
+      setHasMore(pagination ? pagination.page < pagination.totalPages : false);
+      setTotalCount(pagination?.total ?? (Array.isArray(list) ? list.length : 0));
+      setLastSearchFilters({});
+      setHasSearched(true);
     } catch (error) {
       console.error('Error loading default partners:', error);
-      console.error('Error details:', error.message, error.response);
       setPartners([]);
+      setHasMore(false);
+      setTotalCount(0);
     } finally {
       setLoading(false);
     }
   };
 
-  const loadPartners = async (searchFilters = {}) => {
+  const loadPartners = async (searchFilters = {}, pageNum = 1, append = false) => {
     try {
-      setLoading(true);
-      console.log('Loading partners with filters:', searchFilters);
-      const data = await searchPartners(searchFilters);
-      console.log('Partners received:', data);
-      
-      // Apply additional filters on frontend
-      let filteredData = data || [];
-      
-      if (additionalFilters.ratingMin) {
-        filteredData = filteredData.filter(p => p.ratingAverage >= 4.5);
+      if (append) setLoadingMore(true);
+      else setLoading(true);
+      const result = await searchPartners({
+        ...searchFilters,
+        page: pageNum,
+        limit: PARTNERS_PAGE_SIZE
+      });
+      const list = result?.data ?? result ?? [];
+      const pagination = result?.pagination;
+      const nextList = Array.isArray(list) ? list : [];
+      if (append) {
+        setPartners(prev => [...prev, ...nextList]);
+      } else {
+        setPartners(nextList);
       }
-      
-      if (additionalFilters.verifiedOnly) {
-        filteredData = filteredData.filter(p => p.isVerified);
-      }
-      
-      if (additionalFilters.immediatelyAvailable) {
-        filteredData = filteredData.filter(p => p.isImmediatelyAvailable);
-      }
-      
-      if (additionalFilters.available247) {
-        filteredData = filteredData.filter(p => p.isAvailable247);
-      }
-      
-      setPartners(filteredData);
+      setPage(pagination?.page ?? pageNum);
+      setHasMore(pagination ? pagination.page < pagination.totalPages : false);
+      setTotalCount(pagination?.total ?? nextList.length);
+      setLastSearchFilters(searchFilters);
+      setHasSearched(true);
     } catch (error) {
       console.error('Error loading partners:', error);
-      console.error('Error details:', error.message, error.response);
-      setPartners([]);
+      if (!append) setPartners([]);
+      setHasMore(false);
     } finally {
-      setLoading(false);
+      if (append) setLoadingMore(false);
+      else setLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (!hasMore || loading || loadingMore) return;
+    const sentinel = loadMoreSentinelRef.current;
+    if (!sentinel) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0]?.isIntersecting && hasMore && !loading && !loadingMore) {
+          loadPartners(lastSearchFilters, page + 1, true);
+        }
+      },
+      { rootMargin: '200px', threshold: 0.1 }
+    );
+    observer.observe(sentinel);
+    return () => observer.disconnect();
+  }, [hasMore, loading, loadingMore, page, lastSearchFilters]);
 
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
@@ -153,9 +182,8 @@ const Network = () => {
     }
     // Note: language filter would need backend support
     
-    console.log('Searching with filters:', activeFilters);
     setHasSearched(true);
-    loadPartners(activeFilters);
+    loadPartners(activeFilters, 1, false);
   };
 
   const handleReset = () => {
@@ -362,10 +390,10 @@ const Network = () => {
             {hasSearched && (
               <div className="network-partner-count">
                 {t('network.verifiedPartnersAvailable', {
-                  count: partners.length,
-                  plural: partners.length !== 1 ? 's' : '',
-                  countries: new Set(partners.map(p => p.baseCountry).filter(Boolean)).size,
-                  countryPlural: new Set(partners.map(p => p.baseCountry).filter(Boolean)).size !== 1 ? 'ies' : 'y'
+                  count: totalCount || displayedPartners.length,
+                  plural: (totalCount || displayedPartners.length) !== 1 ? 's' : '',
+                  countries: new Set(displayedPartners.map(p => p.baseCountry).filter(Boolean)).size,
+                  countryPlural: new Set(displayedPartners.map(p => p.baseCountry).filter(Boolean)).size !== 1 ? 'ies' : 'y'
                 })}
               </div>
             )}
@@ -387,9 +415,10 @@ const Network = () => {
 
             {loading ? (
               <div className="loading-message">{t('network.loadingPartners')}</div>
-            ) : partners.length > 0 ? (
+            ) : displayedPartners.length > 0 ? (
+              <>
               <div className="partners-grid">
-                {partners.map((partner) => {
+                {displayedPartners.map((partner) => {
                   // Generate specialties/tags based on roleTitle
                   const getSpecialties = (roleTitle) => {
                     if (!roleTitle) return [];
@@ -539,6 +568,11 @@ const Network = () => {
                   );
                 })}
               </div>
+              {hasMore && <div ref={loadMoreSentinelRef} className="network-load-more-sentinel" aria-hidden="true" />}
+              {loadingMore && (
+                <div className="network-loading-more">{t('network.loadingPartners')}</div>
+              )}
+              </>
             ) : (
               <EmptyState 
                 type="partners"

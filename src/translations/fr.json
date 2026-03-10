@@ -257,7 +257,11 @@
     "whatIsItAbout": "De quoi s'agit-il?",
     "message": "Message *",
     "yourMessage": "Votre Message...",
-    "sendMessage": "Envoyer le message"
+    "sendMessage": "Envoyer le message",
+    "sending": "Envoi en cours...",
+    "messageSentSuccess": "Votre message a été envoyé. Nous vous répondrons bientôt.",
+    "sendError": "Échec de l'envoi du message. Veuillez réessayer.",
+    "fillRequiredFields": "Veuillez remplir le nom, l'e-mail et le message."
   },
   "postAd": {
     "heroTitle": "Confiance Maximale. Succès Maximum.",

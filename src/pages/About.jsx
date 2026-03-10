@@ -1,11 +1,47 @@
+import { useState } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { useTranslation } from '../context/TranslationContext';
+import { submitContactUs } from '../services/contactService';
 import './About.css';
 
 const About = () => {
   const { t } = useTranslation();
-  
+  const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState('');
+
+  const handleContactChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setError('');
+  };
+
+  const handleContactSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
+    setSuccess(false);
+    if (!formData.name?.trim() || !formData.email?.trim() || !formData.message?.trim()) {
+      setError(t('about.fillRequiredFields') || 'Please fill in name, email and message.');
+      return;
+    }
+    setLoading(true);
+    try {
+      await submitContactUs({
+        name: formData.name.trim(),
+        email: formData.email.trim(),
+        subject: formData.subject?.trim() || undefined,
+        message: formData.message.trim()
+      });
+      setSuccess(true);
+      setFormData({ name: '', email: '', subject: '', message: '' });
+    } catch (err) {
+      setError(err.response?.data?.error || err.message || t('about.sendError') || 'Failed to send message.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="about-page">
       <Navbar />
@@ -180,7 +216,7 @@ const About = () => {
                 </div>
                 <div className="contact-info-content">
                   <div className="contact-info-label">{t('about.email')}</div>
-                  <div className="contact-info-value">info@terracasa.com</div>
+                  <div className="contact-info-value">ismail.cinar.germany@gmail.com</div>
                 </div>
               </div>
 
@@ -215,7 +251,13 @@ const About = () => {
 
             {/* Contact Form */}
             <div className="contact-form-wrapper">
-              <form className="contact-form">
+              {success && (
+                <div className="contact-form-success">
+                  {t('about.messageSentSuccess') || 'Your message has been sent. We will get back to you soon.'}
+                </div>
+              )}
+              {error && <div className="contact-form-error">{error}</div>}
+              <form className="contact-form" onSubmit={handleContactSubmit}>
                 <div className="form-group">
                   <label htmlFor="contact-name">{t('about.name')}</label>
                   <input
@@ -223,6 +265,8 @@ const About = () => {
                     id="contact-name"
                     name="name"
                     required
+                    value={formData.name}
+                    onChange={handleContactChange}
                     placeholder={t('about.yourName')}
                   />
                 </div>
@@ -234,6 +278,8 @@ const About = () => {
                     id="contact-email"
                     name="email"
                     required
+                    value={formData.email}
+                    onChange={handleContactChange}
                     placeholder={t('about.emailPlaceholder')}
                   />
                 </div>
@@ -244,6 +290,8 @@ const About = () => {
                     type="text"
                     id="contact-subject"
                     name="subject"
+                    value={formData.subject}
+                    onChange={handleContactChange}
                     placeholder={t('about.whatIsItAbout')}
                   />
                 </div>
@@ -255,12 +303,14 @@ const About = () => {
                     name="message"
                     rows="6"
                     required
+                    value={formData.message}
+                    onChange={handleContactChange}
                     placeholder={t('about.yourMessage')}
-                  ></textarea>
+                  />
                 </div>
 
-                <button type="submit" className="contact-submit-btn">
-                  {t('about.sendMessage')}
+                <button type="submit" className="contact-submit-btn" disabled={loading}>
+                  {loading ? (t('about.sending') || 'Sending...') : t('about.sendMessage')}
                 </button>
               </form>
             </div>

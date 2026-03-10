@@ -259,7 +259,11 @@
     "whatIsItAbout": "ما الموضوع؟",
     "message": "الرسالة *",
     "yourMessage": "رسالتك...",
-    "sendMessage": "إرسال الرسالة"
+    "sendMessage": "إرسال الرسالة",
+    "sending": "جاري الإرسال...",
+    "messageSentSuccess": "تم إرسال رسالتك. سنتواصل معك قريباً.",
+    "sendError": "فشل إرسال الرسالة. يرجى المحاولة مرة أخرى.",
+    "fillRequiredFields": "يرجى تعبئة الاسم والبريد الإلكتروني والرسالة."
   },
   "postAd": {
     "heroTitle": "أقصى ثقة. أقصى نجاح.",
