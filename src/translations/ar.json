@@ -265,6 +265,62 @@
     "sendError": "فشل إرسال الرسالة. يرجى المحاولة مرة أخرى.",
     "fillRequiredFields": "يرجى تعبئة الاسم والبريد الإلكتروني والرسالة."
   },
+  "auth": {
+    "welcomeTitle": "مرحبًا بك في تيراكاسا",
+    "welcomeSubtitle": "وصولك إلى العقارات الدولية",
+    "tabs": {
+      "login": "تسجيل الدخول",
+      "register": "إنشاء حساب"
+    },
+    "loginTitle": "تسجيل الدخول",
+    "loginSubtitle": "سجّل الدخول باستخدام حسابك",
+    "registerTitle": "إنشاء حساب",
+    "registerSubtitle": "أنشئ حسابك للبدء",
+    "fields": {
+      "email": "البريد الإلكتروني",
+      "emailRequired": "البريد الإلكتروني *",
+      "password": "كلمة المرور",
+      "passwordRequired": "كلمة المرور *",
+      "firstName": "الاسم الأول",
+      "lastName": "اسم العائلة",
+      "companyName": "اسم الشركة",
+      "roleTitle": "الدور",
+      "baseCountry": "بلد الإقامة",
+      "baseCity": "مدينة الإقامة",
+      "phone": "رقم الهاتف",
+      "avatar": "صورة الملف الشخصي",
+      "verificationDocs": "مستندات التحقق"
+    },
+    "placeholders": {
+      "email": "your@email.com",
+      "password": "أدخل كلمة المرور",
+      "createPassword": "أنشئ كلمة مرور",
+      "firstName": "الاسم الأول",
+      "lastName": "اسم العائلة",
+      "companyName": "اسم الشركة (اختياري)",
+      "roleTitle": "اختر الدور (اختياري)",
+      "baseCountry": "اختر البلد (اختياري)",
+      "baseCity": "اختر المدينة (اختياري)",
+      "phone": "رقم الهاتف (اختياري)"
+    },
+    "buttons": {
+      "login": "تسجيل الدخول",
+      "loggingIn": "جارٍ تسجيل الدخول...",
+      "register": "إنشاء حساب",
+      "creatingAccount": "جارٍ إنشاء الحساب...",
+      "chooseAvatar": "اختر صورة الملف الشخصي",
+      "changeAvatar": "غيّر صورة الملف الشخصي",
+      "chooseVerificationDocs": "اختر مستندات التحقق",
+      "addMoreDocs": "إضافة المزيد ({current}/{max})"
+    },
+    "help": {
+      "avatarFormats": "الصيغ المدعومة: PNG, JPEG, JPG, GIF, WEBP (بحد أقصى 5 ميجابايت)",
+      "verificationDocs": "قم برفع صور لأغراض التحقق (مثل الهوية، إثبات العنوان). الحد الأقصى {max} صور، 5 ميجابايت لكل صورة."
+    },
+    "forgotPassword": "هل نسيت كلمة المرور؟",
+    "loginFailed": "فشل تسجيل الدخول. يرجى التحقق من بياناتك.",
+    "registerFailed": "فشل إنشاء الحساب. يرجى المحاولة مرة أخرى."
+  },
   "postAd": {
     "heroTitle": "أقصى ثقة. أقصى نجاح.",
     "heroDescription": "وصل إلى مشترين مؤهلين حول العالم. الإعلان الموثق بالكامل يلفت الانتباه أسرع ويحقق نتائج أفضل. ابدأ الآن في خطوات قليلة واستخدم منصتنا الموثقة.",

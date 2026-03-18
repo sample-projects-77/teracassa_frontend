@@ -3,12 +3,15 @@ import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { login, register } from '../services/authService';
 import { getCountries } from '../services/countryService';
+import Navbar from '../components/Navbar';
 import CountryDropdown from '../components/CountryDropdown';
 import CityDropdown from '../components/CityDropdown';
 import RoleDropdown from '../components/RoleDropdown';
+import { useTranslation } from '../context/TranslationContext';
 import './Auth.css';
 
 const Auth = () => {
+  const { t } = useTranslation();
   const location = useLocation();
   const [activeTab, setActiveTab] = useState(
     location.pathname === '/register' ? 'register' : 'login'
@@ -179,7 +182,7 @@ const Auth = () => {
         navigate('/');
       }
     } catch (err) {
-      setError(err.message || 'Login failed. Please check your credentials.');
+      setError(err.message || t('auth.loginFailed'));
     } finally {
       setLoading(false);
     }
@@ -226,7 +229,7 @@ const Auth = () => {
         navigate('/');
       }
     } catch (err) {
-      setError(err.message || 'Registration failed. Please try again.');
+      setError(err.message || t('auth.registerFailed'));
     } finally {
       setLoading(false);
     }
@@ -234,49 +237,13 @@ const Auth = () => {
 
   return (
     <div className="auth-page">
-      {/* Header Navigation */}
-      <header className="auth-header">
-        <div className="header-container">
-          <Link to="/" className="logo">
-            TerraCasa
-          </Link>
-          
-          <nav className="header-nav">
-            <Link to="/">Homepage</Link>
-            <Link to="/properties">Properties</Link>
-            <Link to="/countries">Countries</Link>
-            <Link to="/network">Network</Link>
-            <Link to="/post-ad">Post Ad</Link>
-            <Link to="/about">About Us</Link>
-          </nav>
-
-          <div className="header-utils">
-            <div className="currency-selector">
-              <span>$ € EUR</span>
-              <span className="dropdown-arrow">▼</span>
-            </div>
-            <div className="language-selector">
-              <span>A EN English (EN)</span>
-              <span className="dropdown-arrow">▼</span>
-            </div>
-            <button className="icon-button">
-              <span className="icon">♡</span>
-            </button>
-            <button className="icon-button">
-              <span className="icon">👤</span>
-            </button>
-            {!isAuthenticated && (
-              <Link to="/login" className="header-login-btn">Login</Link>
-            )}
-          </div>
-        </div>
-      </header>
+      <Navbar />
 
       {/* Main Content */}
       <div className="auth-main-content">
         <div className="welcome-section">
-          <h1 className="welcome-title">Welcome to TerraCasa</h1>
-          <p className="welcome-subtitle">Your access to international real estate</p>
+          <h1 className="welcome-title">{t('auth.welcomeTitle')}</h1>
+          <p className="welcome-subtitle">{t('auth.welcomeSubtitle')}</p>
         </div>
 
         <div className="auth-card">
@@ -290,7 +257,7 @@ const Auth = () => {
                 navigate('/login', { replace: true });
               }}
             >
-              Login
+              {t('auth.tabs.login')}
             </button>
             <button
               className={`tab ${activeTab === 'register' ? 'active' : ''}`}
@@ -300,21 +267,21 @@ const Auth = () => {
                 navigate('/register', { replace: true });
               }}
             >
-              Register
+              {t('auth.tabs.register')}
             </button>
           </div>
 
           {/* Login Form */}
           {activeTab === 'login' && (
             <div className="auth-form-container">
-              <h2 className="form-title">Login</h2>
-              <p className="form-subtitle">Log in with your account</p>
+              <h2 className="form-title">{t('auth.loginTitle')}</h2>
+              <p className="form-subtitle">{t('auth.loginSubtitle')}</p>
 
               {error && <div className="error-message">{error}</div>}
 
               <form onSubmit={handleLoginSubmit} className="auth-form">
                 <div className="form-group">
-                  <label htmlFor="login-email">E-Mail</label>
+                  <label htmlFor="login-email">{t('auth.fields.email')}</label>
                   <input
                     type="email"
                     id="login-email"
@@ -322,12 +289,12 @@ const Auth = () => {
                     value={loginData.email}
                     onChange={handleLoginChange}
                     required
-                    placeholder="your@email.com"
+                    placeholder={t('auth.placeholders.email')}
                   />
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="login-password">Password</label>
+                  <label htmlFor="login-password">{t('auth.fields.password')}</label>
                   <input
                     type="password"
                     id="login-password"
@@ -335,16 +302,16 @@ const Auth = () => {
                     value={loginData.password}
                     onChange={handleLoginChange}
                     required
-                    placeholder="Enter your password"
+                    placeholder={t('auth.placeholders.password')}
                   />
                 </div>
 
                 <Link to="/forgot-password" className="forgot-password-link">
-                  Forgot password?
+                  {t('auth.forgotPassword')}
                 </Link>
 
                 <button type="submit" className="auth-button primary" disabled={loading}>
-                  {loading ? 'Logging in...' : 'Login'}
+                  {loading ? t('auth.buttons.loggingIn') : t('auth.buttons.login')}
                 </button>
               </form>
             </div>
@@ -353,40 +320,40 @@ const Auth = () => {
           {/* Register Form */}
           {activeTab === 'register' && (
             <div className="auth-form-container">
-              <h2 className="form-title">Register</h2>
-              <p className="form-subtitle">Create your account to get started</p>
+              <h2 className="form-title">{t('auth.registerTitle')}</h2>
+              <p className="form-subtitle">{t('auth.registerSubtitle')}</p>
 
               {error && <div className="error-message">{error}</div>}
 
               <form onSubmit={handleRegisterSubmit} className="auth-form">
                 <div className="form-row">
                   <div className="form-group">
-                    <label htmlFor="register-firstName">First Name</label>
+                    <label htmlFor="register-firstName">{t('auth.fields.firstName')}</label>
                     <input
                       type="text"
                       id="register-firstName"
                       name="firstName"
                       value={registerData.firstName}
                       onChange={handleRegisterChange}
-                      placeholder="First name"
+                      placeholder={t('auth.placeholders.firstName')}
                     />
                   </div>
 
                   <div className="form-group">
-                    <label htmlFor="register-lastName">Last Name</label>
+                    <label htmlFor="register-lastName">{t('auth.fields.lastName')}</label>
                     <input
                       type="text"
                       id="register-lastName"
                       name="lastName"
                       value={registerData.lastName}
                       onChange={handleRegisterChange}
-                      placeholder="Last name"
+                      placeholder={t('auth.placeholders.lastName')}
                     />
                   </div>
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="register-email">E-Mail *</label>
+                  <label htmlFor="register-email">{t('auth.fields.emailRequired')}</label>
                   <input
                     type="email"
                     id="register-email"
@@ -394,12 +361,12 @@ const Auth = () => {
                     value={registerData.email}
                     onChange={handleRegisterChange}
                     required
-                    placeholder="your@email.com"
+                    placeholder={t('auth.placeholders.email')}
                   />
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="register-password">Password *</label>
+                  <label htmlFor="register-password">{t('auth.fields.passwordRequired')}</label>
                     <input
                       type="password"
                       id="register-password"
@@ -407,37 +374,37 @@ const Auth = () => {
                       value={registerData.password}
                       onChange={handleRegisterChange}
                       required
-                      placeholder="Create a password"
+                      placeholder={t('auth.placeholders.createPassword')}
                       minLength="6"
                     />
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="register-companyName">Company Name</label>
+                  <label htmlFor="register-companyName">{t('auth.fields.companyName')}</label>
                   <input
                     type="text"
                     id="register-companyName"
                     name="companyName"
                     value={registerData.companyName}
                     onChange={handleRegisterChange}
-                    placeholder="Company name (optional)"
+                    placeholder={t('auth.placeholders.companyName')}
                   />
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="register-roleTitle">Role Title</label>
+                  <label htmlFor="register-roleTitle">{t('auth.fields.roleTitle')}</label>
                   <RoleDropdown
                     id="register-roleTitle"
                     name="roleTitle"
                     value={registerData.roleTitle}
                     onChange={handleRegisterChange}
-                    placeholder="Select role (optional)"
+                    placeholder={t('auth.placeholders.roleTitle')}
                   />
                 </div>
 
                 <div className="form-row">
                   <div className="form-group">
-                    <label htmlFor="register-baseCountry">Base Country</label>
+                    <label htmlFor="register-baseCountry">{t('auth.fields.baseCountry')}</label>
                     <CountryDropdown
                       id="register-baseCountry"
                       name="baseCountry"
@@ -452,37 +419,37 @@ const Auth = () => {
                         });
                       }}
                       countries={countries}
-                      placeholder="Select country (optional)"
+                      placeholder={t('auth.placeholders.baseCountry')}
                     />
                   </div>
 
                   <div className="form-group">
-                    <label htmlFor="register-baseCity">Base City</label>
+                    <label htmlFor="register-baseCity">{t('auth.fields.baseCity')}</label>
                     <CityDropdown
                       id="register-baseCity"
                       name="baseCity"
                       value={registerData.baseCity}
                       onChange={handleRegisterChange}
                       countryCode={registerData.baseCountry}
-                      placeholder="Select city (optional)"
+                      placeholder={t('auth.placeholders.baseCity')}
                     />
                   </div>
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="register-phone">Phone</label>
+                  <label htmlFor="register-phone">{t('auth.fields.phone')}</label>
                   <input
                     type="tel"
                     id="register-phone"
                     name="phone"
                     value={registerData.phone}
                     onChange={handleRegisterChange}
-                    placeholder="Phone number (optional)"
+                    placeholder={t('auth.placeholders.phone')}
                   />
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="register-avatar">Avatar Image</label>
+                  <label htmlFor="register-avatar">{t('auth.fields.avatar')}</label>
                   <input
                     type="file"
                     id="register-avatar"
@@ -506,7 +473,7 @@ const Auth = () => {
                       onMouseEnter={(e) => e.target.style.backgroundColor = '#f0f0f0'}
                       onMouseLeave={(e) => e.target.style.backgroundColor = '#f9f9f9'}
                     >
-                      {avatarFile ? 'Change Avatar Image' : 'Choose Avatar Image'}
+                      {avatarFile ? t('auth.buttons.changeAvatar') : t('auth.buttons.chooseAvatar')}
                     </label>
                     {avatarPreview && (
                       <div style={{ position: 'relative', display: 'inline-block', maxWidth: '150px' }}>
@@ -547,15 +514,15 @@ const Auth = () => {
                       </div>
                     )}
                   </div>
-                  <p style={{ fontSize: '12px', color: '#666', marginTop: '5px' }}>
-                    Supported formats: PNG, JPEG, JPG, GIF, WEBP (max 5MB)
+                    <p style={{ fontSize: '12px', color: '#666', marginTop: '5px' }}>
+                    {t('auth.help.avatarFormats')}
                   </p>
                 </div>
 
                 <div className="form-group">
-                  <label>Verification documents</label>
+                  <label>{t('auth.fields.verificationDocs')}</label>
                   <p style={{ fontSize: '12px', color: '#666', marginBottom: '8px' }}>
-                    Upload images for verification (e.g. ID, proof of address). Max {MAX_VERIFICATION_DOCS} images, 5MB each.
+                    {t('auth.help.verificationDocs', { max: MAX_VERIFICATION_DOCS })}
                   </p>
                   <input
                     type="file"
@@ -580,8 +547,8 @@ const Auth = () => {
                     }}
                   >
                     {verificationDocFiles.length === 0
-                      ? 'Choose verification documents'
-                      : `Add more (${verificationDocFiles.length}/${MAX_VERIFICATION_DOCS})`}
+                      ? t('auth.buttons.chooseVerificationDocs')
+                      : t('auth.buttons.addMoreDocs', { current: verificationDocFiles.length, max: MAX_VERIFICATION_DOCS })}
                   </label>
                   {verificationDocPreviews.length > 0 && (
                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', marginTop: '10px' }}>
@@ -627,7 +594,7 @@ const Auth = () => {
                 </div>
 
                 <button type="submit" className="auth-button primary" disabled={loading}>
-                  {loading ? 'Creating account...' : 'Register'}
+                  {loading ? t('auth.buttons.creatingAccount') : t('auth.buttons.register')}
                 </button>
               </form>
             </div>

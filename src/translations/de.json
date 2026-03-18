@@ -262,6 +262,62 @@
     "sendError": "Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es erneut.",
     "fillRequiredFields": "Bitte füllen Sie Name, E-Mail und Nachricht aus."
   },
+  "auth": {
+    "welcomeTitle": "Willkommen bei TerraCasa",
+    "welcomeSubtitle": "Ihr Zugang zu internationaler Immobilienwelt",
+    "tabs": {
+      "login": "Anmelden",
+      "register": "Registrieren"
+    },
+    "loginTitle": "Anmeldung",
+    "loginSubtitle": "Melden Sie sich mit Ihrem Konto an",
+    "registerTitle": "Registrieren",
+    "registerSubtitle": "Erstellen Sie Ihr Konto, um zu starten",
+    "fields": {
+      "email": "E-Mail",
+      "emailRequired": "E-Mail *",
+      "password": "Passwort",
+      "passwordRequired": "Passwort *",
+      "firstName": "Vorname",
+      "lastName": "Nachname",
+      "companyName": "Firmenname",
+      "roleTitle": "Rolle",
+      "baseCountry": "Basisland",
+      "baseCity": "Basisstadt",
+      "phone": "Telefon",
+      "avatar": "Profilbild",
+      "verificationDocs": "Verifizierungsdokumente"
+    },
+    "placeholders": {
+      "email": "ihre@email.com",
+      "password": "Geben Sie Ihr Passwort ein",
+      "createPassword": "Passwort erstellen",
+      "firstName": "Vorname",
+      "lastName": "Nachname",
+      "companyName": "Firmenname (optional)",
+      "roleTitle": "Rolle auswählen (optional)",
+      "baseCountry": "Land auswählen (optional)",
+      "baseCity": "Stadt auswählen (optional)",
+      "phone": "Telefonnummer (optional)"
+    },
+    "buttons": {
+      "login": "Anmelden",
+      "loggingIn": "Anmeldung läuft...",
+      "register": "Registrieren",
+      "creatingAccount": "Konto wird erstellt...",
+      "chooseAvatar": "Profilbild auswählen",
+      "changeAvatar": "Profilbild ändern",
+      "chooseVerificationDocs": "Verifizierungsdokumente auswählen",
+      "addMoreDocs": "Mehr hinzufügen ({current}/{max})"
+    },
+    "help": {
+      "avatarFormats": "Unterstützte Formate: PNG, JPEG, JPG, GIF, WEBP (max. 5 MB)",
+      "verificationDocs": "Laden Sie Bilder zur Verifizierung hoch (z. B. Ausweis, Adressnachweis). Max. {max} Bilder, je 5 MB."
+    },
+    "forgotPassword": "Passwort vergessen?",
+    "loginFailed": "Anmeldung fehlgeschlagen. Bitte prüfen Sie Ihre Zugangsdaten.",
+    "registerFailed": "Registrierung fehlgeschlagen. Bitte versuchen Sie es erneut."
+  },
   "postAd": {
     "heroTitle": "Maximales Vertrauen. Maximaler Erfolg.",
     "heroDescription": "Erreichen Sie qualifizierte Käufer weltweit. Eine vollständig verifizierte Anzeige wird schneller beachtet und erzielt bessere Ergebnisse. Starten Sie jetzt in wenigen Schritten und nutzen Sie unsere geprüfte Plattform.",

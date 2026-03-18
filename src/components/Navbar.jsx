@@ -62,7 +62,10 @@ const Navbar = () => {
           </nav>
 
           <div className="navbar-utils">
-            <LanguageDropdown />
+            {/* Desktop / tablet language switcher (hidden on very small screens) */}
+            <div className="navbar-language-desktop">
+              <LanguageDropdown />
+            </div>
             {isAuthenticated ? (
               <>
                 <Link to="/profile" className="icon-button" title={t('common.profile')}>
@@ -86,6 +89,13 @@ const Navbar = () => {
           </div>
         </div>
       </header>
+
+      {/* Mobile-only language switcher inside the slide-down menu */}
+      <nav className="navbar-mobile-language-wrapper" aria-hidden={!menuOpen}>
+        <div className="navbar-mobile-language-inner">
+          <LanguageDropdown />
+        </div>
+      </nav>
     </>
   );
 };

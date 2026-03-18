@@ -263,6 +263,62 @@
     "sendError": "No se pudo enviar el mensaje. Por favor, inténtelo de nuevo.",
     "fillRequiredFields": "Por favor, rellene nombre, correo y mensaje."
   },
+  "auth": {
+    "welcomeTitle": "Bienvenido a TerraCasa",
+    "welcomeSubtitle": "Tu acceso a bienes raíces internacionales",
+    "tabs": {
+      "login": "Iniciar sesión",
+      "register": "Registrarse"
+    },
+    "loginTitle": "Iniciar sesión",
+    "loginSubtitle": "Inicia sesión con tu cuenta",
+    "registerTitle": "Registrarse",
+    "registerSubtitle": "Crea tu cuenta para comenzar",
+    "fields": {
+      "email": "Correo electrónico",
+      "emailRequired": "Correo electrónico *",
+      "password": "Contraseña",
+      "passwordRequired": "Contraseña *",
+      "firstName": "Nombre",
+      "lastName": "Apellido",
+      "companyName": "Nombre de la empresa",
+      "roleTitle": "Rol",
+      "baseCountry": "País de residencia",
+      "baseCity": "Ciudad de residencia",
+      "phone": "Teléfono",
+      "avatar": "Imagen de perfil",
+      "verificationDocs": "Documentos de verificación"
+    },
+    "placeholders": {
+      "email": "tu@email.com",
+      "password": "Introduce tu contraseña",
+      "createPassword": "Crea una contraseña",
+      "firstName": "Nombre",
+      "lastName": "Apellido",
+      "companyName": "Nombre de la empresa (opcional)",
+      "roleTitle": "Selecciona un rol (opcional)",
+      "baseCountry": "Selecciona país (opcional)",
+      "baseCity": "Selecciona ciudad (opcional)",
+      "phone": "Número de teléfono (opcional)"
+    },
+    "buttons": {
+      "login": "Iniciar sesión",
+      "loggingIn": "Iniciando sesión...",
+      "register": "Registrarse",
+      "creatingAccount": "Creando cuenta...",
+      "chooseAvatar": "Elegir imagen de perfil",
+      "changeAvatar": "Cambiar imagen de perfil",
+      "chooseVerificationDocs": "Elegir documentos de verificación",
+      "addMoreDocs": "Añadir más ({current}/{max})"
+    },
+    "help": {
+      "avatarFormats": "Formatos soportados: PNG, JPEG, JPG, GIF, WEBP (máx. 5 MB)",
+      "verificationDocs": "Sube imágenes para la verificación (p. ej. identificación, comprobante de domicilio). Máx. {max} imágenes, 5 MB cada una."
+    },
+    "forgotPassword": "¿Olvidaste tu contraseña?",
+    "loginFailed": "Error al iniciar sesión. Por favor revisa tus credenciales.",
+    "registerFailed": "Error al registrarse. Por favor inténtalo de nuevo."
+  },
   "postAd": {
     "heroTitle": "Máxima Confianza. Máximo Éxito.",
     "heroDescription": "Alcance compradores calificados en todo el mundo. Un anuncio completamente verificado se nota más rápido y logra mejores resultados. Comience ahora en pocos pasos y use nuestra plataforma verificada.",

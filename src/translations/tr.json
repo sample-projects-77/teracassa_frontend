@@ -263,6 +263,62 @@
     "sendError": "Mesaj gönderilemedi. Lütfen tekrar deneyin.",
     "fillRequiredFields": "Lütfen ad, e-posta ve mesaj alanlarını doldurun."
   },
+  "auth": {
+    "welcomeTitle": "TerraCasa'ya Hoş Geldiniz",
+    "welcomeSubtitle": "Uluslararası gayrimenkule erişiminiz",
+    "tabs": {
+      "login": "Giriş Yap",
+      "register": "Kayıt Ol"
+    },
+    "loginTitle": "Giriş Yap",
+    "loginSubtitle": "Hesabınızla giriş yapın",
+    "registerTitle": "Kayıt Ol",
+    "registerSubtitle": "Başlamak için hesabınızı oluşturun",
+    "fields": {
+      "email": "E-posta",
+      "emailRequired": "E-posta *",
+      "password": "Şifre",
+      "passwordRequired": "Şifre *",
+      "firstName": "Ad",
+      "lastName": "Soyad",
+      "companyName": "Şirket Adı",
+      "roleTitle": "Görev",
+      "baseCountry": "Bulunduğu Ülke",
+      "baseCity": "Bulunduğu Şehir",
+      "phone": "Telefon",
+      "avatar": "Profil Resmi",
+      "verificationDocs": "Doğrulama belgeleri"
+    },
+    "placeholders": {
+      "email": "sizin@email.com",
+      "password": "Şifrenizi girin",
+      "createPassword": "Bir şifre oluşturun",
+      "firstName": "Ad",
+      "lastName": "Soyad",
+      "companyName": "Şirket adı (opsiyonel)",
+      "roleTitle": "Görev seçin (opsiyonel)",
+      "baseCountry": "Ülke seçin (opsiyonel)",
+      "baseCity": "Şehir seçin (opsiyonel)",
+      "phone": "Telefon numarası (opsiyonel)"
+    },
+    "buttons": {
+      "login": "Giriş Yap",
+      "loggingIn": "Giriş yapılıyor...",
+      "register": "Kayıt Ol",
+      "creatingAccount": "Hesap oluşturuluyor...",
+      "chooseAvatar": "Profil resmi seç",
+      "changeAvatar": "Profil resmini değiştir",
+      "chooseVerificationDocs": "Doğrulama belgelerini seç",
+      "addMoreDocs": "Daha fazla ekle ({current}/{max})"
+    },
+    "help": {
+      "avatarFormats": "Desteklenen formatlar: PNG, JPEG, JPG, GIF, WEBP (maks. 5 MB)",
+      "verificationDocs": "Doğrulama için görüntüler yükleyin (örn. kimlik, adres kanıtı). Maks. {max} resim, her biri 5 MB."
+    },
+    "forgotPassword": "Şifrenizi mi unuttunuz?",
+    "loginFailed": "Giriş başarısız. Lütfen bilgilerinizi kontrol edin.",
+    "registerFailed": "Kayıt başarısız. Lütfen tekrar deneyin."
+  },
   "postAd": {
     "heroTitle": "Maksimum Güven. Maksimum Başarı.",
     "heroDescription": "Dünya çapında nitelikli alıcılara ulaşın. Tamamen doğrulanmış bir ilan daha hızlı fark edilir ve daha iyi sonuçlar elde eder. Şimdi birkaç adımda başlayın ve doğrulanmış platformumuzu kullanın.",

@@ -156,10 +156,6 @@ body:not(.home-page) .navbar .language-selector:hover:not(:disabled) {
   border-color: #074d78;
 }
 
-/* Responsive */
-@media (max-width: 480px) {
-  .language-dropdown {
-    display: none;
-  }
-}
-
+/* Responsive: no special hiding here;
+   visibility on mobile is controlled from Navbar.css
+*/

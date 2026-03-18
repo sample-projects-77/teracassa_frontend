@@ -265,6 +265,62 @@
     "sendError": "Failed to send message. Please try again.",
     "fillRequiredFields": "Please fill in name, email and message."
   },
+  "auth": {
+    "welcomeTitle": "Welcome to TerraCasa",
+    "welcomeSubtitle": "Your access to international real estate",
+    "tabs": {
+      "login": "Login",
+      "register": "Register"
+    },
+    "loginTitle": "Login",
+    "loginSubtitle": "Log in with your account",
+    "registerTitle": "Register",
+    "registerSubtitle": "Create your account to get started",
+    "fields": {
+      "email": "E-Mail",
+      "emailRequired": "E-Mail *",
+      "password": "Password",
+      "passwordRequired": "Password *",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "companyName": "Company Name",
+      "roleTitle": "Role Title",
+      "baseCountry": "Base Country",
+      "baseCity": "Base City",
+      "phone": "Phone",
+      "avatar": "Avatar Image",
+      "verificationDocs": "Verification documents"
+    },
+    "placeholders": {
+      "email": "your@email.com",
+      "password": "Enter your password",
+      "createPassword": "Create a password",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "companyName": "Company name (optional)",
+      "roleTitle": "Select role (optional)",
+      "baseCountry": "Select country (optional)",
+      "baseCity": "Select city (optional)",
+      "phone": "Phone number (optional)"
+    },
+    "buttons": {
+      "login": "Login",
+      "loggingIn": "Logging in...",
+      "register": "Register",
+      "creatingAccount": "Creating account...",
+      "chooseAvatar": "Choose Avatar Image",
+      "changeAvatar": "Change Avatar Image",
+      "chooseVerificationDocs": "Choose verification documents",
+      "addMoreDocs": "Add more ({current}/{max})"
+    },
+    "help": {
+      "avatarFormats": "Supported formats: PNG, JPEG, JPG, GIF, WEBP (max 5MB)",
+      "verificationDocs": "Upload images for verification (e.g. ID, proof of address). Max {max} images, 5MB each."
+    },
+    "forgotPassword": "Forgot password?",
+    "loginFailed": "Login failed. Please check your credentials.",
+    "registerFailed": "Registration failed. Please try again."
+  },
   "postAd": {
     "heroTitle": "Maximum Trust. Maximum Success.",
     "heroDescription": "Reach qualified buyers worldwide. A fully verified ad is noticed faster and achieves better results. Start now in a few steps and use our verified platform.",

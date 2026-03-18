@@ -167,6 +167,15 @@ body:not(.home-page) .navbar .nav-link.active {
   white-space: nowrap;
 }
 
+/* Desktop / tablet: show language in top bar, hide mobile wrapper by default */
+.navbar-language-desktop {
+  display: block;
+}
+
+.navbar-mobile-language-wrapper {
+  display: none;
+}
+
 .currency-selector,
 .language-selector {
   display: flex;
@@ -406,13 +415,16 @@ body.home-page .navbar.scrolled .navbar-menu-toggle:hover {
     order: 1;
   }
 
-  .navbar-menu-toggle {
+  /* Keep utils (language/login) just before the hamburger */
+  .navbar-utils {
     order: 2;
     margin-left: auto;
   }
 
-  .navbar-utils {
+  /* Hamburger should be the last element on the right */
+  .navbar-menu-toggle {
     order: 3;
+    margin-left: 0;
   }
 
   /* Dropdown overlay: out of flow so it never pushes/squeezes main content */
@@ -456,6 +468,11 @@ body.home-page .navbar.scrolled .navbar-menu-toggle:hover {
 
   .navbar-utils {
     flex: none;
+    gap: 10px;
+  }
+
+  .navbar-mobile-language-wrapper {
+    display: none;
   }
 }
 
@@ -463,6 +480,15 @@ body.home-page .navbar.scrolled .navbar-menu-toggle:hover {
 @media (max-width: 768px) {
   .navbar-container {
     padding: 10px 0;
+    gap: 10px;
+  }
+
+  .navbar-logo {
+    font-size: 22px;
+  }
+
+  .navbar-utils {
+    gap: 8px;
   }
 }
 
@@ -477,8 +503,39 @@ body.home-page .navbar.scrolled .navbar-menu-toggle:hover {
     display: none;
   }
 
-  .language-selector {
-    max-width: 120px;
+  .navbar-login-btn {
+    padding: 6px 12px;
+    font-size: 13px;
+  }
+
+  /* Navbar language selector: show as single compact icon on mobile */
+  .navbar .language-selector {
+    max-width: none;
+    padding: 6px;
+    gap: 0;
+    min-width: auto;
+    justify-content: center;
+  }
+
+  .navbar .language-selector .language-text,
+  .navbar .language-selector .language-flag {
+    display: none;
+  }
+
+  .navbar .language-selector::before {
+    content: "🌐";
+    font-size: 18px;
+    line-height: 1;
+  }
+
+  /* On very small screens, KEEP the language control visible in the top bar
+     and do not show the separate mobile wrapper. */
+  .navbar-language-desktop {
+    display: block;
+  }
+
+  .navbar-mobile-language-wrapper {
+    display: none;
   }
 }
 
