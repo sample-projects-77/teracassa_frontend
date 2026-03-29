@@ -1,11 +1,11 @@
-# TerraCasa Project Review
+# SunHouses Project Review
 
 ## Overview
-This document provides a comprehensive review of both the TerraCasa Frontend and Backend applications.
+This document provides a comprehensive review of both the SunHouses Frontend and Backend applications.
 
 ---
 
-## 🎨 Frontend Application (TerraCasa_Frontend)
+## 🎨 Frontend Application (`teracassa_frontend`)
 
 ### Technology Stack
 - **Framework**: React 19.2.0
@@ -119,7 +119,7 @@ src/
 
 ---
 
-## 🔧 Backend Application (TerraCasa_Backend)
+## 🔧 Backend Application (`Teracassa`)
 
 ### Technology Stack
 - **Runtime**: Node.js
@@ -491,7 +491,7 @@ According to `API_IMPLEMENTATION_STATUS.md`:
 
 ### Frontend Setup
 ```bash
-cd TerraCasa_Frontend
+cd teracassa_frontend
 npm install
 # Create .env file with VITE_API_BASE_URL=http://localhost:5002/api
 npm run dev
@@ -499,7 +499,7 @@ npm run dev
 
 ### Backend Setup
 ```bash
-cd TerraCasa_Backend
+cd Teracassa
 npm install
 # Create .env file with:
 #   MONGO_URI=your_mongodb_connection_string
@@ -554,9 +554,9 @@ npm run dev
 
 ## 📚 Documentation
 
-- Frontend README: `TerraCasa_Frontend/README.md`
-- Backend README: `TerraCasa_Backend/README.md`
-- API Status: `TerraCasa_Backend/API_IMPLEMENTATION_STATUS.md`
+- Frontend README: `teracassa_frontend/README.md`
+- Backend README: `Teracassa/README.md`
+- API Status: `Teracassa/API_IMPLEMENTATION_STATUS.md`
 - This Review: `PROJECT_REVIEW.md`
 
 ---

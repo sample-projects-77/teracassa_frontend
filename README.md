@@ -1,6 +1,6 @@
-# TerraCasa Frontend
+# SunHouses Frontend
 
-React frontend application for TerraCasa real estate platform.
+React frontend application for the SunHouses real estate platform.
 
 ## Setup
 

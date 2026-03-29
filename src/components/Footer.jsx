@@ -11,7 +11,7 @@ const Footer = () => {
         <div className="footer-content">
           {/* Branding Section */}
           <div className="footer-section footer-branding">
-            <h3 className="footer-logo">TerraCasa</h3>
+            <h3 className="footer-logo">SunHouses</h3>
             <p className="footer-tagline">
               {t('footer.tagline')}
             </p>

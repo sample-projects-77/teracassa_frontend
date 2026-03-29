@@ -40,7 +40,7 @@ const Navbar = () => {
       <header className={`navbar ${isScrolled ? 'scrolled' : ''} ${menuOpen ? 'menu-open' : ''}`}>
         <div className="navbar-container">
           <Link to="/" className="navbar-logo">
-            TerraCasa
+            SunHouses
           </Link>
 
           <button

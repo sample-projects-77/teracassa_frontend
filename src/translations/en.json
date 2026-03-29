@@ -28,7 +28,7 @@
     "heroDescription": "Understand land and people – Get one step closer to your international home: Dive deep into your desired lifestyle. We provide you with all the information you need to plan thoroughly – from the best regions for your investment to the cultural nuances of your future everyday life. This way, you also gain relevant insights into the local real estate market – long before you invest.",
     "selectDesiredCountry": "Select Desired Country",
     "whyInvest": "Why invest in {country}?",
-    "advantagesTitle": "Your advantages with TerraCasa",
+    "advantagesTitle": "Your advantages with SunHouses",
     "verifiedOffers": "Verified Offers",
     "verifiedOffersDesc": "All properties are verified by us",
     "expertNetwork": "Expert Network",
@@ -57,7 +57,7 @@
   "home": {
     "heroTitle": "Discover. Invest. Live.",
     "heroSubtitle": "A platform that is more than a property search: We offer you security and complete support on your way to your international home.",
-    "whyUnique": "Why TerraCasa is unique:",
+    "whyUnique": "Why SunHouses is unique:",
     "buyingAbroad": "When buying abroad, we stand by your side. We take away your biggest worries and risks by creating trust through transparency:",
     "verifiedSecurity": "Verified Security:",
     "verifiedSecurityDesc": "Every property and every seller is thoroughly checked. From property deeds to identity - we verify the data so you don't have to.",
@@ -106,7 +106,7 @@
     "priceDescending": "Price descending",
     "topOffers": "Top offers",
     "searchProperties": "Search Properties",
-    "moreTopProperties": "More Top Properties from TerraCasa",
+    "moreTopProperties": "More Top Properties from SunHouses",
     "sortBy": "Sort by",
     "new": "New",
     "top": "Top",
@@ -220,10 +220,10 @@
     "anonymous": "Anonymous"
   },
   "about": {
-    "heroTitle": "About TerraCasa",
+    "heroTitle": "About SunHouses",
     "heroSubtitle": "More than a platform – The secure foundation for international life dreams.",
     "ourMission": "Our Mission",
-    "missionText": "Buying an international property should be a journey of trust. At TerraCasa, we understand that you're not just buying a house, but realizing a dream. That's why we offer you not just a platform, but a comprehensive knowledge base that helps you learn about countries and cultures – with knowledge and maximum security.",
+    "missionText": "Buying an international property should be a journey of trust. At SunHouses, we understand that you're not just buying a house, but realizing a dream. That's why we offer you not just a platform, but a comprehensive knowledge base that helps you learn about countries and cultures – with knowledge and maximum security.",
     "ourVision": "Our Vision",
     "visionIntro": "We are revolutionizing international real estate purchases by removing the biggest hurdles:",
     "securityThroughVerification": "Security through Verification:",
@@ -232,7 +232,7 @@
     "fullSupportText": "We ensure that you are not alone. We connect you with a vetted network of local lawyers, notaries, and experts who guide you through every step in your language and according to local law.",
     "knowledgeBeforeInvestment": "Knowledge before Investment:",
     "knowledgeText": "We provide you with the best and most intelligent search criteria to precisely find what you are looking for, and we deliver all relevant market and lifestyle information.",
-    "visionConclusion": "TerraCasa is the secure bridge between your dream and your international home.",
+    "visionConclusion": "SunHouses is the secure bridge between your dream and your international home.",
     "ourValues": "Our Values",
     "valuesSubtitle": "What drives us and how we work",
     "thinkGlobally": "Think globally",
@@ -266,7 +266,7 @@
     "fillRequiredFields": "Please fill in name, email and message."
   },
   "auth": {
-    "welcomeTitle": "Welcome to TerraCasa",
+    "welcomeTitle": "Welcome to SunHouses",
     "welcomeSubtitle": "Your access to international real estate",
     "tabs": {
       "login": "Login",
@@ -514,7 +514,7 @@
     "newsletterDescription": "Stay informed about new properties and market trends",
     "yourEmail": "Your E-Mail",
     "subscribe": "Subscribe",
-    "copyright": "© 2025 TerraCasa. All rights reserved."
+    "copyright": "© 2025 SunHouses. All rights reserved."
   }
 }
 

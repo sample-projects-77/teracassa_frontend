@@ -26,7 +26,7 @@
     "heroDescription": "Ülkeyi ve insanları anlamak – Uluslararası evinize bir adım daha yakın: İstediğiniz yaşam tarzına derinlemesine dalın. Size kapsamlı bir şekilde planlama yapmanız için gereken tüm bilgileri sunuyoruz – yatırımınız için en iyi bölgelerden gelecekteki günlük hayatınızın kültürel nüanslarına kadar. Bu şekilde, yatırım yapmadan çok önce yerel emlak piyasası hakkında da ilgili bilgiler edinirsiniz.",
     "selectDesiredCountry": "İstenen Ülkeyi Seç",
     "whyInvest": "{country}'ye neden yatırım yapmalısınız?",
-    "advantagesTitle": "TerraCasa ile avantajlarınız",
+    "advantagesTitle": "SunHouses ile avantajlarınız",
     "verifiedOffers": "Doğrulanmış Teklifler",
     "verifiedOffersDesc": "Tüm emlaklar tarafımızca doğrulanır",
     "expertNetwork": "Uzman Ağı",
@@ -55,7 +55,7 @@
   "home": {
     "heroTitle": "Keşfet. Yatırım Yap. Yaşa.",
     "heroSubtitle": "Bir emlak aramasından daha fazlası olan bir platform: Size uluslararası evinize giden yolda güvenlik ve tam destek sunuyoruz.",
-    "whyUnique": "TerraCasa neden benzersiz:",
+    "whyUnique": "SunHouses neden benzersiz:",
     "buyingAbroad": "Yurtdışında satın alırken yanınızdayız. Şeffaflık yoluyla güven oluşturarak en büyük endişelerinizi ve risklerinizi ortadan kaldırıyoruz:",
     "verifiedSecurity": "Doğrulanmış Güvenlik:",
     "verifiedSecurityDesc": "Her emlak ve her satıcı kapsamlı bir şekilde kontrol edilir. Emlak senetlerinden kimliğe kadar – verileri doğruluyoruz, böylece sizin yapmanıza gerek kalmaz.",
@@ -104,7 +104,7 @@
     "priceDescending": "Fiyat azalan",
     "topOffers": "En iyi teklifler",
     "searchProperties": "Emlak Ara",
-    "moreTopProperties": "TerraCasa'dan Daha Fazla Top Emlak",
+    "moreTopProperties": "SunHouses'tan Daha Fazla Top Emlak",
     "sortBy": "Sırala",
     "new": "Yeni",
     "top": "Top",
@@ -218,10 +218,10 @@
     "constructionCompany": "İnşaat Şirketi"
   },
   "about": {
-    "heroTitle": "TerraCasa Hakkında",
+    "heroTitle": "SunHouses Hakkında",
     "heroSubtitle": "Bir platformdan fazlası – Uluslararası yaşam rüyaları için güvenli temel.",
     "ourMission": "Misyonumuz",
-    "missionText": "Uluslararası bir emlak satın almak güven yolculuğu olmalı. TerraCasa'da, sadece bir ev satın almadığınızı, aynı zamanda bir rüyayı gerçekleştirdiğinizi anlıyoruz. Bu yüzden size sadece bir platform değil, ülkeler ve kültürler hakkında öğrenmenize yardımcı olan kapsamlı bir bilgi tabanı sunuyoruz – bilgi ve maksimum güvenlikle.",
+    "missionText": "Uluslararası bir emlak satın almak güven yolculuğu olmalı. SunHouses'ta, sadece bir ev satın almadığınızı, aynı zamanda bir rüyayı gerçekleştirdiğinizi anlıyoruz. Bu yüzden size sadece bir platform değil, ülkeler ve kültürler hakkında öğrenmenize yardımcı olan kapsamlı bir bilgi tabanı sunuyoruz – bilgi ve maksimum güvenlikle.",
     "ourVision": "Vizyonumuz",
     "visionIntro": "En büyük engelleri kaldırarak uluslararası emlak satın alımlarını devrim yapıyoruz:",
     "securityThroughVerification": "Doğrulama ile Güvenlik:",
@@ -230,7 +230,7 @@
     "fullSupportText": "Yalnız olmadığınızdan emin oluyoruz. Sizi, her adımda sizi kendi dilinizde ve yerel yasaya göre yönlendirecek yerel avukatlar, noterler ve uzmanlardan oluşan doğrulanmış bir ağa bağlıyoruz.",
     "knowledgeBeforeInvestment": "Yatırımdan Önce Bilgi:",
     "knowledgeText": "Size tam olarak aradığınızı bulmak için en iyi ve en akıllı arama kriterlerini sağlıyoruz ve tüm ilgili pazar ve yaşam tarzı bilgilerini sunuyoruz.",
-    "visionConclusion": "TerraCasa, rüyanız ve uluslararası eviniz arasındaki güvenli köprüdür.",
+    "visionConclusion": "SunHouses, rüyanız ve uluslararası eviniz arasındaki güvenli köprüdür.",
     "ourValues": "Değerlerimiz",
     "valuesSubtitle": "Bizi ne motive ediyor ve nasıl çalışıyoruz",
     "thinkGlobally": "Küresel düşün",
@@ -264,7 +264,7 @@
     "fillRequiredFields": "Lütfen ad, e-posta ve mesaj alanlarını doldurun."
   },
   "auth": {
-    "welcomeTitle": "TerraCasa'ya Hoş Geldiniz",
+    "welcomeTitle": "SunHouses'a Hoş Geldiniz",
     "welcomeSubtitle": "Uluslararası gayrimenkule erişiminiz",
     "tabs": {
       "login": "Giriş Yap",
@@ -512,7 +512,7 @@
     "newsletterDescription": "Yeni mülkler ve piyasa trendleri hakkında bilgi alın",
     "yourEmail": "E-postanız",
     "subscribe": "Abone ol",
-    "copyright": "© 2025 TerraCasa. Tüm hakları saklıdır."
+    "copyright": "© 2025 SunHouses. Tüm hakları saklıdır."
   }
 }
 

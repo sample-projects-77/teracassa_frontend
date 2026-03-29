@@ -1,4 +1,4 @@
-# TerraCasa Frontend Setup Guide
+# SunHouses Frontend Setup Guide
 
 ## Quick Start
 
@@ -25,7 +25,7 @@
 
 ## Backend Connection
 
-The frontend is configured to connect to the TerraCasa backend API. Make sure:
+The frontend is configured to connect to the SunHouses backend API. Make sure:
 
 - Backend is running on `http://localhost:5000`
 - CORS is enabled in the backend
