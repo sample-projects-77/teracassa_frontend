@@ -127,7 +127,7 @@
   letter-spacing: var(--ls-wide);
 }
 
-.search-field input,
+.search-field input:not([type="checkbox"]),
 .search-field select {
   height: 42px;
   padding: 0 var(--space-3);
@@ -144,7 +144,7 @@
   -webkit-appearance: none;
 }
 
-.search-field input:focus,
+.search-field input:not([type="checkbox"]):focus,
 .search-field select:focus {
   border-color: var(--clr-ocean);
   box-shadow: 0 0 0 3px rgba(36,113,163,0.12);
@@ -169,6 +169,8 @@
 }
 
 .checkbox-label input[type="checkbox"] {
+  appearance: checkbox;
+  -webkit-appearance: checkbox;
   width: 16px;
   height: 16px;
   accent-color: var(--clr-ocean);
