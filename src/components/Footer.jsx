@@ -1,5 +1,12 @@
 import { Link } from 'react-router-dom';
 import { useTranslation } from '../context/TranslationContext';
+import {
+  MapPin, Building2, Users, UserPlus,
+  HelpCircle, Mail, Shield, FileText,
+  Globe, Share2, ExternalLink, AtSign,
+  ArrowRight
+} from 'lucide-react';
+import logoImg from '../assets/logo.png';
 import './Footer.css';
 
 const Footer = () => {
@@ -7,67 +14,136 @@ const Footer = () => {
 
   return (
     <footer className="footer">
-      <div className="footer-container">
-        <div className="footer-content">
-          {/* Branding Section */}
-          <div className="footer-section footer-branding">
-            <h3 className="footer-logo">SunHouses</h3>
-            <p className="footer-tagline">
-              {t('footer.tagline')}
-            </p>
-          </div>
+      {/* Top accent */}
+      <div className="footer__accent" />
 
-          {/* Discover Section */}
-          <div className="footer-section">
-            <h4 className="footer-heading">{t('footer.discover')}</h4>
-            <ul className="footer-links">
-              <li><Link to="/countries">{t('common.countries')}</Link></li>
-              <li><Link to="/properties">{t('common.properties')}</Link></li>
-              <li><Link to="/network">{t('common.network')}</Link></li>
-              <li><Link to="/signup">{t('footer.becomeAPartner')}</Link></li>
-            </ul>
-          </div>
+      <div className="footer__body">
+        <div className="footer__container">
+          <div className="footer__grid">
 
-          {/* Help & Support Section */}
-          <div className="footer-section">
-            <h4 className="footer-heading">{t('footer.helpSupport')}</h4>
-            <ul className="footer-links">
-              <li><Link to="/faq">{t('footer.faq')}</Link></li>
-              <li><Link to="/contact">{t('footer.contact')}</Link></li>
-              <li><Link to="/privacy">{t('footer.dataProtection')}</Link></li>
-              <li><Link to="/terms">{t('footer.termsAndConditions')}</Link></li>
-            </ul>
-          </div>
+            {/* Branding */}
+            <div className="footer__brand">
+              <div className="footer__logo">
+                <img src={logoImg} alt="SunHouses" className="footer__logo-img" />
+              </div>
+              <p className="footer__tagline">{t('footer.tagline')}</p>
 
-          {/* Newsletter Section */}
-          <div className="footer-section footer-newsletter">
-            <h4 className="footer-heading">{t('footer.newsletter')}</h4>
-            <p className="newsletter-description">
-              {t('footer.newsletterDescription')}
-            </p>
-            <form className="newsletter-form" onSubmit={(e) => e.preventDefault()}>
-              <input
-                type="email"
-                placeholder={t('footer.yourEmail')}
-                className="newsletter-input"
-                required
-              />
-              <button type="submit" className="newsletter-button" aria-label={t('footer.subscribe')}>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                  <polyline points="22,6 12,13 2,6"/>
-                </svg>
-              </button>
-            </form>
+              <div className="footer__socials">
+                <a href="#" className="footer__social" aria-label="Instagram" rel="noopener noreferrer">
+                  <Globe size={18} strokeWidth={1.6} />
+                </a>
+                <a href="#" className="footer__social" aria-label="Facebook" rel="noopener noreferrer">
+                  <Share2 size={18} strokeWidth={1.6} />
+                </a>
+                <a href="#" className="footer__social" aria-label="LinkedIn" rel="noopener noreferrer">
+                  <ExternalLink size={18} strokeWidth={1.6} />
+                </a>
+                <a href="#" className="footer__social" aria-label="Twitter / X" rel="noopener noreferrer">
+                  <AtSign size={18} strokeWidth={1.6} />
+                </a>
+              </div>
+            </div>
+
+            {/* Discover */}
+            <div className="footer__column">
+              <h4 className="footer__heading">{t('footer.discover')}</h4>
+              <ul className="footer__links">
+                <li>
+                  <Link to="/countries" className="footer__link">
+                    <MapPin size={14} strokeWidth={1.6} />
+                    {t('common.countries')}
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/properties" className="footer__link">
+                    <Building2 size={14} strokeWidth={1.6} />
+                    {t('common.properties')}
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/network" className="footer__link">
+                    <Users size={14} strokeWidth={1.6} />
+                    {t('common.network')}
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/signup" className="footer__link">
+                    <UserPlus size={14} strokeWidth={1.6} />
+                    {t('footer.becomeAPartner')}
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            {/* Help */}
+            <div className="footer__column">
+              <h4 className="footer__heading">{t('footer.helpSupport')}</h4>
+              <ul className="footer__links">
+                <li>
+                  <Link to="/faq" className="footer__link">
+                    <HelpCircle size={14} strokeWidth={1.6} />
+                    {t('footer.faq')}
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/contact" className="footer__link">
+                    <Mail size={14} strokeWidth={1.6} />
+                    {t('footer.contact')}
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/privacy" className="footer__link">
+                    <Shield size={14} strokeWidth={1.6} />
+                    {t('footer.dataProtection')}
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/terms" className="footer__link">
+                    <FileText size={14} strokeWidth={1.6} />
+                    {t('footer.termsAndConditions')}
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            {/* Newsletter */}
+            <div className="footer__newsletter">
+              <h4 className="footer__heading">{t('footer.newsletter')}</h4>
+              <p className="footer__newsletter-desc">{t('footer.newsletterDescription')}</p>
+              <form className="footer__newsletter-form" onSubmit={(e) => e.preventDefault()}>
+                <input
+                  type="email"
+                  placeholder={t('footer.yourEmail')}
+                  className="footer__newsletter-input"
+                  required
+                  aria-label={t('footer.yourEmail')}
+                />
+                <button
+                  type="submit"
+                  className="footer__newsletter-btn"
+                  aria-label={t('footer.subscribe')}
+                >
+                  <ArrowRight size={18} strokeWidth={2} />
+                </button>
+              </form>
+              <p className="footer__newsletter-note">
+                {t('footer.newsletterNote') || 'Mediterranean lifestyle & property insights.'}
+              </p>
+            </div>
+
           </div>
         </div>
+      </div>
 
-        {/* Copyright Section */}
-        <div className="footer-bottom">
-          <div className="footer-separator"></div>
-          <p className="footer-copyright">
-            {t('footer.copyright')}
-          </p>
+      {/* Bottom bar */}
+      <div className="footer__bottom">
+        <div className="footer__container footer__bottom-inner">
+          <p className="footer__copyright">{t('footer.copyright')}</p>
+          <div className="footer__bottom-links">
+            <Link to="/privacy" className="footer__bottom-link">{t('footer.dataProtection')}</Link>
+            <span className="footer__bottom-sep">·</span>
+            <Link to="/terms" className="footer__bottom-link">{t('footer.termsAndConditions')}</Link>
+          </div>
         </div>
       </div>
     </footer>
@@ -75,4 +151,3 @@ const Footer = () => {
 };
 
 export default Footer;
-

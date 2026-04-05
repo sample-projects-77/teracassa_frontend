@@ -16,6 +16,62 @@ export const searchProperties = async (filters = {}, page = 1, itemsPerPage = 6)
     if (filters.minAreaSqm) params.append('minAreaSqm', filters.minAreaSqm);
     if (filters.maxAreaSqm) params.append('maxAreaSqm', filters.maxAreaSqm);
     if (filters.sort) params.append('sort', filters.sort);
+
+    // String filters
+    const stringFilters = [
+      'district', 'currency', 'features', 'q', 'keywords', 'condition', 'cellar', 'pool',
+      'furnishing', 'security24h', 'accessible', 'heatingType', 'seaLakeView',
+      'directWaterfront', 'beachAccess', 'foreignersCanBuy', 'secondHomeAllowed',
+      'localAdvisorRecommended', 'popularWith', 'currentlyRented', 'energyCertificateClass',
+      'publicTransport', 'internetQuality', 'taxBenefits', 'localFinancingOptions',
+      'propertyManagementAvailable', 'availability', 'solarSystem',
+    ];
+    stringFilters.forEach(key => {
+      if (filters[key]) params.append(key, filters[key]);
+    });
+
+    // Integer filters
+    const intFilters = [
+      'minYearBuilt', 'maxYearBuilt', 'minBathrooms', 'maxBathrooms',
+      'minLivingAreaSqm', 'maxLivingAreaSqm', 'minPlotAreaSqm', 'maxPlotAreaSqm',
+      'minGarageSpaces', 'maxGarageSpaces', 'minBalconyTerraceCount', 'maxBalconyTerraceCount',
+      'minAirConditioningRooms', 'maxAirConditioningRooms',
+      'minDetailsBathrooms', 'maxDetailsBathrooms',
+      'minBathroomsWithToilet', 'maxBathroomsWithToilet',
+      'minSeparateToilets', 'maxSeparateToilets',
+      'minDetailsYearBuilt', 'maxDetailsYearBuilt',
+    ];
+    intFilters.forEach(key => {
+      if (filters[key]) params.append(key, filters[key]);
+    });
+
+    // Number (float) filters
+    const numberFilters = [
+      'minLandRegistryAreaSqm', 'maxLandRegistryAreaSqm',
+      'minEnergyConsumptionKwhPerSqmA', 'maxEnergyConsumptionKwhPerSqmA',
+      'minExpectedYieldPercent', 'maxExpectedYieldPercent',
+      'maxDistanceToBeachMeters', 'maxDistanceToSkiKm', 'maxDistanceToMarinaKm',
+      'maxDistanceToGolfKm', 'maxDistanceToTennisKm', 'maxDistanceToAirportMinutes',
+      'maxDistanceToSightsMinutes', 'maxDistanceToRestaurantsMinutes',
+      'maxDistanceToSupermarketMinutes', 'maxDistanceToMallMinutes',
+      'maxDistanceToDoctorsMinutes', 'maxDistanceToHospitalMinutes',
+      'maxDistanceToSchoolsMinutes',
+    ];
+    numberFilters.forEach(key => {
+      if (filters[key]) params.append(key, filters[key]);
+    });
+
+    // Boolean filters (only append when explicitly set to true/false)
+    const boolFilters = [
+      'allYearHabitable', 'expatFriendly', 'digitalNomadFriendly', 'petFriendly',
+      'familyFriendly', 'audienceSeniorFriendly', 'airbnbReady',
+      'caretakerService', 'detailsSeniorFriendly',
+    ];
+    boolFilters.forEach(key => {
+      if (filters[key] === true || filters[key] === false) {
+        params.append(key, filters[key]);
+      }
+    });
     
     // Add pagination parameters
     params.append('page', page.toString());
