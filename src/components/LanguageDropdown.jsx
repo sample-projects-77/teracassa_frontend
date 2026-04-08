@@ -5,12 +5,12 @@ import { updateUserLanguage } from '../services/profileService';
 import './LanguageDropdown.css';
 
 const languages = [
-  { code: 'ar', flag: 'SA', name: 'Arabic', nativeName: 'العربية (AR)' },
+  { code: 'en', flag: 'EN', name: 'English', nativeName: 'English (EN)' },
   { code: 'de', flag: 'DE', name: 'Deutsch', nativeName: 'Deutsch (DE)' },
-  { code: 'en', flag: 'GB', name: 'English', nativeName: 'English (EN)' },
   { code: 'es', flag: 'ES', name: 'Español', nativeName: 'Español (ES)' },
   { code: 'fr', flag: 'FR', name: 'Français', nativeName: 'Français (FR)' },
   { code: 'ru', flag: 'RU', name: 'Русский', nativeName: 'Русский (RU)' },
+  { code: 'ar', flag: 'SA', name: 'Arabic', nativeName: 'العربية (SA)' },
   { code: 'tr', flag: 'TR', name: 'Türkçe', nativeName: 'Türkçe (TR)' },
 ];
 
@@ -97,8 +97,7 @@ const LanguageDropdown = () => {
         onClick={() => setIsOpen(!isOpen)}
         disabled={isUpdating}
       >
-        <span className="language-flag">{currentLanguage.flag}</span>
-        <span className="language-text">{currentLanguage.nativeName}</span>
+        <span className="language-text">{currentLanguage.flag}</span>
         <span className="dropdown-arrow">{isOpen ? '▲' : '▼'}</span>
       </button>
       
@@ -117,7 +116,6 @@ const LanguageDropdown = () => {
                 <span className="checkmark">✓</span>
               )}
               <span className="language-option-flag">{language.flag}</span>
-              <span className="language-option-text">{language.nativeName}</span>
             </button>
           ))}
         </div>

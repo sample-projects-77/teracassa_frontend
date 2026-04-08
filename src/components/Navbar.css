@@ -46,19 +46,23 @@
   max-width: var(--container-2xl);
   margin: 0 auto;
   padding: 0 var(--space-6);
+  padding-left: 180px; /* space reserved for the fixed logo */
   height: 100%;
   display: flex;
   align-items: center;
   gap: var(--space-8);
 }
 
-/* ---- Logo ---- */
+/* ---- Logo (fixed, independent of navbar height) ---- */
 .navbar__logo {
+  position: fixed;
+  top: calc(var(--navbar-height) / 2);
+  left: var(--space-6);
+  transform: translateY(-50%);
+  z-index: 1001;
   display: flex;
   align-items: center;
-  gap: var(--space-2);
   text-decoration: none;
-  flex-shrink: 0;
   transition: opacity var(--duration-fast) var(--ease-out);
 }
 
@@ -67,24 +71,15 @@
 }
 
 .navbar__logo-img {
-  height: 52px;
+  height: 120px;
   width: auto;
   display: block;
   object-fit: contain;
-  transition: filter var(--duration-fast) var(--ease-out), opacity var(--duration-fast) var(--ease-out);
+  transition: filter var(--duration-fast) var(--ease-out);
 }
 
-/* On home page (transparent/dark hero), add a white glow to keep logo visible */
-.navbar--home .navbar__logo-img {
-  filter: brightness(0) invert(1) drop-shadow(0 1px 6px rgba(0,0,0,0.25));
-}
-
-.navbar--home.navbar--scrolled .navbar__logo-img {
-  filter: brightness(0) invert(1) drop-shadow(0 1px 4px rgba(0,0,0,0.2));
-}
-
-/* On regular pages, show natural logo */
-.navbar--page .navbar__logo-img {
+.navbar__logo--home .navbar__logo-img,
+.navbar__logo--page .navbar__logo-img {
   filter: none;
 }
 

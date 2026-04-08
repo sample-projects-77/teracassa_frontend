@@ -28,7 +28,7 @@
 .home__hero-bg {
   position: absolute;
   inset: 0;
-  background-image: url('https://images.unsplash.com/photo-1601918774946-25832a4be0d6?w=2000&q=85&auto=format&fit=crop');
+  background-image: url('../assets/home.png');
   background-size: cover;
   background-position: center 40%;
   background-repeat: no-repeat;
@@ -363,14 +363,14 @@
   color: var(--clr-charcoal);
   letter-spacing: -0.02em;
   line-height: var(--lh-tight);
-  max-width: 560px;
+  max-width: 100%;
 }
 
 .home__section-subtitle {
   font-size: var(--text-lg);
   color: var(--clr-slate);
   line-height: var(--lh-relaxed);
-  max-width: 560px;
+  max-width: 100%;
 }
 
 .home__section-subtitle--center {
