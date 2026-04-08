@@ -133,7 +133,7 @@
   --container-xl:   1200px;
   --container-2xl:  1400px;
 
-  --navbar-height: 72px;
+  --navbar-height: 90px;
 }
 
 /* ---- Reset & Base ----------------------------------------- */
@@ -309,16 +309,16 @@ input, select, textarea {
 }
 
 .btn-primary {
-  background: var(--clr-deep);
+  background: var(--clr-gold);
   color: var(--clr-warm-white);
-  box-shadow: 0 2px 8px rgba(10, 30, 48, 0.22);
+  box-shadow: var(--shadow-gold);
 }
 
 .btn-primary:hover:not(:disabled) {
-  background: var(--clr-navy);
+  background: #b8882e;
   color: var(--clr-warm-white);
   transform: translateY(-1px);
-  box-shadow: 0 4px 16px rgba(10, 30, 48, 0.28);
+  box-shadow: 0 6px 24px rgba(199, 154, 58, 0.42);
 }
 
 .btn-primary:active:not(:disabled) {
@@ -326,14 +326,15 @@ input, select, textarea {
 }
 
 .btn-secondary {
-  background: transparent;
-  color: var(--clr-deep);
+  background: var(--clr-deep);
+  color: var(--clr-gold-light);
   border: 1.5px solid var(--clr-deep);
 }
 
 .btn-secondary:hover:not(:disabled) {
-  background: var(--clr-deep);
-  color: var(--clr-warm-white);
+  background: var(--clr-navy);
+  color: var(--clr-gold-light);
+  border-color: var(--clr-navy);
   transform: translateY(-1px);
 }
 
@@ -549,7 +550,7 @@ input, select, textarea {
 /* ---- Responsive helpers ----------------------------------- */
 @media (max-width: 768px) {
   :root {
-    --navbar-height: 64px;
+    --navbar-height: 74px;
   }
   h1 { font-size: var(--text-4xl); }
   h2 { font-size: var(--text-3xl); }

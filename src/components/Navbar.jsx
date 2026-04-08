@@ -52,6 +52,15 @@ const Navbar = () => {
 
   return (
     <>
+      {/* Logo — fixed independently so navbar height does not constrain it */}
+      <Link
+        to="/"
+        className={`navbar__logo ${isHomePage ? 'navbar__logo--home' : 'navbar__logo--page'}`}
+        aria-label="SunHouses home"
+      >
+        <img src={logoImg} alt="SunHouses" className="navbar__logo-img" />
+      </Link>
+
       <header
         className={[
           'navbar',
@@ -61,11 +70,6 @@ const Navbar = () => {
         ].filter(Boolean).join(' ')}
       >
         <div className="navbar__inner">
-          {/* Logo */}
-          <Link to="/" className="navbar__logo" aria-label="SunHouses home">
-            <img src={logoImg} alt="SunHouses" className="navbar__logo-img" />
-          </Link>
-
           {/* Desktop nav */}
           <nav className="navbar__nav" role="navigation" aria-label="Main navigation">
             {navLinks.map(({ to, label }) => (
