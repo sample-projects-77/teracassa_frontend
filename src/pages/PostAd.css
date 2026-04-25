@@ -4,8 +4,23 @@
 
 .post-ad-container {
   min-height: 100vh;
-  background: var(--clr-ivory);
+  background:
+    linear-gradient(rgba(247, 244, 238, 0.84), rgba(247, 244, 238, 0.9)),
+    url('../assets/home.png') center top / cover no-repeat fixed;
   padding-top: var(--navbar-height);
+  position: relative;
+  isolation: isolate;
+}
+
+.post-ad-container::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(ellipse at left center, rgba(10, 30, 48, 0.14) 0%, transparent 55%),
+    radial-gradient(ellipse at right center, rgba(10, 30, 48, 0.12) 0%, transparent 58%);
+  pointer-events: none;
 }
 
 /* ---- Auth Required Modal ---- */
@@ -155,7 +170,7 @@
   background: var(--clr-warm-white);
   border-radius: var(--radius-lg);
   border: 1px solid var(--clr-border-light);
-  padding: var(--space-7);
+  padding: var(--space-10);
   box-shadow: var(--shadow-sm);
 }
 
@@ -166,11 +181,6 @@
   margin-bottom: var(--space-6);
   padding-bottom: var(--space-4);
   border-bottom: 1px solid var(--clr-border-light);
-}
-
-/* When form-grid is the very first child (no section-header above it) */
-.form-section > .form-grid:first-child {
-  /* already padded by the parent form-section padding */
 }
 
 .section-icon {
@@ -196,14 +206,15 @@
 .form-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-5);
+  row-gap: var(--space-5);
+  column-gap: var(--space-10);
   align-items: start;
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: var(--space-1);
+  gap: var(--space-2);
   min-width: 0; /* prevent grid blowout */
 }
 
@@ -215,12 +226,16 @@
   font-size: var(--text-sm);
   font-weight: var(--fw-semibold);
   color: var(--clr-slate);
+  line-height: 1.35;
+  min-height: 3.2em;
+  display: flex;
+  align-items: flex-end;
 }
 
 .form-group input,
 .form-group select,
 .form-group textarea {
-  padding: 0.65rem var(--space-3);
+  padding: 0.75rem var(--space-3);
   background: var(--clr-surface);
   border: 1.5px solid var(--clr-border);
   border-radius: var(--radius-sm);
@@ -231,6 +246,7 @@
               box-shadow var(--duration-fast) var(--ease-out);
   outline: none;
   width: 100%;
+  min-height: 44px;
 }
 
 .form-group input:focus,
@@ -251,7 +267,7 @@
 }
 
 .form-group textarea {
-  min-height: 120px;
+  min-height: 96px;
   resize: vertical;
   line-height: var(--lh-relaxed);
 }
@@ -267,12 +283,14 @@
   margin-top: 2px;
 }
 
-/* ---- Price Range ---- */
+/* ---- Price Input ---- */
+.price-input,
 .price-range {
   display: flex;
   gap: var(--space-3);
 }
 
+.price-input input,
 .price-range input {
   flex: 1;
   min-width: 0;
@@ -417,7 +435,7 @@
   background: var(--clr-warm-white);
   border-radius: var(--radius-lg);
   border: 1px solid var(--clr-border-light);
-  padding: var(--space-7);
+  padding: 6px;
   box-shadow: var(--shadow-sm);
 }
 
@@ -555,6 +573,11 @@
 }
 
 @media (max-width: 768px) {
+  .post-ad-container {
+    background-attachment: scroll;
+    background-position: center top;
+  }
+
   .post-ad-hero {
     padding: var(--space-10) var(--space-4) var(--space-8);
   }
@@ -592,6 +615,7 @@
     grid-template-columns: repeat(3, 1fr);
   }
 
+  .price-input,
   .price-range,
   .two-inputs,
   .energy-cert-grid {

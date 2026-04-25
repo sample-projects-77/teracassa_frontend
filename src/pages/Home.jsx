@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { useEffect } from 'react';
+import { Fragment, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { useTranslation } from '../context/TranslationContext';
@@ -13,6 +13,20 @@ import './Home.css';
 
 const Home = () => {
   const { t } = useTranslation();
+
+  const renderWithCommonAmpersand = (text) => {
+    if (typeof text !== 'string' || !text.includes('&')) {
+      return text;
+    }
+
+    const segments = text.split('&');
+    return segments.map((segment, index) => (
+      <Fragment key={`${segment}-${index}`}>
+        {segment}
+        {index < segments.length - 1 && <span className="home__common-ampersand">&amp;</span>}
+      </Fragment>
+    ));
+  };
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' });
@@ -130,7 +144,7 @@ const Home = () => {
                 <div className="home__feature-card-icon">
                   <Icon size={26} strokeWidth={1.5} />
                 </div>
-                <h3 className="home__feature-card-title">{title}</h3>
+                <h3 className="home__feature-card-title">{renderWithCommonAmpersand(title)}</h3>
                 <p className="home__feature-card-desc">{desc}</p>
                 <div className="home__feature-card-arrow">
                   <ArrowRight size={16} strokeWidth={2} />
@@ -204,8 +218,8 @@ const Home = () => {
       <section className="home__resources">
         <div className="home__container">
           <div className="home__section-head home__section-head--center">
-            <span className="section-label">{t('home.tipsGuides')}</span>
-            <h2 className="home__section-title">{t('home.tipsGuides')}</h2>
+            <span className="section-label">{renderWithCommonAmpersand(t('home.tipsGuides'))}</span>
+            <h2 className="home__section-title">{renderWithCommonAmpersand(t('home.tipsGuides'))}</h2>
             <p className="home__section-subtitle home__section-subtitle--center">
               {t('home.tipsSubtitle')}
             </p>
@@ -217,7 +231,7 @@ const Home = () => {
                 <div className="home__resource-icon">
                   <Icon size={24} strokeWidth={1.5} />
                 </div>
-                <h3 className="home__resource-title">{title}</h3>
+                <h3 className="home__resource-title">{renderWithCommonAmpersand(title)}</h3>
                 <p className="home__resource-desc">{desc}</p>
                 <button className="home__resource-link">
                   {t('common.learnMore') || 'Learn more'}

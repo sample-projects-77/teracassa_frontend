@@ -33,8 +33,7 @@ const PostAd = () => {
     city: '',
     district: '',
     propertyType: '',
-    priceFrom: '',
-    priceTo: '',
+    price: '',
     
     // Property details
     bedrooms: '',
@@ -258,7 +257,7 @@ const PostAd = () => {
     if (!formData.country) errors.country = t('postAd.validation.countryRequired');
     if (!formData.city) errors.city = t('postAd.validation.cityRequired');
     if (!formData.propertyType) errors.propertyType = t('postAd.validation.propertyTypeRequired');
-    if (!formData.priceFrom) errors.priceFrom = t('postAd.validation.priceRequired');
+    if (!formData.price) errors.price = t('postAd.validation.priceRequired');
     if (!formData.bedrooms) errors.bedrooms = t('postAd.validation.bedroomsRequired');
     if (!formData.areaSqm) errors.areaSqm = t('postAd.validation.areaRequired');
 
@@ -315,10 +314,10 @@ const PostAd = () => {
         district: formData.district || undefined,
         propertyType: formData.propertyType,
         price: {
-          amount: parseFloat(formData.priceFrom) || 0,
+          amount: parseFloat(formData.price) || 0,
           currency: 'EUR'
         },
-        priceCents: Math.round((parseFloat(formData.priceFrom) || 0) * 100),
+        priceCents: Math.round((parseFloat(formData.price) || 0) * 100),
         currency: 'EUR',
         bedrooms: formData.bedrooms ? parseInt(formData.bedrooms) : undefined,
         bathrooms: formData.bathrooms ? parseInt(formData.bathrooms) : undefined,
@@ -664,27 +663,50 @@ const PostAd = () => {
               </div>
 
               <div className="form-group">
-                <label>{t('postAd.priceRange')} (€) *</label>
-                <div className="price-range">
+                <label htmlFor="price">{t('postAd.price')} (€) *</label>
+                <div className="price-input">
                   <input
                     type="number"
-                    name="priceFrom"
-                    id="priceFrom"
-                    value={formData.priceFrom}
+                    name="price"
+                    id="price"
+                    value={formData.price}
                     onChange={handleInputChange}
-                    placeholder={t('postAd.priceFrom')}
-                    className={fieldErrors.priceFrom ? 'error-field' : ''}
+                    placeholder={t('postAd.pricePlaceholder')}
+                    className={fieldErrors.price ? 'error-field' : ''}
                     required
                   />
-                  <input
-                    type="number"
-                    name="priceTo"
-                    value={formData.priceTo}
-                    onChange={handleInputChange}
-                    placeholder={t('postAd.priceTo')}
-                  />
                 </div>
-                {fieldErrors.priceFrom && <span className="field-error">{fieldErrors.priceFrom}</span>}
+                {fieldErrors.price && <span className="field-error">{fieldErrors.price}</span>}
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="bedrooms">{t('postAd.bedrooms')} *</label>
+                <input
+                  type="number"
+                  id="bedrooms"
+                  name="bedrooms"
+                  value={formData.bedrooms}
+                  onChange={handleInputChange}
+                  placeholder="z.B. 3"
+                  className={fieldErrors.bedrooms ? 'error-field' : ''}
+                  required
+                />
+                {fieldErrors.bedrooms && <span className="field-error">{fieldErrors.bedrooms}</span>}
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="areaSqm">{t('postAd.area')} (m²) *</label>
+                <input
+                  type="number"
+                  id="areaSqm"
+                  name="areaSqm"
+                  value={formData.areaSqm}
+                  onChange={handleInputChange}
+                  placeholder="z.B. 150"
+                  className={fieldErrors.areaSqm ? 'error-field' : ''}
+                  required
+                />
+                {fieldErrors.areaSqm && <span className="field-error">{fieldErrors.areaSqm}</span>}
               </div>
             </div>
           </div>
@@ -742,42 +764,6 @@ const PostAd = () => {
               )}
             </div>
           </div>
-
-          {/* Property Details Section */}
-          <div className="form-section">
-            <div className="form-grid">
-              <div className="form-group">
-                <label htmlFor="bedrooms">{t('postAd.bedrooms')} *</label>
-                <input
-                  type="number"
-                  id="bedrooms"
-                  name="bedrooms"
-                  value={formData.bedrooms}
-                  onChange={handleInputChange}
-                  placeholder="z.B. 3"
-                  className={fieldErrors.bedrooms ? 'error-field' : ''}
-                  required
-                />
-                {fieldErrors.bedrooms && <span className="field-error">{fieldErrors.bedrooms}</span>}
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="areaSqm">{t('postAd.area')} (m²) *</label>
-                <input
-                  type="number"
-                  id="areaSqm"
-                  name="areaSqm"
-                  value={formData.areaSqm}
-                  onChange={handleInputChange}
-                  placeholder="z.B. 150"
-                  className={fieldErrors.areaSqm ? 'error-field' : ''}
-                  required
-                />
-                {fieldErrors.areaSqm && <span className="field-error">{fieldErrors.areaSqm}</span>}
-              </div>
-            </div>
-          </div>
-
 
           {/* Additional Property Information */}
           <div className="form-section">

@@ -377,6 +377,13 @@
   text-align: center;
 }
 
+/* Keep ampersand glyph simple in serif headings */
+.home__common-ampersand {
+  font-family: var(--font-body);
+  font-style: normal;
+  font-weight: var(--fw-semibold);
+}
+
 .home__trust-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
