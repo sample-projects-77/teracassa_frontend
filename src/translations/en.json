@@ -85,7 +85,20 @@
     "virtualTours": "Virtual Tours",
     "virtualToursDesc": "Experience reports & 360-degree videos",
     "webinarsQa": "Webinars & Q&A",
-    "webinarsQaDesc": "Live sessions with experts"
+    "webinarsQaDesc": "Live sessions with experts",
+    "expertServiceHeadline": "Your personal navigator through the international real estate market.",
+    "expertServiceDescription": "We will not leave you alone in your target country. Use our exclusive support service: our verified experts coordinate the entire purchase process for you - from the first legal review to the handover of keys.",
+    "expertServiceCta": "Learn more about expert service",
+    "purchaseProcessTitle": "Guided Purchase Process",
+    "timelineReservationTitle": "Reservation",
+    "timelineReservationDesc": "SunHouses partner checks the preliminary contract.",
+    "timelineDueDiligenceTitle": "Due diligence",
+    "timelineDueDiligenceDesc": "On-site legal and technical inspection.",
+    "timelinePreparationTitle": "Preparation",
+    "timelinePreparationDesc": "Tax registration numbers, bank account, and powers of attorney.",
+    "timelineCompletionTitle": "Completion",
+    "timelineCompletionDesc": "Accompaniment to the solicitor.",
+    "timelineMessage": "We are by your side every step of the way."
   },
   "properties": {
     "heroTitle": "Search precisely. Invest securely.",
@@ -150,7 +163,7 @@
   },
   "network": {
     "heroTitle": "Your Network. Your Success.",
-    "heroDescription": "Secure your purchase abroad. Connect with our verified network of lawyers, notaries, and architects who will legally and professionally accompany you through every step of the process.",
+    "heroDescription": "Are you looking not just for experts, but for a solution to secure your purchase abroad? Our transaction support offers you a comprehensive, hassle-free package provided by hand-picked preferred partners.",
     "searchTitle": "Local Expertise, Global Trust.",
     "searchInstructions": "Find Your Network Partner: Filter by Country, Service, and Language.",
     "selectCountry": "Select country",
@@ -181,7 +194,12 @@
     "taxAdvisor": "Tax Advisor",
     "financialAdvisor": "Financial Advisor",
     "appraiser": "Appraiser",
-    "constructionCompany": "Construction Company"
+    "constructionCompany": "Construction Company",
+    "expertJoinTitle": "For Experts: Become Part of Our Network",
+    "expertJoinText1": "Shape the future of the global real estate market with us.",
+    "expertJoinText2": "Sunhouses.global is more than a platform - it is a synergy hub for the best in the industry. We connect visionary architects, specialized legal professionals, and first-class real estate experts to execute cross-border transactions at the highest level.",
+    "expertJoinText3": "Become part of a global ecosystem based on trust, excellence, and discreet exchange. Benefit from our international reach and connect with partners who speak your language - professionally and in quality standards.",
+    "expertJoinCta": "Request Partnership Now"
   },
   "contactModal": {
     "title": "Contact Partner",

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { Fragment, useState, useEffect, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -26,6 +26,20 @@ const Countries = () => {
   const languageRef = useRef(currentLanguage);
   const prevLanguageRef = useRef(currentLanguage);
   const navigate = useNavigate();
+
+  const renderWithCommonAmpersand = (text) => {
+    if (typeof text !== 'string' || !text.includes('&')) {
+      return text;
+    }
+
+    const segments = text.split('&');
+    return segments.map((segment, index) => (
+      <Fragment key={`${segment}-${index}`}>
+        {segment}
+        {index < segments.length - 1 && <span className="countries-common-ampersand">&amp;</span>}
+      </Fragment>
+    ));
+  };
 
   // Keep ref in sync with currentLanguage
   useEffect(() => {
@@ -364,7 +378,7 @@ const Countries = () => {
                 <div className="info-card-icon-wrapper">
                   {getIconSVG('lifestyle')}
                 </div>
-                <h3 className="info-card-title">{lifestyleSection.title}</h3>
+                <h3 className="info-card-title">{renderWithCommonAmpersand(lifestyleSection.title)}</h3>
                 <ul className="info-card-list">
                   {lifestyleSection.bulletPoints && lifestyleSection.bulletPoints.length > 0 ? (
                     lifestyleSection.bulletPoints.map((point, index) => (
@@ -395,7 +409,7 @@ const Countries = () => {
                 <div className="info-card-icon-wrapper">
                   {getIconSVG('market')}
                 </div>
-                <h3 className="info-card-title">{propertyMarketSection.title}</h3>
+                <h3 className="info-card-title">{renderWithCommonAmpersand(propertyMarketSection.title)}</h3>
                 <ul className="info-card-list">
                   {propertyMarketSection.bulletPoints && propertyMarketSection.bulletPoints.length > 0 ? (
                     propertyMarketSection.bulletPoints.map((point, index) => (
@@ -426,7 +440,7 @@ const Countries = () => {
                 <div className="info-card-icon-wrapper">
                   {getIconSVG('law')}
                 </div>
-                <h3 className="info-card-title">{lawTaxSection.title}</h3>
+                <h3 className="info-card-title">{renderWithCommonAmpersand(lawTaxSection.title)}</h3>
                 <ul className="info-card-list">
                   {lawTaxSection.bulletPoints && lawTaxSection.bulletPoints.length > 0 ? (
                     lawTaxSection.bulletPoints.map((point, index) => (

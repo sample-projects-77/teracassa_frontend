@@ -342,7 +342,7 @@ const Properties = () => {
 
           <form onSubmit={handleSearch} className="properties-search-form">
             {/* First Row */}
-            <div className="search-row">
+            <div className="search-row search-row--basic-top">
               <div className="search-field">
                 <CountryDropdown
                   id="country"
@@ -367,23 +367,6 @@ const Properties = () => {
               </div>
               
               <div className="search-field">
-                <select
-                  id="propertyType"
-                  name="propertyType"
-                  value={filters.propertyType}
-                  onChange={handleFilterChange}
-                >
-                  <option value="">{t('properties.propertyType')}</option>
-                  <option value="apartment">{t('properties.apartment')}</option>
-                  <option value="house">{t('properties.house')}</option>
-                  <option value="villa">{t('properties.villa')}</option>
-                  <option value="land">{t('properties.land')}</option>
-                  <option value="commercial">{t('properties.commercial')}</option>
-                  <option value="other">{t('properties.other')}</option>
-                </select>
-              </div>
-              
-              <div className="search-field">
                 <input
                   type="number"
                   id="minPriceCents"
@@ -395,7 +378,7 @@ const Properties = () => {
                   step="1000"
                 />
               </div>
-              
+
               <div className="search-field">
                 <input
                   type="number"
@@ -411,7 +394,24 @@ const Properties = () => {
             </div>
             
             {/* Second Row */}
-            <div className="search-row">
+            <div className="search-row search-row--basic-bottom">
+              <div className="search-field">
+                <select
+                  id="propertyType"
+                  name="propertyType"
+                  value={filters.propertyType}
+                  onChange={handleFilterChange}
+                >
+                  <option value="">{t('properties.propertyType')}</option>
+                  <option value="apartment">{t('properties.apartment')}</option>
+                  <option value="house">{t('properties.house')}</option>
+                  <option value="villa">{t('properties.villa')}</option>
+                  <option value="land">{t('properties.land')}</option>
+                  <option value="commercial">{t('properties.commercial')}</option>
+                  <option value="other">{t('properties.other')}</option>
+                </select>
+              </div>
+
               <div className="search-field">
                 <select
                   id="bedrooms"
@@ -439,6 +439,8 @@ const Properties = () => {
                   min="0"
                 />
               </div>
+
+              <div className="search-field search-field--spacer" aria-hidden="true" />
             </div>
 
             {/* Advanced Search Fields (shown when advanced tab is active) */}

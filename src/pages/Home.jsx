@@ -89,13 +89,6 @@ const Home = () => {
         <div className="home__hero-overlay" />
 
         <div className="home__hero-inner">
-          {/* Label */}
-          <div className="home__hero-label">
-            <span className="home__hero-label-dot" />
-            {t('home.heroLabel') || 'Mediterranean Real Estate'}
-            <span className="home__hero-label-dot" />
-          </div>
-
           {/* Title */}
           <h1 className="home__hero-title">{t('home.heroTitle')}</h1>
           <p className="home__hero-subtitle">{t('home.heroSubtitle')}</p>
@@ -159,11 +152,18 @@ const Home = () => {
       <section className="home__why">
         <div className="home__container">
           <div className="home__section-head">
-            <span className="section-label">{t('home.whyUnique') || 'Why SunHouses'}</span>
             <h2 className="home__section-title">{t('home.buyingAbroad')}</h2>
             <p className="home__section-subtitle">
               {t('home.heroSubtitle')}
             </p>
+          </div>
+
+          <div className="home__expert-service">
+            <h3 className="home__expert-service-title">{t('home.expertServiceHeadline')}</h3>
+            <p className="home__expert-service-description">{t('home.expertServiceDescription')}</p>
+            <Link to="/network" className="home__expert-service-cta">
+              {t('home.expertServiceCta')}
+            </Link>
           </div>
 
           <div className="home__trust-grid">
@@ -223,6 +223,29 @@ const Home = () => {
             <p className="home__section-subtitle home__section-subtitle--center">
               {t('home.tipsSubtitle')}
             </p>
+          </div>
+
+          <div className="home__timeline">
+            <h3 className="home__timeline-title">{t('home.purchaseProcessTitle')}</h3>
+            <div className="home__timeline-steps">
+              <div className="home__timeline-step">
+                <span className="home__timeline-step-label">{t('home.timelineReservationTitle')}</span>
+                <p className="home__timeline-step-text">{t('home.timelineReservationDesc')}</p>
+              </div>
+              <div className="home__timeline-step">
+                <span className="home__timeline-step-label">{t('home.timelineDueDiligenceTitle')}</span>
+                <p className="home__timeline-step-text">{t('home.timelineDueDiligenceDesc')}</p>
+              </div>
+              <div className="home__timeline-step">
+                <span className="home__timeline-step-label">{t('home.timelinePreparationTitle')}</span>
+                <p className="home__timeline-step-text">{t('home.timelinePreparationDesc')}</p>
+              </div>
+              <div className="home__timeline-step">
+                <span className="home__timeline-step-label">{t('home.timelineCompletionTitle')}</span>
+                <p className="home__timeline-step-text">{t('home.timelineCompletionDesc')}</p>
+              </div>
+            </div>
+            <p className="home__timeline-message">{t('home.timelineMessage')}</p>
           </div>
 
           <div className="home__resource-grid">

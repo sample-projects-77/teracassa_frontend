@@ -35,23 +35,26 @@
 
 .properties-main-heading {
   font-family: var(--font-heading);
-  font-size: clamp(2rem, 4vw, 3rem);
+  font-size: clamp(1.7rem, 3.2vw, 2.45rem);
   font-weight: 700;
   color: var(--clr-warm-white);
   line-height: var(--lh-tight);
   margin-bottom: var(--space-4);
+  text-shadow: 0 2px 16px rgba(10, 30, 48, 0.28);
 }
 
 .properties-description {
-  font-size: var(--text-lg);
-  color: rgba(255,255,255,0.75);
+  font-size: var(--text-base);
+  color: rgba(255,255,255,0.92);
   line-height: var(--lh-relaxed);
   margin-bottom: var(--space-2);
+  text-shadow: 0 1px 8px rgba(10, 30, 48, 0.24);
 }
 
 .properties-info {
   font-size: var(--text-sm);
-  color: rgba(255,255,255,0.5);
+  color: rgba(255,255,255,0.78);
+  text-shadow: 0 1px 6px rgba(10, 30, 48, 0.2);
 }
 
 /* ---- Search Section ---- */
@@ -113,6 +116,20 @@
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: var(--space-4);
   margin-bottom: var(--space-4);
+}
+
+/* Basic search layout request:
+   row 1: country, city, property type
+   row 2: price from, price to (directly under property type area) */
+.search-row--basic-top,
+.search-row--basic-pricing,
+.search-row--basic-bottom {
+  grid-template-columns: repeat(4, minmax(160px, 1fr));
+}
+
+.search-field--spacer {
+  visibility: hidden;
+  pointer-events: none;
 }
 
 .search-field {
@@ -195,21 +212,27 @@
   align-items: center;
   gap: var(--space-2);
   padding: 0.6rem 1.5rem;
-  background: var(--clr-deep);
-  color: var(--clr-warm-white);
+  background: linear-gradient(135deg, #ffd84d 0%, #f6be00 55%, #e9a800 100%);
+  color: #0f2d4a;
   border: none;
   border-radius: var(--radius-sm);
   font-family: var(--font-body);
   font-size: var(--text-sm);
   font-weight: var(--fw-semibold);
   cursor: pointer;
+  box-shadow:
+    0 8px 20px rgba(246, 190, 0, 0.38),
+    0 0 0 1px rgba(255, 227, 130, 0.45) inset;
   transition: all var(--duration-fast) var(--ease-out);
 }
 
 .search-button:hover {
-  background: var(--clr-navy);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(10,30,48,0.22);
+  background: linear-gradient(135deg, #ffe36a 0%, #ffca1c 55%, #efb106 100%);
+  color: #0a1e30;
+  transform: translateY(-1px) scale(1.01);
+  box-shadow:
+    0 10px 24px rgba(246, 190, 0, 0.44),
+    0 0 18px rgba(255, 216, 77, 0.42);
 }
 
 .search-icon {
@@ -459,6 +482,10 @@
 
   .search-row {
     grid-template-columns: 1fr;
+  }
+
+  .search-field--spacer {
+    display: none;
   }
 
   .properties-list-section {

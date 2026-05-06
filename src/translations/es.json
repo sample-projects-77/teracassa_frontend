@@ -85,7 +85,20 @@
     "virtualTours": "Tours Virtuales",
     "virtualToursDesc": "Informes de experiencia y videos de 360 grados",
     "webinarsQa": "Webinars y Preguntas",
-    "webinarsQaDesc": "Sesiones en vivo con expertos"
+    "webinarsQaDesc": "Sesiones en vivo con expertos",
+    "expertServiceHeadline": "Tu navegador personal en el mercado inmobiliario internacional.",
+    "expertServiceDescription": "No te dejamos solo en tu país objetivo. Usa nuestro servicio exclusivo de acompañamiento: nuestros expertos verificados coordinan todo el proceso de compra por ti, desde la primera revisión legal hasta la entrega de llaves.",
+    "expertServiceCta": "Más información sobre el servicio de expertos",
+    "purchaseProcessTitle": "Proceso de compra guiado",
+    "timelineReservationTitle": "Reserva",
+    "timelineReservationDesc": "El socio de SunHouses revisa el contrato preliminar.",
+    "timelineDueDiligenceTitle": "Debida diligencia",
+    "timelineDueDiligenceDesc": "Inspección legal y técnica in situ.",
+    "timelinePreparationTitle": "Preparación",
+    "timelinePreparationDesc": "Números de registro fiscal, cuenta bancaria y poderes notariales.",
+    "timelineCompletionTitle": "Finalización",
+    "timelineCompletionDesc": "Acompañamiento al notario.",
+    "timelineMessage": "Estamos a tu lado en cada paso del camino."
   },
   "properties": {
     "heroTitle": "Busca con precisión. Invierte con seguridad.",
@@ -217,7 +230,12 @@
     "taxAdvisor": "Asesor Fiscal",
     "financialAdvisor": "Asesor Financiero",
     "appraiser": "Tasador",
-    "constructionCompany": "Empresa de Construcción"
+    "constructionCompany": "Empresa de Construcción",
+    "expertJoinTitle": "Para Expertos: Forma Parte de Nuestra Red",
+    "expertJoinText1": "Da forma con nosotros al futuro del mercado inmobiliario global.",
+    "expertJoinText2": "Sunhouses.global es más que una plataforma: es un centro de sinergia para los mejores del sector. Reunimos a arquitectos visionarios, juristas especializados y expertos inmobiliarios de primer nivel para realizar transacciones transfronterizas al más alto nivel.",
+    "expertJoinText3": "Forma parte de un ecosistema global basado en la confianza, la excelencia y el intercambio discreto. Aprovecha nuestro alcance internacional y conéctate con socios que hablan tu idioma, tanto profesional como cualitativamente.",
+    "expertJoinCta": "Solicitar asociación ahora"
   },
   "about": {
     "heroTitle": "Acerca de SunHouses",

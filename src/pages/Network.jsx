@@ -260,6 +260,27 @@ const Network = () => {
         </div>
       </section>
 
+      {/* Expert Partnership Section */}
+      <section className="network-expert-section">
+        <div className="network-expert-container">
+          <div className="network-expert-content">
+            <h2 className="network-expert-title">{t('network.expertJoinTitle')}</h2>
+            <p className="network-expert-text">{t('network.expertJoinText1')}</p>
+            <p className="network-expert-text">{t('network.expertJoinText2')}</p>
+            <p className="network-expert-text">{t('network.expertJoinText3')}</p>
+          </div>
+          <div className="network-expert-actions">
+            <button
+              type="button"
+              className="network-expert-cta"
+              onClick={() => navigate('/register')}
+            >
+              {t('network.expertJoinCta')}
+            </button>
+          </div>
+        </div>
+      </section>
+
       {/* Search and Filter Section */}
       <section className="network-search-section">
         <div className="network-search-container">

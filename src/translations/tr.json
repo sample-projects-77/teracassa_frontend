@@ -85,7 +85,20 @@
     "virtualTours": "Sanal Turlar",
     "virtualToursDesc": "Deneyim raporları ve 360 derece videolar",
     "webinarsQa": "Webinarlar ve Soru-Cevap",
-    "webinarsQaDesc": "Uzmanlarla canlı oturumlar"
+    "webinarsQaDesc": "Uzmanlarla canlı oturumlar",
+    "expertServiceHeadline": "Uluslararası emlak pazarında kişisel rehberiniz.",
+    "expertServiceDescription": "Sizi hedef ülkenizde yalnız bırakmıyoruz. Özel eşlik hizmetimizden yararlanın: doğrulanmış uzmanlarımız, ilk hukuki incelemeden anahtar teslimine kadar tüm satın alma sürecini sizin için koordine eder.",
+    "expertServiceCta": "Uzman hizmeti hakkında daha fazla bilgi",
+    "purchaseProcessTitle": "Rehberli satın alma süreci",
+    "timelineReservationTitle": "Rezervasyon",
+    "timelineReservationDesc": "SunHouses ortağı ön sözleşmeyi kontrol eder.",
+    "timelineDueDiligenceTitle": "Durum tespiti",
+    "timelineDueDiligenceDesc": "Yerinde hukuki ve teknik inceleme.",
+    "timelinePreparationTitle": "Hazırlık",
+    "timelinePreparationDesc": "Vergi kayıt numaraları, banka hesabı ve vekaletnameler.",
+    "timelineCompletionTitle": "Tamamlama",
+    "timelineCompletionDesc": "Noter sürecinde eşlik.",
+    "timelineMessage": "Yolun her adımında yanınızdayız."
   },
   "properties": {
     "heroTitle": "Hassas arayın. Güvenle yatırım yapın.",
@@ -217,7 +230,12 @@
     "taxAdvisor": "Vergi Danışmanı",
     "financialAdvisor": "Finansal Danışman",
     "appraiser": "Değerleme Uzmanı",
-    "constructionCompany": "İnşaat Şirketi"
+    "constructionCompany": "İnşaat Şirketi",
+    "expertJoinTitle": "Uzmanlar İçin: Ağımızın Parçası Olun",
+    "expertJoinText1": "Küresel emlak pazarının geleceğini bizimle birlikte şekillendirin.",
+    "expertJoinText2": "Sunhouses.global bir platformdan daha fazlasıdır - sektörün en iyileri için bir sinerji merkezidir. Vizyoner mimarları, uzman hukukçuları ve üst düzey emlak profesyonellerini bir araya getirerek sınır ötesi işlemleri en yüksek standartta gerçekleştiriyoruz.",
+    "expertJoinText3": "Güven, mükemmeliyet ve gizli bilgi paylaşımı temelli küresel bir ekosistemin parçası olun. Uluslararası erişimimizden faydalanın ve hem profesyonel hem kalite anlamında sizin dilinizi konuşan ortaklarla bağlantı kurun.",
+    "expertJoinCta": "Hemen ortaklık başvurusu yapın"
   },
   "about": {
     "heroTitle": "SunHouses Hakkında",

@@ -85,7 +85,20 @@
     "virtualTours": "جولات افتراضية",
     "virtualToursDesc": "تقارير تجارب وفيديوهات 360 درجة",
     "webinarsQa": "ندوات وأسئلة وأجوبة",
-    "webinarsQaDesc": "جلسات مباشرة مع خبراء"
+    "webinarsQaDesc": "جلسات مباشرة مع خبراء",
+    "expertServiceHeadline": "مرشدك الشخصي في سوق العقارات الدولي.",
+    "expertServiceDescription": "لن نتركك وحدك في بلدك المستهدف. استفد من خدمتنا الحصرية للمرافقة: خبراؤنا الموثقون ينسقون لك عملية الشراء بالكامل - من أول مراجعة قانونية حتى تسليم المفتاح.",
+    "expertServiceCta": "اعرف المزيد عن خدمة الخبراء",
+    "purchaseProcessTitle": "عملية شراء مرافقة خطوة بخطوة",
+    "timelineReservationTitle": "الحجز",
+    "timelineReservationDesc": "يقوم شريك SunHouses بمراجعة العقد المبدئي.",
+    "timelineDueDiligenceTitle": "الفحص النافي للجهالة",
+    "timelineDueDiligenceDesc": "فحص قانوني وفني في الموقع.",
+    "timelinePreparationTitle": "التحضير",
+    "timelinePreparationDesc": "أرقام التسجيل الضريبي والحساب البنكي والتوكيلات.",
+    "timelineCompletionTitle": "الإتمام",
+    "timelineCompletionDesc": "مرافقة إلى كاتب العدل.",
+    "timelineMessage": "نحن بجانبك في كل خطوة على الطريق."
   },
   "properties": {
     "heroTitle": "ابحث بدقة. استثمر بأمان.",
@@ -181,7 +194,12 @@
     "taxAdvisor": "مستشار ضريبي",
     "financialAdvisor": "مستشار مالي",
     "appraiser": "مقيم",
-    "constructionCompany": "شركة بناء"
+    "constructionCompany": "شركة بناء",
+    "expertJoinTitle": "للخبراء: كن جزءاً من شبكتنا",
+    "expertJoinText1": "ساهم معنا في تشكيل مستقبل سوق العقارات العالمي.",
+    "expertJoinText2": "Sunhouses.global أكثر من مجرد منصة - إنه مركز تكاملي لأفضل خبراء القطاع. نجمع معماريين أصحاب رؤية، قانونيين متخصصين، وخبراء عقاريين من الدرجة الأولى لتنفيذ الصفقات العابرة للحدود بأعلى مستوى.",
+    "expertJoinText3": "كن جزءاً من منظومة عالمية قائمة على الثقة والتميز والتبادل المهني المتحفظ. استفد من انتشارنا الدولي وتواصل مع شركاء يتحدثون لغتك - مهنياً ومعيارياً.",
+    "expertJoinCta": "اطلب الشراكة الآن"
   },
   "contactModal": {
     "title": "اتصال بالشريك",
