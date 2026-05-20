@@ -438,6 +438,15 @@
 }
 
 @media (max-width: 900px) {
+  .navbar__inner {
+    justify-content: flex-end;
+    padding-left: var(--space-6);
+  }
+
+  .navbar__logo {
+    overflow: hidden;
+  }
+
   .navbar__nav {
     display: none;
   }
@@ -462,6 +471,7 @@
 
 @media (max-width: 480px) {
   .navbar__inner {
+    justify-content: flex-end;
     padding: 0 var(--space-4);
     gap: var(--space-4);
   }
@@ -472,6 +482,11 @@
     width: 74px;
     height: 74px;
     padding: 5px;
+    overflow: hidden;
+  }
+
+  .navbar__logo-img {
+    transform: scale(1.25);
   }
 
   .navbar__logo-text {
